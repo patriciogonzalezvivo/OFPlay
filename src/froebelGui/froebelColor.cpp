@@ -63,6 +63,10 @@ void froebelColor::clear(){
     states.clear();
 }
 
+void froebelColor::addState( ofFloatColor _color ){
+    states.push_back(_color);
+}
+
 void froebelColor::addState( unsigned int _pallet ){
     ofFloatColor newColor;
     newColor = getFromPalet( _pallet );

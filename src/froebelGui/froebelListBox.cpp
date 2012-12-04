@@ -95,7 +95,7 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape){
     box.width = width - size*0.5;
     box.height = 0;
     totalBoxHeight = 0;
-
+    
     if (bEdge)
         box.width -= size*0.5;
     
@@ -186,6 +186,7 @@ bool froebelListBox::checkMousePressed(ofPoint _mouse){
                     if (elements[i]->checkMousePressed(_mouse)){
                         text = getSelectedAsString();
                         bChange = true;
+                        bSelected = true;
                         return true;
                     }
                 }
@@ -197,6 +198,15 @@ bool froebelListBox::checkMousePressed(ofPoint _mouse){
 }
 
 void froebelListBox::update(){
+    if ( bChange ){
+        totalBoxHeight = 0;
+        
+        for(int i = 0; i < elements.size(); i++){
+            if (totalBoxHeight < maxHeight)
+                totalBoxHeight += elements[i]->height;
+        }
+    }
+    
     froebelTextBox::update();
     backgroundColor.update();
     

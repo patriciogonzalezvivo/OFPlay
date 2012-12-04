@@ -21,6 +21,7 @@ public:
     
     void    clear();
     void    addState( unsigned int _palletN );
+    void    addState( ofFloatColor _color);
 //    void    addStateAsPointer( ofFloatColor *_color );
     
     void    setState( unsigned int _stateN );

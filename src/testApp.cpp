@@ -109,6 +109,7 @@ void testApp::setup(){
     ofEnableSmoothing();
     ofEnableAlphaBlending();
     ofSetVerticalSync(true);
+    ofSetWindowTitle( "OFPlay" );
 //    ofSetLogLevel(OF_LOG_VERBOSE);
     
     //  Default Settings
@@ -116,7 +117,7 @@ void testApp::setup(){
     project             = NULL;
     statusEnergy        = 0;
     
-    defaultHeight = 38;
+    defaultHeight       = 34;
     float paddingTop    = defaultHeight;
     float paddingLeft   = defaultHeight;
     float paddingRight  = defaultHeight;
@@ -125,7 +126,6 @@ void testApp::setup(){
     string  sketchName  = "mySketch";
     
     logo.loadImage("images/OFPlay.png");
-    logo.setAnchorPercent(0.5, 0.5);
 
     //  XML Settings
     //
@@ -162,7 +162,7 @@ void testApp::setup(){
     
     //  load font and setup the buttons
     //
-    font.loadFont("fonts/Inconsolata.otf", 14, true,false,false,0.5,90);
+    font.loadFont("fonts/Inconsolata.otf", 12, true,false,false,0.5,90);
     secondFont.loadFont("fonts/GeosansLight.ttf", 11, true,false,false,0.5,90);
     
     //  Name:
@@ -191,7 +191,7 @@ void testApp::setup(){
     subProjectName->bgColor.addState(2);
     subProjectName->fgColor.addState(7);
     subProjectName->bgColor.addState(2);
-    subProjectName->width = ofGetWidth() - paddingLeft*2.0;
+    subProjectName->width = ofGetWidth() - defaultHeight;
     projectName.subInfo = subProjectName;
     
     projectPath.setText(sketchPath);
@@ -218,7 +218,7 @@ void testApp::setup(){
     subProjectPath->bgColor.addState(2);
     subProjectPath->fgColor.addState(7);
     subProjectPath->bgColor.addState(2);
-    subProjectPath->width = ofGetWidth() - paddingLeft*2.0;
+    subProjectPath->width = ofGetWidth() - defaultHeight;
     projectPath.subInfo = subProjectPath;
     
     //  LOAD PLATFORMS
@@ -228,7 +228,7 @@ void testApp::setup(){
     platformsList.font = &font;
     platformsList.setPrefix("Platform: ");
     platformsList.setDivider(", ");
-    platformsList.setSizeAndShapes(38,3);
+    platformsList.setSizeAndShapes(defaultHeight,3);
     platformsList.width = 300;
     platformsList.maxHeight = 200;
     platformsList.addElement("windows (codeblocks)",ofGetTargetPlatform()==OF_TARGET_WINGCC);
@@ -262,7 +262,7 @@ void testApp::setup(){
     subPlatformList->bgColor.addState(2);
     subPlatformList->fgColor.addState(7);
     subPlatformList->bgColor.addState(2);
-    subPlatformList->width = ofGetWidth() - paddingLeft*2.0;
+    subPlatformList->width = ofGetWidth() - defaultHeight;
     platformsList.subInfo = subPlatformList;
 
     //  LOAD ADDONS
@@ -307,16 +307,19 @@ void testApp::setup(){
     subAddonsList->bgColor.addState(2);
     subAddonsList->fgColor.addState(7);
     subAddonsList->bgColor.addState(2);
-    subAddonsList->width = ofGetWidth() - paddingLeft*2.0;
+    subAddonsList->width = ofGetWidth() - defaultHeight;
     addonsList.subInfo = subAddonsList;
     
-    generateButton.setText( "GENERATE PROJECT" );
+    generateButton.setText( "GENERATE" );
     generateButton.font = &font;
+    generateButton.bFixedSize = true;
+    generateButton.bgColor.clear();
+    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
     generateButton.setSizeAndShapes(defaultHeight);
-    generateButton.x = ofGetWidth() - paddingLeft - 300;
-    generateButton.y = ofGetHeight() - defaultHeight - paddingButton;
-    generateButton.width = 300;
     
+//    ofSetWindowShape(768,768);
 }
 
 //------------------------------------------------------
@@ -528,7 +531,7 @@ void testApp::draw(){
     platformsList.draw();
     
     ofSetColor(255);
-    logo.draw(798,506);
+    logo.draw(ofGetWidth() - defaultHeight - logo.getWidth(),ofGetHeight() - defaultHeight - logo.getHeight());
     generateButton.draw();
     
     ofFill();
@@ -600,6 +603,7 @@ void testApp::mousePressed(int x, int y, int button){
         projectPath.bSelected   = false;
         projectName.bSelected   = false;
         generateProject();
+        generateButton.bSelected = false;
     } else {
         platformsList.bSelected = false;
         addonsList.bSelected    = false;
@@ -616,6 +620,18 @@ void testApp::mouseReleased(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
     
+    projectName.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
+    projectPath.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
+    platformsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
+    addonsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
+    
+    addonsList.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
+    addonsList.bChange = true;
+    
+    generateButton.x = ofGetWidth() - defaultHeight - generateButton.width - defaultHeight*0.7;
+    generateButton.y = ofGetHeight() - logo.getHeight()*0.5 - defaultHeight*1.5;
+    
+//    cout << w << "x" << h << endl;
 }
 
 //--------------------------------------------------------------
