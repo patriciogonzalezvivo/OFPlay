@@ -2,18 +2,10 @@
 
 #include "ofMain.h"
 
-#include "ofAddon.h"
-#include "CBLinuxProject.h"
-#include "CBWinProject.h"
-#include "visualStudioProject.h"
-#include "xcodeProject.h"
-#include <Poco/Path.h>
-
 #include "ofxXmlSettings.h"
 
-#include "froebelEditBox.h"
-#include "froebelTextBox.h"
-#include "froebelListBox.h"
+#include "froebelGui.h"
+#include "projectGenerator.h"
 
 class testApp : public ofBaseApp{
 public:
@@ -47,16 +39,17 @@ public:
     froebelListBox  platformsList;
     froebelListBox  addonsList;
     froebelTextBox  generateButton;
+    baseProject     *project;
     
-    string      appToRoot;
-    string      defaultLoc;
-    string      addonsPath;
+    string          appToRoot;
+    string          defaultLoc;
+    string          addonsPath;
     
-    string      status;
-    float       statusSetTime;
-    float       statusEnergy;
+    string          status;
+    float           statusSetTime;
+    float           statusEnergy;
     
-    float       defaultHeight;
+    float           defaultHeight;
     
-    baseProject *project;
+    
 };
