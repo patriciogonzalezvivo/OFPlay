@@ -11,28 +11,38 @@
 froebelListBox::froebelListBox(){
     subInfo     = NULL;
     
-    setActiveColors(3, 4);
-    setPasiveColors(2, 5);
-    
-    bgColor = bgDstColor = fgColor = fgDstColor = froebelColor(0);
-    
-    backgroundColor = ofColor(230.f);
-    
-    bSelected   = false;
     bLeftAlign  = true;
-    bChange     = false;
-    
+    bChange     = true;
     bEdge       = false;
     bIcon       = false;
+    bSelected   = false;
+    bFixedSize  = false;
     
     text        = "";
     prefix      = "";
     deliminater = "";
     
-    maxWidth = 300;
-    maxHeight = 200;
-    size = 40;
-    damp = 0.1;
+    maxWidth    = 600;
+    size        = 40;
+    nState      = 0;
+    damp        = 0.1;
+    
+    //  STATE_PASSIVE
+    //
+    fgColor.addState(2);
+    bgColor.addState(5);
+    
+    //  STATE_HOVER
+    //
+    fgColor.addState(4);
+    bgColor.addState(5);
+    
+    //  STATE_ACTIVE
+    //
+    fgColor.addState(3);
+    bgColor.addState(4);
+    
+    backgroundColor.setFromPalet(0);
 }
 
 void froebelListBox::addElement(string _value, bool _defVal, int _iconShape){
@@ -53,12 +63,28 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape){
         newElement->setSizeAndShapes(size,3,_iconShape);
         
     newElement->setText(_value);
+    newElement->setPrefix(" ");
     newElement->font = font;
     newElement->bSelected = _defVal;
-    newElement->bgPasiveColor = backgroundColor;
-    newElement->bgActiveColor = froebelColor(7);
-    newElement->fgPasiveColor = froebelColor(5);
-    newElement->fgActiveColor = froebelColor(4);
+    newElement->bFixedSize = true;
+    
+    newElement->fgColor.clear();
+    newElement->bgColor.clear();
+    
+    //  STATE_PASSIVE
+    //
+    newElement->fgColor.addState(5);
+    newElement->bgColor.addState(0);//addStateAsPointer(&backgroundColor);
+    
+    //  STATE_HOVER
+    //
+    newElement->fgColor.addState(7);
+    newElement->bgColor.addState(2);
+    
+    //  STATE_ACTIVE
+    //
+    newElement->fgColor.addState(4);
+    newElement->bgColor.addState(7);
     
     elements.push_back(newElement);
     
@@ -66,18 +92,18 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape){
     //
     box.x = x;
     box.y = y + size;
-    box.width = width;
+    box.width = width - size*0.5;
     box.height = 0;
+    totalBoxHeight = 0;
 
     if (bEdge)
         box.width -= size*0.5;
     
     for(int i = 0; i < elements.size(); i++){
-        if (box.height < maxHeight)
-            box.height += elements[i]->height;
+        if (totalBoxHeight < maxHeight)
+            totalBoxHeight += elements[i]->height;
     }
     
-    box.height += size*0.5;
 }
 
 void froebelListBox::clear(){
@@ -158,14 +184,17 @@ bool froebelListBox::checkMousePressed(ofPoint _mouse){
 }
 
 void froebelListBox::update(){
-    
     froebelTextBox::update();
+    backgroundColor.update();
     
     if (bSelected){
         //  recalculate the bounding box
         //
         box.x = x;
         box.y = y + size;
+        
+        if (totalBoxHeight != box.height)
+            box.height = ofLerp(box.height, totalBoxHeight, damp);
     
         float totalLenght = 0;
         float offSetY = 0;
@@ -177,23 +206,34 @@ void froebelListBox::update(){
             if (box.inside(ofGetMouseX(),ofGetMouseY())){
                 float pct = ofMap(ofGetMouseY()- box.y, size*0.5, box.height, 0,1,true);
                 float diff = totalLenght - box.height;
-                mouseOffSet = ofLerp( mouseOffSet, -diff * pct, damp);
+                mouseOffSet = ofLerp( mouseOffSet, -diff * pct, damp*0.5);
             }
         }
         
         for(int i = 0; i < elements.size(); i++){
             elements[i]->x = box.x;
             elements[i]->y = box.y + offSetY + mouseOffSet;
-            elements[i]->width = box.width;
+            elements[i]->width = box.width + size*0.5;
             elements[i]->update();
             
             offSetY += elements[i]->height;
         }
+    } else {
+        if (totalBoxHeight != box.height)
+            box.height = ofLerp(box.height, 0, damp*0.5);
     }
 }
 
 
 void froebelListBox::draw(){
+    
+    if (bEdge)
+        endingShape.color.set(bgColor);
+    
+    if (bIcon)
+        iconShape.color.set(fgColor);
+    
+    
     //  Render Elements
     //
     if ( bSelected ){

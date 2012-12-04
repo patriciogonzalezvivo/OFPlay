@@ -30,15 +30,17 @@ public:
     void    update();
     void    draw();
     
-    ofFloatColor    backgroundColor;
+    froebelColor    backgroundColor;
     
     vector<froebelTextBox*> elements;
     
+    float   damp;
     int     maxHeight;
     
 protected:
     ofRectangle     box;
     
+    float           totalBoxHeight;
     float           mouseOffSet;
     
 };

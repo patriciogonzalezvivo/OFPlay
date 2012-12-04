@@ -96,6 +96,7 @@
 		3D520B6E166AF23500212598 /* OFPlay.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OFPlay.icns; sourceTree = "<group>"; };
 		3D9D9D9D166D8FB300889B5C /* froebelColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelColor.cpp; sourceTree = "<group>"; };
 		3D9D9D9E166D8FB300889B5C /* froebelColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelColor.h; sourceTree = "<group>"; };
+		3D9D9DA9166D9EA400889B5C /* froebelGui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = froebelGui.h; sourceTree = "<group>"; };
 		3e12fc1366c71a2011058511445803c9 /* ofAddon.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofAddon.h; path = src/ProjectGeneratorMotor/src/ofAddon.h; sourceTree = SOURCE_ROOT; };
 		50df87d612c5aae17aafa6c02c6bc570 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxXmlSettings.cpp; path = ../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp; sourceTree = SOURCE_ROOT; };
 		53e59de3bc648ce3a83be02a8f7632bd /* visualStudioProject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = visualStudioProject.cpp; path = src/ProjectGeneratorMotor/src/visualStudioProject.cpp; sourceTree = SOURCE_ROOT; };
@@ -189,6 +190,7 @@
 		3D4F987D166C5973004FD728 /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				3D9D9DA9166D9EA400889B5C /* froebelGui.h */,
 				3D9D9D9E166D8FB300889B5C /* froebelColor.h */,
 				3D9D9D9D166D8FB300889B5C /* froebelColor.cpp */,
 				3D4F9883166C5973004FD728 /* froebelShape.h */,

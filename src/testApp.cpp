@@ -181,9 +181,16 @@ void testApp::setup(){
     subProjectName->setText("CHANGE THE NAME");
     subProjectName->font = &secondFont;
     subProjectName->bLeftAlign = false;
+    subProjectName->bFixedSize = true;
     subProjectName->setSizeAndShapes(defaultHeight, 1);
-    subProjectName->setActiveColors(4, 6);
-    subProjectName->setPasiveColors(3, 0);
+    subProjectName->fgColor.clear();    //  Clear default pallete to insert my own
+    subProjectName->bgColor.clear();    //  Clear default pallete to insert my own
+    subProjectName->fgColor.addState(3);
+    subProjectName->bgColor.addState(0);
+    subProjectName->fgColor.addState(3);
+    subProjectName->bgColor.addState(2);
+    subProjectName->fgColor.addState(7);
+    subProjectName->bgColor.addState(2);
     subProjectName->width = ofGetWidth() - paddingLeft*2.0;
     projectName.subInfo = subProjectName;
     
@@ -201,9 +208,16 @@ void testApp::setup(){
     subProjectPath->setText("CHANGE THE DIRECTORY");
     subProjectPath->font = &secondFont;
     subProjectPath->bLeftAlign = false;
+    subProjectPath->bFixedSize = true;
     subProjectPath->setSizeAndShapes(defaultHeight, 1);
-    subProjectPath->setActiveColors(4, 6);
-    subProjectPath->setPasiveColors(3, 0);
+    subProjectPath->fgColor.clear();    //  Clear default pallete to insert my own
+    subProjectPath->bgColor.clear();    //  Clear default pallete to insert my own
+    subProjectPath->fgColor.addState(3);
+    subProjectPath->bgColor.addState(0);
+    subProjectPath->fgColor.addState(3);
+    subProjectPath->bgColor.addState(2);
+    subProjectPath->fgColor.addState(7);
+    subProjectPath->bgColor.addState(2);
     subProjectPath->width = ofGetWidth() - paddingLeft*2.0;
     projectPath.subInfo = subProjectPath;
     
@@ -215,7 +229,8 @@ void testApp::setup(){
     platformsList.setPrefix("Platform: ");
     platformsList.setDivider(", ");
     platformsList.setSizeAndShapes(38,3);
-    platformsList.width = 320;
+    platformsList.width = 300;
+    platformsList.maxHeight = 200;
     platformsList.addElement("windows (codeblocks)",ofGetTargetPlatform()==OF_TARGET_WINGCC);
 	platformsList.addElement("windows (visualStudio)", ofGetTargetPlatform()==OF_TARGET_WINVS);
 	platformsList.addElement("linux (codeblocks)",ofGetTargetPlatform()==OF_TARGET_LINUX);
@@ -237,9 +252,16 @@ void testApp::setup(){
     subPlatformList->setText("CHANGE THE PLATFORM TARGET");
     subPlatformList->font = &secondFont;
     subPlatformList->bLeftAlign = false;
+    subPlatformList->bFixedSize = true;
     subPlatformList->setSizeAndShapes(defaultHeight, 1);
-    subPlatformList->setActiveColors(4, 6);
-    subPlatformList->setPasiveColors(3, 0);
+    subPlatformList->fgColor.clear();    //  Clear default pallete to insert my own
+    subPlatformList->bgColor.clear();    //  Clear default pallete to insert my own
+    subPlatformList->fgColor.addState(3);
+    subPlatformList->bgColor.addState(0);
+    subPlatformList->fgColor.addState(3);
+    subPlatformList->bgColor.addState(2);
+    subPlatformList->fgColor.addState(7);
+    subPlatformList->bgColor.addState(2);
     subPlatformList->width = ofGetWidth() - paddingLeft*2.0;
     platformsList.subInfo = subPlatformList;
 
@@ -250,11 +272,10 @@ void testApp::setup(){
     addonsList.font = &font;
     addonsList.setPrefix("Addons: ");
     addonsList.setDivider(", ");
-    addonsList.setSizeAndShapes(38,3);
+    addonsList.setSizeAndShapes(defaultHeight,3);
     addonsList.width = 320;
-    addonsList.height = defaultHeight;
     addonsList.maxWidth = 700;
-    addonsList.maxHeight = 200;
+    addonsList.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0 ;
     
     ofDirectory addonsFolder(addonsPath);
     addonsFolder.listDir();
@@ -276,9 +297,16 @@ void testApp::setup(){
     subAddonsList->setText("SELECT ADDONS");
     subAddonsList->font = &secondFont;
     subAddonsList->bLeftAlign = false;
+    subAddonsList->bFixedSize = true;
     subAddonsList->setSizeAndShapes(defaultHeight, 1);
-    subAddonsList->setActiveColors(4, 6);
-    subAddonsList->setPasiveColors(3, 0);
+    subAddonsList->fgColor.clear();    //  Clear default pallete to insert my own
+    subAddonsList->bgColor.clear();    //  Clear default pallete to insert my own
+    subAddonsList->fgColor.addState(3);
+    subAddonsList->bgColor.addState(0);
+    subAddonsList->fgColor.addState(3);
+    subAddonsList->bgColor.addState(2);
+    subAddonsList->fgColor.addState(7);
+    subAddonsList->bgColor.addState(2);
     subAddonsList->width = ofGetWidth() - paddingLeft*2.0;
     addonsList.subInfo = subAddonsList;
     
@@ -477,6 +505,7 @@ void testApp::update(){
     projectPath.update();
     platformsList.update();
     addonsList.update();
+    generateButton.update();
     
     float diff = ofGetElapsedTimef()- statusSetTime;
     if (diff > 3){

@@ -11,24 +11,22 @@
 
 #include "ofMain.h"
 
+#include "froebelColor.h"
+
 class froebelShape : public ofPoint {
 public:
     
     froebelShape();
     
     void    setShape(int _shapeNum, float _size);
-    void    setColor(int _color, float _damping = 0.1);
     
     void    draw();
     
     ofPolyline      shape;
-    ofFloatColor    dstColor;
+    
+    froebelColor    color;
     
 private:
-    ofFloatColor    froebelColor(int _color);
-    ofFloatColor    color;
-    
-    float           damp;
     float           size;
     int             type;
 };

@@ -10,13 +10,9 @@
 
 froebelShape::froebelShape(){
     color.set(1.0f);
-    dstColor.set(1.0f);
-    
-    damp = 0.1;
     
     size = 40;
     type = 0;
-    color = 3;
 }
 
 void froebelShape::setShape(int _shapeNum, float _size){
@@ -92,16 +88,8 @@ void froebelShape::setShape(int _shapeNum, float _size){
     }
 }
 
-void froebelShape::setColor(int _color, float _damp){
-    dstColor = froebelColor(_color);
-    damp = _damp;
-}
-
 void froebelShape::draw(){
-    
-    if (dstColor != color){
-        color.lerp(dstColor, damp);
-    }
+    color.update();
     
     ofPushMatrix();
     ofPushStyle();
@@ -118,39 +106,3 @@ void froebelShape::draw(){
     ofPopStyle();
     ofPopMatrix();
 }
-
-ofFloatColor froebelShape::froebelColor(int _color){
-    ofFloatColor color;
-    
-    switch (_color) {
-        case 0:
-            color = ofColor(220);
-            break;
-        case 1:
-            color = ofColor(4, 49, 7);
-            break;
-        case 2:
-            color = ofColor(220, 202, 185);
-            break;
-        case 3:
-            color = ofColor(186, 1, 23);
-            break;
-        case 4:
-            color = ofColor(247, 181, 55);
-            break;
-        case 5:
-            color = ofColor(64, 79, 122);
-            break;
-        case 6:
-            color = ofColor(62, 2, 35);
-            break;
-        case 7:
-            color = ofColor(193, 66, 11);
-            break;
-        default:
-            color = ofColor(0);
-            break;
-    }
-    
-    return color;
-};

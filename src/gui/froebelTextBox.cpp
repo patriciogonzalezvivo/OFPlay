@@ -11,35 +11,35 @@
 froebelTextBox::froebelTextBox(){
     subInfo     = NULL;
     
-    setActiveColors(3, 4);
-    setPasiveColors(2, 5);
-    
-    bgColor = bgDstColor = fgColor = fgDstColor = froebelColor(0);
-    
-    bSelected   = false;
     bLeftAlign  = true;
     bChange     = true;
+    bEdge       = false;
+    bIcon       = false;
+    bSelected   = false;
+    bFixedSize  = false;
     
-    bEdge = false;
-    bIcon = false;
-    
-    text = "";
-    prefix = "";
+    text        = "";
+    prefix      = "";
     deliminater = "";
     
-    maxWidth = 600;
-    size = 40;
-    damp = 0.1;
-}
-
-void froebelTextBox::setActiveColors(int _fg, int _bg){
-    fgActiveColor = froebelColor(_fg);
-    bgActiveColor = froebelColor(_bg);
-}
-
-void froebelTextBox::setPasiveColors(int _fg, int _bg){
-    fgPasiveColor = froebelColor(_fg);
-    bgPasiveColor = froebelColor(_bg);
+    maxWidth    = 600;
+    size        = 40;
+    nState      = 0;
+    
+    //  STATE_PASSIVE
+    //
+    fgColor.addState(2);
+    bgColor.addState(5);
+    
+    //  STATE_HOVER
+    //
+    fgColor.addState(4);
+    bgColor.addState(5);
+    
+    //  STATE_ACTIVE
+    //
+    fgColor.addState(3);
+    bgColor.addState(4);
 }
 
 void froebelTextBox::setSizeAndShapes(float _size, int _endingShape, int _iconShape){
@@ -83,6 +83,7 @@ void froebelTextBox::setDivider( string _deliminater ){
 bool froebelTextBox::checkMousePressed(ofPoint _mouse){
     if (inside(_mouse)){
         bSelected = !bSelected;
+        nState = STATE_ACTIVE;
         return true;
     }
     return false;
@@ -94,46 +95,33 @@ void froebelTextBox::update(){
     if (subInfo != NULL)
         subInfo->update();
     
-    
-    //  Selection and Hover colors
+    //  Update STATE
     //
     if( bSelected ){
-        bgDstColor = bgActiveColor;
-        fgDstColor = fgActiveColor;
-        
-        if (bEdge)
-            endingShape.dstColor = bgActiveColor;
-        
-        if (bIcon)
-            iconShape.dstColor = fgActiveColor;
-        
+        nState = STATE_ACTIVE;
     } else {
         if (inside(ofGetMouseX(), ofGetMouseY()) ){
-            fgDstColor = bgActiveColor;
-            
-            if (bIcon)
-                iconShape.dstColor = bgActiveColor;
-            
+            nState= STATE_HOVER;
         } else {
-            fgDstColor = fgPasiveColor;
-            
-            if (bIcon)
-                iconShape.dstColor = fgPasiveColor;
+            nState= STATE_PASIVE;
         }
-        bgDstColor = bgPasiveColor;
-        
-        if (bEdge)
-            endingShape.dstColor = bgPasiveColor;
     }
     
-    if (bgColor != bgDstColor){
-        bgColor.lerp(bgDstColor, damp);
-    }
+    //  Update Colors
+    //
+    fgColor.setState(nState);
+    bgColor.setState(nState);
+    fgColor.update();
+    bgColor.update();
     
-    if (fgColor != fgDstColor){
-        fgColor.lerp(fgDstColor, damp);
-    }
+    if (bEdge)
+        endingShape.color.set(bgColor);
     
+    if (bIcon)
+        iconShape.color.set(fgColor);
+    
+    //  Update Shape
+    //
     if (bChange){
         //  Compose text
         //
@@ -151,9 +139,16 @@ void froebelTextBox::update(){
         if ( bIcon)
             margins += size*0.5;
         
-        if ( textBox.width + margins >= width ){
+        bool doReScale = true;
+        
+        if ( bFixedSize){
+            if (textBox.width + margins < width)
+                doReScale = false;
+        } 
+        
+        if (doReScale){
             if ( textBox.width + margins <= maxWidth ){
-                
+            
                 //  If it less that the max adjust the shape
                 //
                 width = textBox.width + margins;
@@ -187,10 +182,10 @@ void froebelTextBox::update(){
                     }
                 }
             }
-            
+        
             textBox = font->getStringBoundingBox( displayText , 0, 0);
             width = textBox.width + margins ;
-            
+            height = size;
             if ( textBox.height+size*0.5 > size ) {
                 while ( textBox.height+size > size*nEdges ) {
                     nEdges++;
@@ -198,13 +193,14 @@ void froebelTextBox::update(){
                 }
             }
             
-            bChange = false;
         }
+        
+        bChange = false;
     }
 }
 
 void froebelTextBox::draw(){
-    
+
     //  If it have a sub textBox, draw it first
     //
     if (subInfo != NULL)
@@ -253,39 +249,3 @@ void froebelTextBox::draw(){
     ofPopStyle();
     
 }
-
-ofFloatColor froebelTextBox::froebelColor(int _color){
-    ofFloatColor color;
-    
-    switch (_color) {
-        case 0:
-            color = ofColor(220);
-            break;
-        case 1:
-            color = ofColor(4, 49, 7);
-            break;
-        case 2:
-            color = ofColor(220, 202, 185);
-            break;
-        case 3:
-            color = ofColor(186, 1, 23);
-            break;
-        case 4:
-            color = ofColor(247, 181, 55);
-            break;
-        case 5:
-            color = ofColor(64, 79, 122);
-            break;
-        case 6:
-            color = ofColor(62, 2, 35);
-            break;
-        case 7:
-            color = ofColor(193, 66, 11);
-            break;
-        default:
-            color = ofColor(0);
-            break;
-    }
-    
-    return color;
-};

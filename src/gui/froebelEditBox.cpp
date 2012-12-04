@@ -11,32 +11,49 @@
 froebelEditBox::froebelEditBox(){
     subInfo     = NULL;
     
-    setActiveColors(3, 4);
-    setPasiveColors(2, 5);
+    subInfo     = NULL;
     
-    bgColor = bgDstColor = fgColor = fgDstColor = froebelColor(0);
-    
-    bSelected   = false;
     bLeftAlign  = true;
     bChange     = true;
+    bEdge       = false;
+    bIcon       = false;
+    bSelected   = false;
+    bFixedSize  = false;
     
-    text = "";
-    prefix = "";
+    text        = "";
+    prefix      = "";
     deliminater = "";
     
-    bIcon = false;
-    bEdge = false;
+    maxWidth    = 600;
+    size        = 40;
+    nState      = 0;
     
-    maxWidth = 600;
-    size = 40;
-    damp = 0.1;
+    bgColor.clear();
+    fgColor.clear();
     
-	cursorPosition = 0;
-	cursorx = 0;
-	cursory = 0;
-    bEnabled = false;
-	bEditing = false;
-    bDrawCursor = false;
+    //  STATE_PASSIVE
+    //
+    fgColor.addState(2);
+    bgColor.addState(5);
+    
+    //  STATE_HOVER
+    //
+    fgColor.addState(4);
+    bgColor.addState(5);
+    
+    //  STATE_ACTIVE
+    //
+    fgColor.addState(3);
+    bgColor.addState(4);
+    
+    //  Specific
+    //
+	cursorPosition  = 0;
+	cursorx         = 0;
+	cursory         = 0;
+    bEnabled        = false;
+	bEditing        = false;
+    bDrawCursor     = false;
 	mouseDownInRect = false;
 }
 
@@ -63,7 +80,7 @@ void froebelEditBox::disable(){
 void froebelEditBox::beginEditing() {
     if(!bEditing){
         ofAddListener(ofEvents().keyPressed, this, &froebelEditBox::keyPressed);
-        ofSendMessage(TEXTFIELD_IS_ACTIVE);
+        ofSendMessage("textfieldIsActive");
         bEditing = true;
         bDrawCursor = true;
         cursory = 0;
@@ -75,7 +92,7 @@ void froebelEditBox::beginEditing() {
 void froebelEditBox::endEditing() {
     if(bEditing){
         ofRemoveListener(ofEvents().keyPressed, this, &froebelEditBox::keyPressed);
-        ofSendMessage(TEXTFIELD_IS_INACTIVE);
+        ofSendMessage("textfieldIsInactive");
         ofNotifyEvent(textChanged, text, this);
         bEditing = false;
         bDrawCursor = false;
@@ -153,6 +170,19 @@ void froebelEditBox::endEditing() {
 
 void froebelEditBox::draw(){
     froebelTextBox::draw();
+    
+    //  Update Colors
+    //
+    fgColor.setState(nState);
+    bgColor.setState(nState);
+    fgColor.update();
+    bgColor.update();
+    
+    if (bEdge)
+        endingShape.color.set(bgColor);
+    
+    if (bIcon)
+        iconShape.color.set(fgColor);
     
     ofPushMatrix();
     ofPushStyle();

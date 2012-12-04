@@ -9,9 +9,6 @@
 #ifndef FROEBELEDITBOX
 #define FROEBELEDITBOX
 
-#define TEXTFIELD_IS_ACTIVE "textfieldIsActive"
-#define TEXTFIELD_IS_INACTIVE "textfieldIsInactive"
-
 #include "ofMain.h"
 #include "froebelTextBox.h"
 

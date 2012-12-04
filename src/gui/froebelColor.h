@@ -11,20 +11,27 @@
 
 #include "ofMain.h"
 
-class froebelColor {
+class froebelColor : public ofFloatColor {
 public:
     
     froebelColor();
     
-    ofFloatColor    getColorFromPalet( int _palletNum );
+    void    setFromPalet( unsigned int _palletN  ); 
+    ofFloatColor    getFromPalet( unsigned int _palletN );
     
-    void    addState( int _pallet );
-    void    addState( ofFloatColor *_color );
+    void    clear();
+    void    addState( unsigned int _palletN );
+//    void    addStateAsPointer( ofFloatColor *_color );
     
-    ofFloatColor    color;
+    void    setState( unsigned int _stateN );
+    
+    void    update();
+    
+    float   damp;
 private:
-    vector<ofFloatColor*>   dstColors;
+    vector<ofFloatColor>   states;
     
+    int     dstStateN;
 };
 
 #endif
