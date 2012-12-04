@@ -57,4 +57,14 @@ inline bool isInVector(T item, vector<T> & vec){
     return bIsInVector;
 }
 
+void convertWindowsToUnixPath(string & path);
+
+string windowsFromUnixPath(string path);
+
+void extractFolderFromPath(string &_path, string &_folder);
+
+void fixStringCharacters(string &toFix);
+
+bool isProjectFolder(string &_projFolder);
+
 #endif /* UTILS_H_ */

@@ -23,17 +23,24 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
  
-    void    loadProject(string _path);
-    bool    isAddonCore(string _addonName);
-    string  setTarget(int targ);
-    void    setStatus(string newStatus);
-    void    generateProject();
-    
+    //  GUI
+    //
     ofImage         logo;
+    ofTrueTypeFont  font, secondFont;
+    float           defaultHeight;
     
-    ofTrueTypeFont  font;
-    ofTrueTypeFont  secondFont;
-
+    //  Basic Paths
+    //
+    string          appToRoot;
+    string          defaultLoc;
+    string          addonsPath;
+    
+    //  Project Generator
+    //
+    void            loadProject(string _path);
+    bool            isAddonCore(string _addonName);
+    string          setTarget(int targ);
+    void            generateProject();
     froebelEditBox  projectName;
     froebelEditBox  projectPath;
     froebelListBox  platformsList;
@@ -41,15 +48,9 @@ public:
     froebelTextBox  generateButton;
     baseProject     *project;
     
-    string          appToRoot;
-    string          defaultLoc;
-    string          addonsPath;
-    
+    //  Status
+    //
+    void            setStatus(string newStatus);
+    float           statusSetTime, statusEnergy;
     string          status;
-    float           statusSetTime;
-    float           statusEnergy;
-    
-    float           defaultHeight;
-    
-    
 };

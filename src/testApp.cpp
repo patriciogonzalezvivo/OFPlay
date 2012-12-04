@@ -1,108 +1,5 @@
 #include "testApp.h"
-#include "Utils.h"
-#include <stdio.h>
-#include "ofConstants.h"
 
-void convertWindowsToUnixPath(string & path){
-    for (int i = 0; i < path.size(); i++){
-        if (path[i] == '\\') path[i] = '/';
-    }
-}
-
-string windowsFromUnixPath(string path){
-    for (int i = 0; i < path.size(); i++){
-        if (path[i] == '/') path[i] = '\\';
-    }
-	return path;
-}
-
-void extractFolderFromPath(string &_path, string &_folder){
-    string completePath = _path;
-    _folder = "";
-    _path = "";
-    
-    int i;
-    for (i = completePath.size()-1 ; completePath[i] != '/'; i--){
-        _folder.insert(_folder.begin(), completePath[i]);
-    }
-    for (i-- ; completePath[i] >= 0; i--){
-        _path.insert(_path.begin(), completePath[i]);
-    }
-}
-
-void fixStringCharacters(string &toFix){
-    
-    // replace all non alpha numeric (ascii) characters with _
-    for (int i = 0; i < toFix.size(); i++){
-        int which = (int)toFix[i];
-        if ((which >= 48 && which <= 57) ||
-            (which >= 65 && which <= 90) ||
-            (which >= 97 && which <= 122)){
-        } else {
-            toFix[i] = '_';
-        }
-    }
-}
-
-bool isProjectFolder(string &_projFolder){
-    //  Return true or false if a project Folder structure it's found and change the _projFolder string
-    //  to become the correct path to a folder structure
-    //
-    
-    //  1. If is a directory
-    //
-    ofDirectory dir;
-    string searchFor = _projFolder;
-    dir.open(searchFor);
-    if ( dir.isDirectory() ){
-        
-        //  Is a project directory or a src directory?
-        //
-        string folder;
-        extractFolderFromPath(searchFor, folder);
-        if ( (folder == "src") || (folder == "bin") || ( (int)folder.find(".xcodeproj") > 0) ){
-            _projFolder = searchFor;
-        } else {
-            searchFor = _projFolder;
-        }
-        
-    } else {
-        
-        //  If is a file it have something related to a project?
-        //
-        string name;
-        extractFolderFromPath(searchFor, name);
-        if (((int)name.find(".cbp") > 0) ||
-            ((int)name.find(".workspace") > 0) ||
-            ((int)name.find(".plist") > 0) ||
-            ((int)name.find(".xcconfig") > 0) ||
-            ((int)name.find(".make") > 0) ||
-            ((int)name.find(".vcxproj") > 0 )){
-            _projFolder = searchFor;
-        } else {
-            return false;
-        }
-    }
-    
-    //  3. Have src/
-    //
-    searchFor = searchFor+"/src";
-    dir.open( searchFor );
-    if (!dir.isDirectory())
-        return false;
-    
-    //  4. Have main.cpp, testApp.h, testApp.cpp?
-    //
-    ofFile test;
-    bool    isMainCpp = test.open(searchFor+"/main.cpp");
-    bool    isTestAppH = test.open(searchFor+"/testApp.h");
-    bool    isTestAppCpp = test.open(searchFor+"/testApp.cpp");
-    
-    if ( !(isMainCpp && isTestAppH && isTestAppCpp) )
-        return false;
-    
-    return true;
-}
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -112,27 +9,16 @@ void testApp::setup(){
     ofSetWindowTitle( "OFPlay" );
 //    ofSetLogLevel(OF_LOG_VERBOSE);
     
-    //  Default Settings
-    //
     project             = NULL;
     statusEnergy        = 0;
     
-    defaultHeight       = 34;
-    float paddingTop    = defaultHeight;
-    float paddingLeft   = defaultHeight;
-    float paddingRight  = defaultHeight;
-    float paddingButton = defaultHeight*0.5;
-    
-    string  sketchName  = "mySketch";
-    
-    logo.loadImage("images/OFPlay.png");
-
-    //  XML Settings
-    //
     ofxXmlSettings XML;
     XML.loadFile("settings/projectGeneratorSettings.xml");
+    
     appToRoot = XML.getValue("appToRoot", "../../../../");
     defaultLoc = XML.getValue("defaultNewProjectLocation", "apps/myApps");
+    
+    string  sketchName  = "mySketch";
     
     //-------------------------------------
     // calculate the bin path (../../../ on osx) and the sketch path (bin -> root - > defaultLoc)
@@ -159,9 +45,8 @@ void testApp::setup(){
     
     //------------------------------------- GUI
     //
-    
-    //  load font and setup the buttons
-    //
+    defaultHeight       = 34;
+    logo.loadImage("images/OFPlay.png");
     font.loadFont("fonts/Inconsolata.otf", 12, true,false,false,0.5,90);
     secondFont.loadFont("fonts/GeosansLight.ttf", 11, true,false,false,0.5,90);
     
@@ -171,8 +56,8 @@ void testApp::setup(){
     projectName.setPrefix("Name: ");
     projectName.font = &font;
     projectName.setSizeAndShapes(defaultHeight, 3);
-    projectName.x = paddingLeft;
-    projectName.y = paddingTop;
+    projectName.x = defaultHeight;
+    projectName.y = defaultHeight;
     projectName.enable();
     
     froebelTextBox *subProjectName = new froebelTextBox();
@@ -199,8 +84,8 @@ void testApp::setup(){
     projectPath.setDivider("/");
     projectPath.font = &font;
     projectPath.setSizeAndShapes(defaultHeight, 3);
-    projectPath.x = paddingLeft;
-    projectPath.y = projectName.y + projectName.height + paddingButton;
+    projectPath.x = defaultHeight;
+    projectPath.y = projectName.y + projectName.height + defaultHeight*0.5;
     
     froebelTextBox *subProjectPath = new froebelTextBox();
     *subProjectPath = projectPath;
@@ -223,8 +108,8 @@ void testApp::setup(){
     
     //  LOAD PLATFORMS
     //
-    platformsList.x = paddingLeft;
-    platformsList.y = projectPath.y + projectPath.height + paddingButton;
+    platformsList.x = defaultHeight;
+    platformsList.y = projectPath.y + projectPath.height + defaultHeight*0.5;
     platformsList.font = &font;
     platformsList.setPrefix("Platform: ");
     platformsList.setDivider(", ");
@@ -267,8 +152,8 @@ void testApp::setup(){
 
     //  LOAD ADDONS
     //
-    addonsList.x = paddingLeft;
-    addonsList.y = platformsList.y + platformsList.height + paddingButton;
+    addonsList.x = defaultHeight;
+    addonsList.y = platformsList.y + platformsList.height + defaultHeight*0.5;
     addonsList.font = &font;
     addonsList.setPrefix("Addons: ");
     addonsList.setDivider(", ");

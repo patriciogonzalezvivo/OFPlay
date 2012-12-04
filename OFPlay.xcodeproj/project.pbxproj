@@ -182,17 +182,17 @@
 		3DAF84B0166E2E32003BBA69 /* froebelGui */ = {
 			isa = PBXGroup;
 			children = (
-				3DAF84B1166E2E32003BBA69 /* froebelColor.cpp */,
-				3DAF84B2166E2E32003BBA69 /* froebelColor.h */,
-				3DAF84B3166E2E32003BBA69 /* froebelEditBox.cpp */,
-				3DAF84B4166E2E32003BBA69 /* froebelEditBox.h */,
 				3DAF84B5166E2E32003BBA69 /* froebelGui.h */,
-				3DAF84B6166E2E32003BBA69 /* froebelListBox.cpp */,
-				3DAF84B7166E2E32003BBA69 /* froebelListBox.h */,
-				3DAF84B8166E2E32003BBA69 /* froebelShape.cpp */,
+				3DAF84B2166E2E32003BBA69 /* froebelColor.h */,
+				3DAF84B1166E2E32003BBA69 /* froebelColor.cpp */,
 				3DAF84B9166E2E32003BBA69 /* froebelShape.h */,
-				3DAF84BA166E2E32003BBA69 /* froebelTextBox.cpp */,
+				3DAF84B8166E2E32003BBA69 /* froebelShape.cpp */,
 				3DAF84BB166E2E32003BBA69 /* froebelTextBox.h */,
+				3DAF84BA166E2E32003BBA69 /* froebelTextBox.cpp */,
+				3DAF84B4166E2E32003BBA69 /* froebelEditBox.h */,
+				3DAF84B3166E2E32003BBA69 /* froebelEditBox.cpp */,
+				3DAF84B7166E2E32003BBA69 /* froebelListBox.h */,
+				3DAF84B6166E2E32003BBA69 /* froebelListBox.cpp */,
 			);
 			path = froebelGui;
 			sourceTree = "<group>";

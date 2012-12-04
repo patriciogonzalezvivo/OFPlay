@@ -16,4 +16,8 @@
 #include "xcodeProject.h"
 #include <Poco/Path.h>
 
+#include "Utils.h"
+//#include <stdio.h>
+//#include "ofConstants.h"
+
 #endif

@@ -509,3 +509,104 @@ string getOFRootFromConfig(){
 	ofBuffer filePath = configFile.readToBuffer();
 	return filePath.getFirstLine();
 }
+
+void convertWindowsToUnixPath(string & path){
+    for (int i = 0; i < path.size(); i++){
+        if (path[i] == '\\') path[i] = '/';
+    }
+}
+
+string windowsFromUnixPath(string path){
+    for (int i = 0; i < path.size(); i++){
+        if (path[i] == '/') path[i] = '\\';
+    }
+	return path;
+}
+
+void extractFolderFromPath(string &_path, string &_folder){
+    string completePath = _path;
+    _folder = "";
+    _path = "";
+    
+    int i;
+    for (i = completePath.size()-1 ; completePath[i] != '/'; i--){
+        _folder.insert(_folder.begin(), completePath[i]);
+    }
+    for (i-- ; completePath[i] >= 0; i--){
+        _path.insert(_path.begin(), completePath[i]);
+    }
+}
+
+void fixStringCharacters(string &toFix){
+    
+    // replace all non alpha numeric (ascii) characters with _
+    for (int i = 0; i < toFix.size(); i++){
+        int which = (int)toFix[i];
+        if ((which >= 48 && which <= 57) ||
+            (which >= 65 && which <= 90) ||
+            (which >= 97 && which <= 122)){
+        } else {
+            toFix[i] = '_';
+        }
+    }
+}
+
+bool isProjectFolder(string &_projFolder){
+    //  Return true or false if a project Folder structure it's found and change the _projFolder string
+    //  to become the correct path to a folder structure
+    //
+    
+    //  1. If is a directory
+    //
+    ofDirectory dir;
+    string searchFor = _projFolder;
+    dir.open(searchFor);
+    if ( dir.isDirectory() ){
+        
+        //  Is a project directory or a src directory?
+        //
+        string folder;
+        extractFolderFromPath(searchFor, folder);
+        if ( (folder == "src") || (folder == "bin") || ( (int)folder.find(".xcodeproj") > 0) ){
+            _projFolder = searchFor;
+        } else {
+            searchFor = _projFolder;
+        }
+        
+    } else {
+        
+        //  If is a file it have something related to a project?
+        //
+        string name;
+        extractFolderFromPath(searchFor, name);
+        if (((int)name.find(".cbp") > 0) ||
+            ((int)name.find(".workspace") > 0) ||
+            ((int)name.find(".plist") > 0) ||
+            ((int)name.find(".xcconfig") > 0) ||
+            ((int)name.find(".make") > 0) ||
+            ((int)name.find(".vcxproj") > 0 )){
+            _projFolder = searchFor;
+        } else {
+            return false;
+        }
+    }
+    
+    //  3. Have src/
+    //
+    searchFor = searchFor+"/src";
+    dir.open( searchFor );
+    if (!dir.isDirectory())
+        return false;
+    
+    //  4. Have main.cpp, testApp.h, testApp.cpp?
+    //
+    ofFile test;
+    bool    isMainCpp = test.open(searchFor+"/main.cpp");
+    bool    isTestAppH = test.open(searchFor+"/testApp.h");
+    bool    isTestAppCpp = test.open(searchFor+"/testApp.cpp");
+    
+    if ( !(isMainCpp && isTestAppH && isTestAppCpp) )
+        return false;
+    
+    return true;
+}
