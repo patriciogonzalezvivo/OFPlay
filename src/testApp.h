@@ -56,5 +56,7 @@ public:
     float       statusSetTime;
     float       statusEnergy;
     
+    float       defaultHeight;
+    
     baseProject *project;
 };

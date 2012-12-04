@@ -22,11 +22,12 @@ public:
     
     virtual bool checkMousePressed(ofPoint _mouse);
     
-    virtual void setText(string _text );
-    virtual string getText();
     virtual void setPrefix( string _prefix );
     virtual void setDivider( string _deliminater );
+    virtual void setText(string _text );
+    virtual string getText();
     
+    virtual ofRectangle getBoundingBox();
     virtual void update();
     virtual void draw();
     

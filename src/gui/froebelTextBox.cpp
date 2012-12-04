@@ -61,6 +61,16 @@ void froebelTextBox::setSizeAndShapes(float _size, int _endingShape, int _iconSh
     bChange = true;
 }
 
+void froebelTextBox::setPrefix( string _prefix ){
+    prefix = _prefix;
+    bChange = true;
+}
+
+void froebelTextBox::setDivider( string _deliminater ){
+    deliminater = _deliminater;
+    bChange = true;
+}
+
 void froebelTextBox::setText(string _text ){
     text = _text;
     bChange = true;
@@ -70,14 +80,15 @@ string froebelTextBox::getText(){
     return text;
 }
 
-void froebelTextBox::setPrefix( string _prefix ){
-    prefix = _prefix;
-    bChange = true;
-}
-
-void froebelTextBox::setDivider( string _deliminater ){
-    deliminater = _deliminater;
-    bChange = true;
+ofRectangle froebelTextBox::getBoundingBox(){
+    ofRectangle rta;
+    
+    rta.set(*this);
+    
+    if (subInfo != NULL)
+        rta.growToInclude(*subInfo);
+    
+    return rta;
 }
 
 bool froebelTextBox::checkMousePressed(ofPoint _mouse){
@@ -92,8 +103,11 @@ bool froebelTextBox::checkMousePressed(ofPoint _mouse){
 void froebelTextBox::update(){
     //  Update dependences
     //
-    if (subInfo != NULL)
+    if (subInfo != NULL){
+        subInfo->x = x;
+        subInfo->y = y;
         subInfo->update();
+    }
     
     //  Update STATE
     //

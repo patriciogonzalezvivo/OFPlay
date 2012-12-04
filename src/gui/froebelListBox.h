@@ -19,6 +19,8 @@ public:
     
     void    addElement(string _value, bool _defVal = false, int _iconShape = -1);
     bool    select(string _value);
+    
+    ofRectangle getBoundingBox();
     vector<string>  getSelected();
     string  getSelectedAsString();
     

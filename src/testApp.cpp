@@ -116,7 +116,7 @@ void testApp::setup(){
     project             = NULL;
     statusEnergy        = 0;
     
-    float defaultHeight = 38;
+    defaultHeight = 38;
     float paddingTop    = defaultHeight;
     float paddingLeft   = defaultHeight;
     float paddingRight  = defaultHeight;
@@ -248,8 +248,8 @@ void testApp::setup(){
     
     froebelTextBox *subPlatformList = new froebelTextBox();
     *subPlatformList = platformsList;
-    subPlatformList->setDivider( "<< " );
-    subPlatformList->setText("CHANGE THE PLATFORM TARGET");
+    subPlatformList->setPrefix( "<< " );
+    subPlatformList->setText("CHANGE THE PLATFORM");
     subPlatformList->font = &secondFont;
     subPlatformList->bLeftAlign = false;
     subPlatformList->bFixedSize = true;
@@ -284,7 +284,7 @@ void testApp::setup(){
         
     	if(addonName.find("ofx")==0){
             if (isAddonCore(addonName)){
-                addonsList.addElement(addonName,false,0);
+                addonsList.addElement(addonName,false);
             } else {
                 addonsList.addElement(addonName,false,4);
             }
@@ -504,7 +504,11 @@ void testApp::update(){
     projectName.update();
     projectPath.update();
     platformsList.update();
+    ofRectangle prev = platformsList.getBoundingBox();
+    addonsList.x = prev.x;
+    addonsList.y = prev.y + prev.height + defaultHeight*0.5;
     addonsList.update();
+    
     generateButton.update();
     
     float diff = ofGetElapsedTimef()- statusSetTime;
@@ -532,7 +536,6 @@ void testApp::draw(){
     ofRect(0,ofGetHeight(), ofGetWidth(), -25);
     ofSetColor(255,255,255, 255 * statusEnergy);
     ofDrawBitmapString(status, 10,ofGetHeight()-8);
-    
 }
 
 //--------------------------------------------------------------

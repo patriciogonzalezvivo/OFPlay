@@ -130,6 +130,19 @@ bool froebelListBox::select(string _value){
     return false;
 }
 
+ofRectangle froebelListBox::getBoundingBox(){
+    ofRectangle rta;
+    
+    rta.set(*this);
+    
+    if (subInfo != NULL)
+        rta.growToInclude(*subInfo);
+    
+    rta.growToInclude(box);
+    
+    return rta;
+}
+
 vector<string> froebelListBox::getSelected(){
     vector<string> list;
     
