@@ -17,12 +17,12 @@ public:
     
     froebelListBox();
     
-    void    addElement(string _value, bool _defVal = false, int _iconShape = -1);
+    void    addElement(string _value, bool _defVal = false, int _iconShape = -1, int _edgeCoorner = -1);
     bool    select(string _value);
     
-    ofRectangle getBoundingBox();
+    ofRectangle     getBoundingBox();
     vector<string>  getSelected();
-    string  getSelectedAsString();
+    string          getSelectedAsString();
     
     bool    checkMousePressed(ofPoint _mouse);
     
@@ -42,7 +42,8 @@ public:
     int     maxHeight;
     
 protected:
-    ofRectangle box;
+    void        updateContainerBoxSize();
+    ofRectangle conteinerBox;
     ofRectangle slider;
     
     float       totalBoxHeight;

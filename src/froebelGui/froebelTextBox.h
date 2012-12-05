@@ -25,9 +25,12 @@ public:
     virtual void setPrefix( string _prefix );
     virtual void setDivider( string _deliminater );
     virtual void setText(string _text );
-    virtual string getText();
     
+    virtual string      getText();
+    virtual float       getVerticalMargins();
+    virtual ofRectangle getTextBoundingBox();
     virtual ofRectangle getBoundingBox();
+    
     virtual void update();
     virtual void draw();
     
@@ -39,6 +42,8 @@ public:
     
     enum    { STATE_PASIVE, STATE_HOVER, STATE_ACTIVE };
     int     nState;
+    
+    int     minWidth;
     int     maxWidth;
     
     bool    bChange;
@@ -61,9 +66,8 @@ protected:
     
     ofRectangle     textBox;
     
-    float   size;
-    float   margins;
-    int     nEdges;
+    float           size;
+    int             nEdges;
 };
 
 #endif

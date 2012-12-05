@@ -10,17 +10,19 @@ void testApp::setup(){
 //    ofSetLogLevel(OF_LOG_VERBOSE);
 //    ofSetWindowShape(768,768);
     ofBackground(230);//225,223,229);
+//    ofSetDataPathRoot("../Resources/");
     
     project             = NULL;
     statusEnergy        = 0;
     
-    ofxXmlSettings XML;
-    XML.loadFile("settings/projectGeneratorSettings.xml");
-    
-    appToRoot = XML.getValue("appToRoot", "../../../../");
-    defaultLoc = XML.getValue("defaultNewProjectLocation", "apps/myApps");
     
     string  sketchName  = "mySketch";
+
+    
+    ofxXmlSettings XML;
+    XML.loadFile("projectGeneratorSettings.xml");
+    appToRoot = XML.getValue("appToRoot", "../../../../");
+    defaultLoc = XML.getValue("defaultNewProjectLocation", "apps");
     
     //-------------------------------------
     // calculate the bin path (../../../ on osx) and the sketch path (bin -> root - > defaultLoc)
@@ -48,8 +50,8 @@ void testApp::setup(){
     //------------------------------------- GUI
     //
     defaultHeight       = 34;
-    logo.loadImage("images/OFPlay.png");
-    font.loadFont("fonts/Inconsolata.otf", 12, true,false,false,0.5,90);
+    logo.loadImage("OFPlay.png");
+    font.loadFont("Inconsolata.otf", 12, true,false,false,0.5,90);
     
     //  PATH:
     //
@@ -446,8 +448,6 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
     ofPoint mouse = ofPoint(x, y);
-    
-   
     
     if ( projectPath.checkMousePressed( mouse )){
         string command = "";

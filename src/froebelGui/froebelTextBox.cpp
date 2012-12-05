@@ -23,6 +23,7 @@ froebelTextBox::froebelTextBox(){
     prefix      = "";
     deliminater = "";
     
+    minWidth    = 0;
     maxWidth    = 600;
     size        = 40;
     nState      = 0;
@@ -46,7 +47,6 @@ froebelTextBox::froebelTextBox(){
 void froebelTextBox::setSizeAndShapes(float _size, int _endingShape, int _iconShape){
     size = _size;
     height = size;
-    width = size;
     
     if (_endingShape != -1){
         bEdge = true;
@@ -92,13 +92,20 @@ ofRectangle froebelTextBox::getBoundingBox(){
     return rta;
 }
 
-bool froebelTextBox::checkMousePressed(ofPoint _mouse){
-    if (inside(_mouse)){
-        bSelected = !bSelected;
-        nState = STATE_ACTIVE;
-        return true;
-    }
-    return false;
+float froebelTextBox::getVerticalMargins(){
+    float margins = size;
+    
+    if ( bEdge )
+        margins += size*0.5;
+    
+    if ( bIcon)
+        margins += size*0.5;
+    
+    return margins;
+}
+
+ofRectangle froebelTextBox::getTextBoundingBox(){
+    return textBox;
 }
 
 void froebelTextBox::update(){
@@ -146,31 +153,32 @@ void froebelTextBox::update(){
         //  Calculate the size of the text
         //
         textBox = font->getStringBoundingBox( displayText , 0, 0);
-        margins = size;
-        
-        if ( bEdge )
-            margins += size*0.5;
-        
-        if ( bIcon)
-            margins += size*0.5;
+        textBox.width += getVerticalMargins();
         
         bool doReScale = true;
         
         if ( bFixedSize){
-            if (textBox.width + margins < width)
+            if (textBox.width < width)
                 doReScale = false;
         } 
         
         if (doReScale){
-            if ( textBox.width + margins <= maxWidth ){
+            
+            if ( textBox.width <= maxWidth ){
             
                 //  If it less that the max adjust the shape
                 //
-                width = textBox.width + margins;
+                if (textBox.width <= minWidth){
+                    width = minWidth;
+                } else {
+                    width = textBox.width;
+                }
+                
+                height = size;
                 
             } else {
                 
-                //  other wise break it baby
+                //  other wise break
                 //
                 string _newText = displayText;
                 vector < string > breakUp;
@@ -196,18 +204,21 @@ void froebelTextBox::update(){
                         pos.x += rect.width;
                     }
                 }
-            }
-        
-            textBox = font->getStringBoundingBox( displayText , 0, 0);
-            width = textBox.width + margins ;
-            height = size;
-            if ( textBox.height+size*0.5 > size ) {
-                while ( textBox.height+size > size*nEdges ) {
-                    nEdges++;
-                    height = size*nEdges;
+                
+                //  Apply the breaking
+                //
+                textBox = font->getStringBoundingBox( displayText , 0, 0);
+                textBox.width + getVerticalMargins();
+                width = textBox.width;
+                height = size;
+                if ( textBox.height+size*0.5 > size ) {
+                    while ( textBox.height+size > size*nEdges ) {
+                        nEdges++;
+                        height = size*nEdges;
+                    }
                 }
+                
             }
-            
         }
         
         bChange = false;
@@ -261,10 +272,19 @@ void froebelTextBox::draw(){
     if (bLeftAlign){
         font->drawString(displayText, size*0.5, size-13);
     } else {
-        font->drawString(displayText, width-(margins-size*0.5)-textBox.width, size-13);
+        font->drawString(displayText, width-(getVerticalMargins()-size*0.5)-textBox.width, size-13);
     }
         
     ofPopMatrix();
     ofPopStyle();
     
+}
+
+bool froebelTextBox::checkMousePressed(ofPoint _mouse){
+    if (inside(_mouse)){
+        bSelected = !bSelected;
+        nState = STATE_ACTIVE;
+        return true;
+    }
+    return false;
 }
