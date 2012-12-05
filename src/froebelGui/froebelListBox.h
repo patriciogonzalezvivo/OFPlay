@@ -36,15 +36,17 @@ public:
     
     vector<froebelTextBox*> elements;
     
+    float   offsetY;
+    float   offsetPct;
     float   damp;
     int     maxHeight;
     
 protected:
-    ofRectangle     box;
+    ofRectangle box;
+    ofRectangle slider;
     
-    float           totalBoxHeight;
-    float           mouseOffSet;
-    
+    float       totalBoxHeight;
+    float       totalLenght;
 };
 
 #endif

@@ -9,6 +9,7 @@ void testApp::setup(){
     ofSetWindowTitle( "OFPlay" );
 //    ofSetLogLevel(OF_LOG_VERBOSE);
 //    ofSetWindowShape(768,768);
+    ofBackground(230);//225,223,229);
     
     project             = NULL;
     statusEnergy        = 0;
@@ -64,16 +65,18 @@ void testApp::setup(){
     *subProjectPath = projectPath;
     subProjectPath->setPrefix("<< ");
     subProjectPath->setText("CHANGE THE DIRECTORY");
-    subProjectPath->font = &font;//&secondFont;
+    subProjectPath->font = &font;
     subProjectPath->bLeftAlign = false;
     subProjectPath->bFixedSize = true;
-    subProjectPath->setSizeAndShapes(defaultHeight);
-    subProjectPath->bEdge = false;
-    subProjectPath->bFill = false;
+    subProjectPath->setSizeAndShapes(defaultHeight,1);
     subProjectPath->fgColor.clear();
-    subProjectPath->fgColor.setFromPalet(5);
+    subProjectPath->fgColor.addState(5);
+    subProjectPath->fgColor.addState(7);
+    subProjectPath->fgColor.addState(5);
     subProjectPath->bgColor.clear();
-    subProjectPath->bgColor.linktToColor( &projectPath.bgColor );
+    subProjectPath->bgColor.addState(0);
+    subProjectPath->bgColor.addState(2);
+    subProjectPath->bgColor.addState(0);
     subProjectPath->width = ofGetWidth() - defaultHeight;
     projectPath.subInfo = subProjectPath;
     
@@ -94,13 +97,15 @@ void testApp::setup(){
     subProjectName->font = &font;//&secondFont;
     subProjectName->bLeftAlign = false;
     subProjectName->bFixedSize = true;
-    subProjectName->setSizeAndShapes(defaultHeight);
-    subProjectName->bEdge = false;
-    subProjectName->bFill = false;
+    subProjectName->setSizeAndShapes(defaultHeight,1);
     subProjectName->fgColor.clear();
-    subProjectName->fgColor.setFromPalet(5);
+    subProjectName->fgColor.addState(5);
+    subProjectName->fgColor.addState(7);
+    subProjectName->fgColor.addState(5);
     subProjectName->bgColor.clear();
-    subProjectName->bgColor.linktToColor( &projectName.bgColor );
+    subProjectName->bgColor.addState(0);
+    subProjectName->bgColor.addState(2);
+    subProjectName->bgColor.addState(0);
     subProjectName->width = ofGetWidth() - defaultHeight;
     projectName.subInfo = subProjectName;
     
@@ -136,13 +141,15 @@ void testApp::setup(){
     subPlatformList->font = &font;//&secondFont;
     subPlatformList->bLeftAlign = false;
     subPlatformList->bFixedSize = true;
-    subPlatformList->setSizeAndShapes(defaultHeight);
-    subPlatformList->bEdge = false;
-    subPlatformList->bFill = false;
+    subPlatformList->setSizeAndShapes(defaultHeight,1);
     subPlatformList->fgColor.clear();
-    subPlatformList->fgColor.setFromPalet(5);
+    subPlatformList->fgColor.addState(5);
+    subPlatformList->fgColor.addState(7);
+    subPlatformList->fgColor.addState(5);
     subPlatformList->bgColor.clear();
-    subPlatformList->bgColor.linktToColor( &platformsList.bgColor );
+    subPlatformList->bgColor.addState(0);
+    subPlatformList->bgColor.addState(2);
+    subPlatformList->bgColor.addState(0);
     subPlatformList->width = ofGetWidth() - defaultHeight;
     platformsList.subInfo = subPlatformList;
 
@@ -179,23 +186,25 @@ void testApp::setup(){
     subAddonsList->font = &font;//&secondFont;
     subAddonsList->bLeftAlign = false;
     subAddonsList->bFixedSize = true;
-    subAddonsList->setSizeAndShapes(defaultHeight);
-    subAddonsList->bEdge = false;
-    subAddonsList->bFill = false;
+    subAddonsList->setSizeAndShapes(defaultHeight,1);
     subAddonsList->fgColor.clear();
-    subAddonsList->fgColor.setFromPalet(5);
+    subAddonsList->fgColor.addState(5);
+    subAddonsList->fgColor.addState(7);
+    subAddonsList->fgColor.addState(5);
     subAddonsList->bgColor.clear();
-    subAddonsList->bgColor.linktToColor( &addonsList.bgColor );
+    subAddonsList->bgColor.addState(0);
+    subAddonsList->bgColor.addState(2);
+    subAddonsList->bgColor.addState(0);
     subAddonsList->width = ofGetWidth() - defaultHeight;
     addonsList.subInfo = subAddonsList;
     
     generateButton.setText( "GENERATE" );
     generateButton.font = &font;
     generateButton.bFixedSize = true;
-//    generateButton.bgColor.clear();
-//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
-//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
-//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+    generateButton.bgColor.clear();
+    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
     generateButton.setSizeAndShapes(defaultHeight);
 }
 
@@ -400,7 +409,6 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    ofBackground(225,223,229);
 
     projectName.draw();
     projectPath.draw();
@@ -508,7 +516,6 @@ void testApp::windowResized(int w, int h){
     generateButton.x = ofGetWidth() - defaultHeight - generateButton.width - defaultHeight*0.7;
     generateButton.y = ofGetHeight() - logo.getHeight()*0.5 - defaultHeight*1.5;
     
-//    cout << w << "x" << h << endl;
 }
 
 //--------------------------------------------------------------

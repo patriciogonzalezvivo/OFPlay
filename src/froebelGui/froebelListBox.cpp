@@ -25,7 +25,9 @@ froebelListBox::froebelListBox(){
     maxWidth        = 600;
     maxHeight       = 200;
     totalBoxHeight  = 0;
-    mouseOffSet     = 0.0;
+    totalLenght     = 0;
+    offsetY         = 0.0;
+    offsetPct       = 0.0;
     size            = 40;
     nState          = 0;
     damp            = 0.1;
@@ -57,7 +59,7 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape){
     //  Add element to the vector
     //
     froebelTextBox *newElement = new froebelTextBox();
-    newElement->x = x;
+    newElement->x = x+size*0.25;
     newElement->y = lastY;
     
     if ( _iconShape == -1 )
@@ -66,7 +68,7 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape){
         newElement->setSizeAndShapes(size,3,_iconShape);
         
     newElement->setText(_value);
-    newElement->setPrefix(" ");
+    newElement->setPrefix("  ");
     newElement->font = font;
     newElement->bSelected = _defVal;
     newElement->bFixedSize = true;
@@ -93,9 +95,12 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape){
     
     //  recalculate the bounding box
     //
+    slider.x = x;
+    slider.width = size*0.5;
+    
     box.x = x;
-    box.y = y + size;
-    box.width = width - size*0.5;
+    box.y = y;
+    box.width = width - size*0.75;
     box.height = 0;
     totalBoxHeight = 0;
     
@@ -184,20 +189,25 @@ bool froebelListBox::checkMousePressed(ofPoint _mouse){
         
         if ( box.inside(_mouse) ){
             
-            for(int i = 0; i < elements.size(); i++){
-                if (box.inside( elements[i]->getCenter() )){
-                    if (elements[i]->checkMousePressed(_mouse)){
-                        text = getSelectedAsString();
-                        bChange = true;
-                        bSelected = true;
-                        return true;
+            if (slider.inside(_mouse)){
+                return true;
+            } else {
+                for(int i = 0; i < elements.size(); i++){
+                    if (box.inside( elements[i]->getCenter() )){
+                        if (elements[i]->checkMousePressed(_mouse)){
+                            text = getSelectedAsString();
+                            bChange = true;
+                            bSelected = true;
+                            return true;
+                        }
                     }
                 }
             }
-            
-            return false;
         }
+        
     }
+        
+    return false;
 }
 
 void froebelListBox::update(){
@@ -214,35 +224,61 @@ void froebelListBox::update(){
     backgroundColor.update();
     
     if (bSelected){
-        //  recalculate the bounding box
+        //  Adjust the size of the box that contain the 
         //
         box.x = x;
-        box.y = y + size;
-        
+        box.y = y + height;
         if (totalBoxHeight != box.height)
             box.height = ofLerp(box.height, totalBoxHeight, damp);
-    
-        float totalLenght = 0;
-        float offSetY = 0;
+        
+        //  Recalculate the totalLenght of the elements
+        //
+        totalLenght = 0;
         for(int i = 0; i < elements.size(); i++){
             totalLenght += elements[i]->height;
         }
         
         if (totalLenght > box.height){
-            if (box.inside(ofGetMouseX(),ofGetMouseY())){
-                float pct = ofMap(ofGetMouseY()- box.y, size*0.5, box.height, 0,1,true);
-                float diff = totalLenght - box.height;
-                mouseOffSet = ofLerp( mouseOffSet, -diff * pct, damp*0.5);
+            ofPoint mouse = ofPoint(ofGetMouseX(),ofGetMouseY());
+            
+            //  Scrolling
+            //
+            if (box.inside(mouse)){
+                
+                offsetPct = ofMap(mouse.y-box.y, size*0.5,box.height,0.0,1.0,true);
+                
+                //  Scrolling on top and button zones 
+                //
+                if ( offsetY > -totalLenght-box.height*0.5){
+                    float newDamp = ( 0.5+abs(offsetPct - 0.5) )*0.01;
+                    
+                    if ( offsetPct < 0.5 ){
+                        offsetY = ofLerp(offsetY, 0, newDamp);
+                    } else {
+                        offsetY = ofLerp(offsetY, (-totalLenght + box.height), newDamp);
+                    }
+                }
+                
+                //  Slider Scrolling
+                //
+                slider.y = y + height + ofMap(offsetY,0,-totalLenght,0,box.height);
+                slider.height = (box.height/totalLenght)*box.height;
+                if (slider.inside(mouse)){
+                    float diff = totalLenght - box.height;
+                    offsetY = -diff * offsetPct;//ofLerp( offsetY, , damp);
+                }
             }
+            
         }
         
+        float previusY = 0;
         for(int i = 0; i < elements.size(); i++){
-            elements[i]->x = box.x;
-            elements[i]->y = box.y + offSetY + mouseOffSet;
+            elements[i]->x = box.x ;
+            elements[i]->y = box.y + previusY + offsetY;
             elements[i]->width = box.width + size*0.5;
             elements[i]->update();
             
-            offSetY += elements[i]->height;
+            previusY += elements[i]->height;
         }
     } else {
         if (totalBoxHeight != box.height)
@@ -273,6 +309,11 @@ void froebelListBox::draw(){
                 elements[i]->draw();
             }
         }
+    }
+    
+    if ((totalLenght > maxHeight) && bSelected ){
+        ofSetColor(bgColor.getFromPalet(2));
+        ofRect(slider);
     }
     
     froebelTextBox::draw();

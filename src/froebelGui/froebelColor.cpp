@@ -25,34 +25,30 @@ void froebelColor::setFromPalet(unsigned int _palletN){
 ofFloatColor froebelColor::getFromPalet( unsigned int _palletNum ){
     ofFloatColor color;
     
-    switch ( _palletNum ) {
-        case 0:
-            color = ofColor(220);
-            break;
-        case 1:
-            color = ofColor(4, 49, 7);
-            break;
-        case 2:
-            color = ofColor(220, 202, 185);
-            break;
-        case 3:
-            color = ofColor(201,28,29);//186, 1, 23);
-            break;
-        case 4:
-            color = ofColor(245,170,53);//247, 181, 55);
-            break;
-        case 5:
-            color = ofColor(41,94,151);//64, 79, 122);
-            break;
-        case 6:
-            color = ofColor(35,151,66);//62, 2, 35);
-            break;
-        case 7:
-            color = ofColor(233,88,43);//193, 66, 11);
-            break;
-        default:
-            color = ofColor(255);
-            break;
+    ofColor palette[8];
+    
+//    palette[0] = ofColor(220);
+//    palette[1] = ofColor(4, 49, 7);
+//    palette[2] = ofColor(220, 202, 185);
+//    palette[3] = ofColor(201,28,29);
+//    palette[4] = ofColor(245,170,53);
+//    palette[5] = ofColor(41,94,151);
+//    palette[6] = ofColor(35,151,66);
+//    palette[7] = ofColor(233,88,43);
+    
+    palette[0] = ofColor(220);
+    palette[1] = ofColor(4, 49, 7);
+    palette[2] = ofColor(220, 202, 185);
+    palette[3] = ofColor(186, 1, 23);
+    palette[4] = ofColor(247, 181, 55);
+    palette[5] = ofColor(64, 79, 122);
+    palette[6] = ofColor(62, 2, 35);
+    palette[7] = ofColor(193, 66, 11);
+    
+    if (_palletNum < 8){
+        color = palette[_palletNum];
+    } else {
+        color = ofColor(255);
     }
     
     return color;
