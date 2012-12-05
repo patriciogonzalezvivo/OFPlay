@@ -22,10 +22,13 @@ froebelListBox::froebelListBox(){
     prefix      = "";
     deliminater = "";
     
-    maxWidth    = 600;
-    size        = 40;
-    nState      = 0;
-    damp        = 0.1;
+    maxWidth        = 600;
+    maxHeight       = 200;
+    totalBoxHeight  = 0;
+    mouseOffSet     = 0.0;
+    size            = 40;
+    nState          = 0;
+    damp            = 0.1;
     
     //  STATE_PASSIVE
     //

@@ -11,12 +11,13 @@
 froebelTextBox::froebelTextBox(){
     subInfo     = NULL;
     
+    bFill       = true;
     bLeftAlign  = true;
     bChange     = true;
-    bEdge       = false;
-    bIcon       = false;
     bSelected   = false;
     bFixedSize  = false;
+    bEdge       = false;
+    bIcon       = false;
     
     text        = "";
     prefix      = "";
@@ -38,7 +39,7 @@ froebelTextBox::froebelTextBox(){
     
     //  STATE_ACTIVE
     //
-    fgColor.addState(3);
+    fgColor.addState(5);
     bgColor.addState(4);
 }
 
@@ -234,7 +235,11 @@ void froebelTextBox::draw(){
     ofPushMatrix();
     ofPushStyle();
     
-    ofFill();
+    if(bFill)
+        ofFill();
+    else
+        ofNoFill();
+    
     ofSetColor(bgColor);
     ofRect(smallBox);
     ofTranslate(x, y);

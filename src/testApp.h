@@ -26,7 +26,7 @@ public:
     //  GUI
     //
     ofImage         logo;
-    ofTrueTypeFont  font, secondFont;
+    ofTrueTypeFont  font;
     float           defaultHeight;
     
     //  Basic Paths

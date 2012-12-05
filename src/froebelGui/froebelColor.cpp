@@ -11,8 +11,11 @@
 froebelColor::froebelColor(){
     dstStateN   = -1;
     damp        = 0.1;
-    
-    set(1.0f);
+    pointerToColor = NULL;
+    r = 1.0;
+    g = 1.0;
+    b = 1.0;
+    a = 1.0;
 }
 
 void froebelColor::setFromPalet(unsigned int _palletN){
@@ -33,19 +36,19 @@ ofFloatColor froebelColor::getFromPalet( unsigned int _palletNum ){
             color = ofColor(220, 202, 185);
             break;
         case 3:
-            color = ofColor(186, 1, 23);
+            color = ofColor(201,28,29);//186, 1, 23);
             break;
         case 4:
-            color = ofColor(247, 181, 55);
+            color = ofColor(245,170,53);//247, 181, 55);
             break;
         case 5:
-            color = ofColor(64, 79, 122);
+            color = ofColor(41,94,151);//64, 79, 122);
             break;
         case 6:
-            color = ofColor(62, 2, 35);
+            color = ofColor(35,151,66);//62, 2, 35);
             break;
         case 7:
-            color = ofColor(193, 66, 11);
+            color = ofColor(233,88,43);//193, 66, 11);
             break;
         default:
             color = ofColor(255);
@@ -56,11 +59,9 @@ ofFloatColor froebelColor::getFromPalet( unsigned int _palletNum ){
 }
 
 void froebelColor::clear(){
-//    for (int i = 0; i < states.size(); i++) {
-//        delete states[i];
-//    }
-//    
     states.clear();
+    
+    pointerToColor = NULL;
 }
 
 void froebelColor::addState( ofFloatColor _color ){
@@ -69,13 +70,9 @@ void froebelColor::addState( ofFloatColor _color ){
 
 void froebelColor::addState( unsigned int _pallet ){
     ofFloatColor newColor;
-    newColor = getFromPalet( _pallet );
+    newColor.set(getFromPalet( _pallet ));
     states.push_back(newColor);
 }
-
-//void froebelColor::addStateAsPointer( ofFloatColor *_color ){
-//    states.push_back(_color);
-//}
 
 void froebelColor::setState( unsigned int _stateN ){
     if ( (_stateN < states.size()) && ( _stateN != dstStateN ) ){
@@ -83,9 +80,15 @@ void froebelColor::setState( unsigned int _stateN ){
     }
 }
 
+void froebelColor::linktToColor( ofFloatColor *_color ){
+    pointerToColor = _color;
+}
+
 void froebelColor::update(){
     
-    if ( dstStateN != -1 ){
+    if (pointerToColor != NULL){
+        lerp( *pointerToColor, damp );
+    } else if ( dstStateN != -1 ){
         if ( (*this) != states[ dstStateN ] ){
             lerp( states[ dstStateN ], damp);
         }

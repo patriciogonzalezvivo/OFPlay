@@ -8,6 +8,7 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofSetWindowTitle( "OFPlay" );
 //    ofSetLogLevel(OF_LOG_VERBOSE);
+//    ofSetWindowShape(768,768);
     
     project             = NULL;
     statusEnergy        = 0;
@@ -48,68 +49,65 @@ void testApp::setup(){
     defaultHeight       = 34;
     logo.loadImage("images/OFPlay.png");
     font.loadFont("fonts/Inconsolata.otf", 12, true,false,false,0.5,90);
-    secondFont.loadFont("fonts/GeosansLight.ttf", 11, true,false,false,0.5,90);
     
-    //  Name:
+    //  PATH:
     //
-    projectName.setText(sketchName);
-    projectName.setPrefix("Name: ");
-    projectName.font = &font;
-    projectName.setSizeAndShapes(defaultHeight, 3);
-    projectName.x = defaultHeight;
-    projectName.y = defaultHeight;
-    projectName.enable();
-    
-    froebelTextBox *subProjectName = new froebelTextBox();
-    *subProjectName = projectName;
-    subProjectName->setPrefix("<< ");
-    subProjectName->setText("CHANGE THE NAME");
-    subProjectName->font = &secondFont;
-    subProjectName->bLeftAlign = false;
-    subProjectName->bFixedSize = true;
-    subProjectName->setSizeAndShapes(defaultHeight, 1);
-    subProjectName->fgColor.clear();    //  Clear default pallete to insert my own
-    subProjectName->bgColor.clear();    //  Clear default pallete to insert my own
-    subProjectName->fgColor.addState(3);
-    subProjectName->bgColor.addState(0);
-    subProjectName->fgColor.addState(3);
-    subProjectName->bgColor.addState(2);
-    subProjectName->fgColor.addState(7);
-    subProjectName->bgColor.addState(2);
-    subProjectName->width = ofGetWidth() - defaultHeight;
-    projectName.subInfo = subProjectName;
-    
     projectPath.setText(sketchPath);
     projectPath.setPrefix("Path: ");
     projectPath.setDivider("/");
     projectPath.font = &font;
     projectPath.setSizeAndShapes(defaultHeight, 3);
     projectPath.x = defaultHeight;
-    projectPath.y = projectName.y + projectName.height + defaultHeight*0.5;
+    projectPath.y = defaultHeight;
     
     froebelTextBox *subProjectPath = new froebelTextBox();
     *subProjectPath = projectPath;
     subProjectPath->setPrefix("<< ");
     subProjectPath->setText("CHANGE THE DIRECTORY");
-    subProjectPath->font = &secondFont;
+    subProjectPath->font = &font;//&secondFont;
     subProjectPath->bLeftAlign = false;
     subProjectPath->bFixedSize = true;
-    subProjectPath->setSizeAndShapes(defaultHeight, 1);
-    subProjectPath->fgColor.clear();    //  Clear default pallete to insert my own
-    subProjectPath->bgColor.clear();    //  Clear default pallete to insert my own
-    subProjectPath->fgColor.addState(3);
-    subProjectPath->bgColor.addState(0);
-    subProjectPath->fgColor.addState(3);
-    subProjectPath->bgColor.addState(2);
-    subProjectPath->fgColor.addState(7);
-    subProjectPath->bgColor.addState(2);
+    subProjectPath->setSizeAndShapes(defaultHeight);
+    subProjectPath->bEdge = false;
+    subProjectPath->bFill = false;
+    subProjectPath->fgColor.clear();
+    subProjectPath->fgColor.setFromPalet(5);
+    subProjectPath->bgColor.clear();
+    subProjectPath->bgColor.linktToColor( &projectPath.bgColor );
     subProjectPath->width = ofGetWidth() - defaultHeight;
     projectPath.subInfo = subProjectPath;
+    
+    //  NAME:
+    //
+    projectName.setText(sketchName);
+    projectName.setPrefix("Name: ");
+    projectName.font = &font;
+    projectName.setSizeAndShapes(defaultHeight, 3);
+    projectName.x = defaultHeight;
+    projectName.y = projectPath.y + projectPath.height + defaultHeight*0.5;
+    projectName.enable();
+    
+    froebelTextBox *subProjectName = new froebelTextBox();
+    *subProjectName = projectName;
+    subProjectName->setPrefix("<< ");
+    subProjectName->setText("CHANGE THE NAME");
+    subProjectName->font = &font;//&secondFont;
+    subProjectName->bLeftAlign = false;
+    subProjectName->bFixedSize = true;
+    subProjectName->setSizeAndShapes(defaultHeight);
+    subProjectName->bEdge = false;
+    subProjectName->bFill = false;
+    subProjectName->fgColor.clear();
+    subProjectName->fgColor.setFromPalet(5);
+    subProjectName->bgColor.clear();
+    subProjectName->bgColor.linktToColor( &projectName.bgColor );
+    subProjectName->width = ofGetWidth() - defaultHeight;
+    projectName.subInfo = subProjectName;
     
     //  LOAD PLATFORMS
     //
     platformsList.x = defaultHeight;
-    platformsList.y = projectPath.y + projectPath.height + defaultHeight*0.5;
+    platformsList.y = projectName.y + projectName.height + defaultHeight*0.5;
     platformsList.font = &font;
     platformsList.setPrefix("Platform: ");
     platformsList.setDivider(", ");
@@ -135,18 +133,16 @@ void testApp::setup(){
     *subPlatformList = platformsList;
     subPlatformList->setPrefix( "<< " );
     subPlatformList->setText("CHANGE THE PLATFORM");
-    subPlatformList->font = &secondFont;
+    subPlatformList->font = &font;//&secondFont;
     subPlatformList->bLeftAlign = false;
     subPlatformList->bFixedSize = true;
-    subPlatformList->setSizeAndShapes(defaultHeight, 1);
-    subPlatformList->fgColor.clear();    //  Clear default pallete to insert my own
-    subPlatformList->bgColor.clear();    //  Clear default pallete to insert my own
-    subPlatformList->fgColor.addState(3);
-    subPlatformList->bgColor.addState(0);
-    subPlatformList->fgColor.addState(3);
-    subPlatformList->bgColor.addState(2);
-    subPlatformList->fgColor.addState(7);
-    subPlatformList->bgColor.addState(2);
+    subPlatformList->setSizeAndShapes(defaultHeight);
+    subPlatformList->bEdge = false;
+    subPlatformList->bFill = false;
+    subPlatformList->fgColor.clear();
+    subPlatformList->fgColor.setFromPalet(5);
+    subPlatformList->bgColor.clear();
+    subPlatformList->bgColor.linktToColor( &platformsList.bgColor );
     subPlatformList->width = ofGetWidth() - defaultHeight;
     platformsList.subInfo = subPlatformList;
 
@@ -180,31 +176,27 @@ void testApp::setup(){
     *subAddonsList = addonsList;
     subAddonsList->setPrefix("<< ");
     subAddonsList->setText("SELECT ADDONS");
-    subAddonsList->font = &secondFont;
+    subAddonsList->font = &font;//&secondFont;
     subAddonsList->bLeftAlign = false;
     subAddonsList->bFixedSize = true;
-    subAddonsList->setSizeAndShapes(defaultHeight, 1);
-    subAddonsList->fgColor.clear();    //  Clear default pallete to insert my own
-    subAddonsList->bgColor.clear();    //  Clear default pallete to insert my own
-    subAddonsList->fgColor.addState(3);
-    subAddonsList->bgColor.addState(0);
-    subAddonsList->fgColor.addState(3);
-    subAddonsList->bgColor.addState(2);
-    subAddonsList->fgColor.addState(7);
-    subAddonsList->bgColor.addState(2);
+    subAddonsList->setSizeAndShapes(defaultHeight);
+    subAddonsList->bEdge = false;
+    subAddonsList->bFill = false;
+    subAddonsList->fgColor.clear();
+    subAddonsList->fgColor.setFromPalet(5);
+    subAddonsList->bgColor.clear();
+    subAddonsList->bgColor.linktToColor( &addonsList.bgColor );
     subAddonsList->width = ofGetWidth() - defaultHeight;
     addonsList.subInfo = subAddonsList;
     
     generateButton.setText( "GENERATE" );
     generateButton.font = &font;
     generateButton.bFixedSize = true;
-    generateButton.bgColor.clear();
-    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
-    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
-    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+//    generateButton.bgColor.clear();
+//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
     generateButton.setSizeAndShapes(defaultHeight);
-    
-//    ofSetWindowShape(768,768);
 }
 
 //------------------------------------------------------
@@ -408,7 +400,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    ofBackground(230,230,230);
+    ofBackground(225,223,229);
 
     projectName.draw();
     projectPath.draw();

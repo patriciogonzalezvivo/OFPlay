@@ -45,6 +45,9 @@ public:
     bool    bSelected;
     bool    bLeftAlign;
     bool    bFixedSize;
+    bool    bEdge;
+    bool    bIcon;
+    bool    bFill;
     
 protected:
     string  text;
@@ -60,9 +63,6 @@ protected:
     
     float   size;
     float   margins;
-
-    bool    bEdge;
-    bool    bIcon;
     int     nEdges;
 };
 

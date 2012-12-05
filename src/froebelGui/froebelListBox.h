@@ -24,7 +24,7 @@ public:
     vector<string>  getSelected();
     string  getSelectedAsString();
     
-    bool checkMousePressed(ofPoint _mouse);
+    bool    checkMousePressed(ofPoint _mouse);
     
     void    clear();
     void    reset();
