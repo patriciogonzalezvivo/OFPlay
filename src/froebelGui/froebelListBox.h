@@ -11,43 +11,26 @@
 
 #include "ofMain.h"
 #include "froebelTextBox.h"
+#include "froebelContainer.h"
 
 class froebelListBox : public froebelTextBox {
 public:
     
     froebelListBox();
     
-    void    addElement(string _value, bool _defVal = false, int _iconShape = -1, int _edgeCoorner = -1);
-    bool    select(string _value);
+    void        addElement(string _value, bool _defVal = false, int _iconShape = -1, int _edgeCoorner = -1);
+    bool        select(string _value);
+    string      getSelectedAsString();
+    ofRectangle getBoundingBox();
+    bool        checkMousePressed(ofPoint _mouse);
     
-    ofRectangle     getBoundingBox();
-    vector<string>  getSelected();
-    string          getSelectedAsString();
+    void        update();
+    void        draw();
     
-    bool    checkMousePressed(ofPoint _mouse);
-    
-    void    clear();
-    void    reset();
-    
-    void    update();
-    void    draw();
-    
-    froebelColor    backgroundColor;
-    
-    vector<froebelTextBox*> elements;
-    
-    float   offsetY;
-    float   offsetPct;
-    float   damp;
-    int     maxHeight;
+    froebelContainer conteinerBox;
     
 protected:
-    void        updateContainerBoxSize();
-    ofRectangle conteinerBox;
-    ofRectangle slider;
     
-    float       totalBoxHeight;
-    float       totalLenght;
 };
 
 #endif

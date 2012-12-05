@@ -272,7 +272,7 @@ void froebelTextBox::draw(){
     if (bLeftAlign){
         font->drawString(displayText, size*0.5, size-13);
     } else {
-        font->drawString(displayText, width-(getVerticalMargins()-size*0.5)-textBox.width, size-13);
+        font->drawString(displayText, width-(-size*0.5)-textBox.width, size-13);
     }
         
     ofPopMatrix();

@@ -9,20 +9,72 @@
 #include "froebelContainer.h"
 
 froebelContainer::froebelContainer(){
+    maxHeight       = 200;
     
+    totalBoxHeight  = 0;
+    totalLenght     = 0;
+    offsetY         = 0.0;
+    offsetPct       = 0.0;
+    damp            = 0.1;
+    slider.width    = 10;
+    
+    bEnable         = false;
+    bgColor.setFromPalet(0);
+}
+
+void froebelContainer::addElement( froebelTextBox *_newElement){
+    int lastY = 0;
+    if (elements.size() > 0)
+        lastY = elements[elements.size()-1]->y +  elements[elements.size()-1]->height;
+    
+    _newElement->x = x;
+    _newElement->y = lastY;
+    
+    elements.push_back(_newElement);
+}
+
+void froebelContainer::clear(){
+    for(int i = 0; i < elements.size(); i++){
+        delete elements[i];
+    }
+    elements.clear();
+}
+
+void froebelContainer::reset(){
+    for(int i = 0; i < elements.size(); i++){
+        elements[i]->bSelected = false;
+    }
+}
+
+bool froebelContainer::select(string _value){
+    for(int i = 0; i < elements.size(); i++){
+        if ( elements[i]->getText() == _value){
+            elements[i]->bSelected = true;
+            return true;
+        }
+    }
+    return false;
+}
+
+vector<string> froebelContainer::getSelected(){
+    vector<string> list;
+    
+    for(int i = 0; i < elements.size(); i++){
+        if ( elements[i]->bSelected ){
+            list.push_back( elements[i]->getText() );
+        }
+    }
+    
+    return list;
 }
 
 void froebelContainer::update(){
+    bgColor.update();
     
-}
-
-void froebelListBox::updateContainerBoxSize(){
-    
-    conteinerBox.width = 0;
+    width = 0;
     totalBoxHeight = 0;
     
-    slider.x = conteinerBox.x;
-    slider.width = size*0.5;
+    slider.x = x;
     
     bool minWidthChange = false;
     
@@ -31,17 +83,118 @@ void froebelListBox::updateContainerBoxSize(){
         if (totalBoxHeight < maxHeight)
             totalBoxHeight += elements[i]->height;
         
-        float elementWidth = elements[i]->getTextBoundingBox().width;
+        float elementWidth = elements[i]->getTextBoundingBox().width + elements[i]->getVerticalMargins();
         
-        if (elementWidth > conteinerBox.width){
-            conteinerBox.width = elementWidth;
+        if (elementWidth > width){
+            width = elementWidth;
             minWidthChange = true;
         }
     }
     
     if (minWidthChange){
         for(int i = 0; i < elements.size(); i++){
-            elements[i]->minWidth = conteinerBox.width;
+            elements[i]->minWidth = width;
         }
+    }
+    
+    if (bEnable){
+        //  Adjust the size
+        //
+        if (totalBoxHeight != height)
+            height = ofLerp(height, totalBoxHeight, damp);
+        
+        //  Recalculate the totalLenght of the elements
+        //
+        totalLenght = 0;
+        for(int i = 0; i < elements.size(); i++){
+            totalLenght += elements[i]->height;
+        }
+        
+        if (totalLenght > height){
+            ofPoint mouse = ofPoint(ofGetMouseX(),ofGetMouseY());
+            
+            //  Scrolling
+            //
+            if (inside(mouse)){
+                
+                offsetPct = ofMap(mouse.y-y, 0,height,0.0,1.0,true);
+                
+                //  Scrolling on top and button zones
+                //
+                if ( offsetY > -totalLenght - height*0.5){
+                    //                    float newDamp = ( 0.5+abs(offsetPct - 0.5) )*0.01;
+                    //
+                    //                    if ( offsetPct < 0.5 ){
+                    //                        offsetY = ofLerp(offsetY, 0, newDamp);
+                    //                    } else {
+                    //                        offsetY = ofLerp(offsetY, (-totalLenght + box.height), newDamp);
+                    //                    }
+                    float diff = totalLenght - height;
+                    offsetY = ofLerp(offsetY,-diff * offsetPct,0.01);
+                }
+                
+                //  Slider Scrolling
+                //
+                slider.y = y + ofMap(offsetY,0,-totalLenght,0,height);
+                slider.height = (height/totalLenght)*height;
+                if (slider.inside(mouse)){
+                    float diff = totalLenght - height;
+                    offsetY = -diff * offsetPct;
+                }
+            }
+            
+        }
+        
+        float previusY = 0;
+        for(int i = 0; i < elements.size(); i++){
+            elements[i]->x = x ;
+            elements[i]->y = y + previusY + offsetY;
+            elements[i]->width = width;
+            elements[i]->update();
+            
+            previusY += elements[i]->height;
+        }
+    } else {
+        if (totalBoxHeight != height)
+            height = ofLerp(height, 0, damp*0.5);
+    }
+}
+
+void froebelContainer::draw(){
+    
+    ofFill();
+    ofSetColor(bgColor);
+    ofRect( *this );
+    
+    for(int i = 0; i < elements.size(); i++){
+        if (inside( elements[i]->getCenter() )){
+            elements[i]->draw();
+        }
+    }
+    
+    if ( (totalLenght-5 >= maxHeight) ){
+        ofSetColor(bgColor.getFromPalet(2));
+        ofRect(slider);
+    }
+    
+}
+
+bool froebelContainer::checkMousePressed(ofPoint _mouse){
+    if ( inside(_mouse) ){
+        if (slider.inside(_mouse)){
+            return true;
+        } else {
+            
+            for(int i = 0; i < elements.size(); i++){
+                
+                if ( inside( elements[i]->getCenter() )){
+                    if (elements[i]->checkMousePressed(_mouse)){
+                        return true;
+                    }
+                }
+            }
+        }
+    } else {
+        return false;
     }
 }

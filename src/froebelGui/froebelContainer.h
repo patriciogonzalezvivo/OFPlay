@@ -17,11 +17,30 @@ public:
     
     froebelContainer();
     
-    virtual bool checkMousePressed(ofPoint _mouse);
+    void            addElement( froebelTextBox *_newElement);
+    bool            select(string _value);
+    vector<string>  getSelected();
+    void            clear();
+    void            reset();
     
-    void update();
-    void draw();
+    virtual bool    checkMousePressed(ofPoint _mouse);
     
+    vector<froebelTextBox*> elements;
+    
+    void        update();
+    void        draw();
+    
+    froebelColor    bgColor;
+    ofRectangle slider;
+    
+    bool        bEnable;
+    int         maxHeight;
+private:
+    float       offsetY;
+    float       offsetPct;
+    float       damp;
+    float       totalBoxHeight;
+    float       totalLenght;
 };
 
 #endif

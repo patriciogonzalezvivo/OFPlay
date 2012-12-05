@@ -31,21 +31,29 @@ public:
     
     //  Basic Paths
     //
-    string          appToRoot;
+    string          binPath;
+    string          ofRoot;
+//    string          appToRoot;
     string          defaultLoc;
     string          addonsPath;
     
     //  Project Generator
     //
+    void            loadAddons();
+    void            loadFolder(string _path);
     void            loadProject(string _path);
-    bool            isAddonCore(string _addonName);
+    
     string          setTarget(int targ);
     void            generateProject();
+    
+    bool            isAddonCore(string _addonName);
+    
     froebelEditBox  projectName;
-    froebelEditBox  projectPath;
+    froebelListBox  projectPath;
     froebelListBox  platformsList;
     froebelListBox  addonsList;
     froebelTextBox  generateButton;
+    
     baseProject     *project;
     
     //  Status
