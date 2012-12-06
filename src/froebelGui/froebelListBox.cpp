@@ -53,7 +53,6 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape, int
     newElement->font = font;
     newElement->setSizeAndShapes(size,_edgeCoorner,_iconShape);
     newElement->setText(_value);
-    newElement->setPrefix("  ");
     newElement->bSelected = _defVal;
     
     newElement->fgColor.clear();
@@ -73,6 +72,7 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape, int
     containerBox.y = y + height;
     containerBox.width = width-( bEdge? size: 0);
     containerBox.height = 0;
+    containerBox.size = size;
     containerBox.addElement(newElement);
     
     bChange = true;
@@ -134,6 +134,9 @@ bool froebelListBox::checkMousePressed(ofPoint _mouse){
             bChange = true;
             bSelected = true;
             return true;
+        } else {
+            string rta = getSelectedAsString();
+            ofNotifyEvent(focusLost, rta);
         }
     }
 }

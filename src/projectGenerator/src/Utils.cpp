@@ -625,3 +625,34 @@ bool isProjectFolder(string &_projFolder){
         return false;
     }
 }
+
+bool isAddonCore(string addon){
+    //  Pre define what's a core addon
+    //
+    vector<string>  coreAddons;
+    coreAddons.push_back("ofx3DModelLoader");
+    coreAddons.push_back("ofxAccelerometer");
+    coreAddons.push_back("ofxAndroid");
+    coreAddons.push_back("ofxAssimpModelLoader");
+    coreAddons.push_back("ofxGui");
+    coreAddons.push_back("ofxMultiTouch");
+    coreAddons.push_back("ofxDirList");
+    coreAddons.push_back("ofxNetwork");
+    coreAddons.push_back("ofxOpenCv");
+    coreAddons.push_back("ofxOsc");
+    coreAddons.push_back("ofxThread");
+    coreAddons.push_back("ofxThreadedImageLoader");
+    coreAddons.push_back("ofxVectorGraphics");
+    coreAddons.push_back("ofxVectorMath");
+    coreAddons.push_back("ofxXmlSettings");
+    coreAddons.push_back("ofxSvg");
+    coreAddons.push_back("ofxSynth");
+    coreAddons.push_back("ofxiPhone");
+    
+    for (int i = 0; i < coreAddons.size(); i++){
+        if (coreAddons[i] == addon){
+            return true;
+        }
+    }
+    return false;
+}

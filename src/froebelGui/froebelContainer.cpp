@@ -14,9 +14,9 @@ froebelContainer::froebelContainer(){
     totalBoxHeight  = 0;
     totalLenght     = 0;
     offsetY         = 0.0;
-    offsetPct       = 0.0;
     damp            = 0.1;
-    slider.width    = 20;
+    size            = 30;
+    slider.width    = 5;
     
     bEnable         = false;
     bCheckList      = false;
@@ -126,29 +126,15 @@ void froebelContainer::update(){
             //  Scrolling
             //
             if (inside(mouse)){
-                
-                offsetPct = ofMap(mouse.y-y, 0,height,0.0,1.0,true);
-                
-                //  Scrolling on top and button zones
-                //
-                if ( offsetY > -totalLenght - height*0.5){
-                    //                    float newDamp = ( 0.5+abs(offsetPct - 0.5) )*0.01;
-                    //
-                    //                    if ( offsetPct < 0.5 ){
-                    //                        offsetY = ofLerp(offsetY, 0, newDamp);
-                    //                    } else {
-                    //                        offsetY = ofLerp(offsetY, (-totalLenght + box.height), newDamp);
-                    //                    }
-                }
+    
+                float offsetPct = ofMap(mouse.y-y, 0,height,0.0,1.0,true);
+                float diff = totalLenght - height;
+                offsetY = ofLerp(offsetY, -diff * offsetPct, damp);
                 
                 //  Slider Scrolling
                 //
                 slider.y = y + ofMap(offsetY,0,-totalLenght,0,height);
                 slider.height = (height/totalLenght)*height;
-                if (slider.inside(mouse)){
-                    float diff = totalLenght - height;
-                    offsetY = -diff * offsetPct;
-                }
             }
             
         }

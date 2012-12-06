@@ -96,14 +96,31 @@ bool froebelFolderElement::checkMousePressed(ofPoint _mouse){
             ofDirectory folder(rootPath+text);
             folder.listDir();
             for(int i=0; i < (int)folder.size();i++){
+                
                 if (folder.getFile(i).isDirectory()){
-                    string path = rootPath+text+folder.getName(i);
-                    if (  isProjectFolder( path ) ){
+                    
+                    string name = folder.getName(i);
+                    string path = rootPath+text+name;
+                    
+                    if (isAddonCore(name) ||
+                        name == "build" ||
+                        name == "bin" ||
+                        name == "src" ||
+                        name == "lib" ||
+                        name == "libs" ||
+                        name == "include" ||
+                        name == "scripts" ||
+                        name == "doc" ||
+                        name == "docs"){
+                        
+                      //    Skip core addons folder because don't have a example inside
+                      //    and src libs folders
+                        
+                    } else if (  isProjectFolder( path ) ){
                         froebelTextBox *newElement = new froebelTextBox();
                         newElement->font = font;
-                        newElement->setSizeAndShapes(size,3);
+                        newElement->setSizeAndShapes(size,3,5);
                         newElement->setText(folder.getName(i));
-                        newElement->setPrefix("  ");
                         
                         newElement->fgColor.clear();
                         newElement->fgColor.addState(5);
@@ -123,7 +140,6 @@ bool froebelFolderElement::checkMousePressed(ofPoint _mouse){
                         newFolder->font = font;
                         newFolder->setSizeAndShapes(size);
                         newFolder->setText( folder.getName(i) + "/");
-                        newFolder->setPrefix("  ");
                         newFolder->rootPath = rootPath + text ;
                         newFolder->fgColor.clear();
                         newFolder->fgColor.addState(5);
@@ -133,6 +149,7 @@ bool froebelFolderElement::checkMousePressed(ofPoint _mouse){
                         newFolder->bgColor.addState(0);
                         newFolder->bgColor.addState(2);
                         newFolder->bgColor.addState(7);
+                        newFolder->containerBox.size = size;
                         
                         newFolder->father = &containerBox;
                         

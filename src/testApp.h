@@ -43,10 +43,10 @@ public:
     void            loadFolder(string _path);
     void            loadProject(string _path);
     
+    void            pathChange(string &_path);
+    
     string          setTarget(int targ);
     void            generateProject();
-    
-    bool            isAddonCore(string _addonName);
     
     froebelEditBox  projectName;
     froebelListBox  projectPath;

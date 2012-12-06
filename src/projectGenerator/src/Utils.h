@@ -66,5 +66,6 @@ void extractFolderFromPath(string &_path, string &_folder);
 void fixStringCharacters(string &toFix);
 
 bool isProjectFolder(string &_projFolder);
+bool isAddonCore(string _addonName);
 
 #endif /* UTILS_H_ */

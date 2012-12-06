@@ -60,8 +60,12 @@ void testApp::setup(){
     projectPath.x = defaultHeight;
     projectPath.y = defaultHeight;
     projectPath.containerBox.bCheckList = false;
+    
+    ofAddListener(projectPath.focusLost, this, &testApp::pathChange);
+    
     loadFolder( "apps/" );
     loadFolder( "examples/" );
+    loadFolder( "addons/" );
     
     froebelTextBox *subProjectPath = new froebelTextBox();
     *subProjectPath = projectPath;
@@ -217,6 +221,7 @@ void testApp::loadFolder(string _path){
     ofDirectory folder( ofFilePath::getAbsolutePath(ofFilePath::join(ofRoot,_path)) );
 
     if (folder.exists()){
+        
         //  Create Folder Element
         //
         froebelFolderElement *newFolder = new froebelFolderElement();
@@ -224,7 +229,7 @@ void testApp::loadFolder(string _path){
         newFolder->setSizeAndShapes(defaultHeight);
         newFolder->setText(_path);
         newFolder->rootPath = ofRoot;
-        newFolder->setPrefix("  ");
+        newFolder->setPrefix("");
         newFolder->fgColor.clear();
         newFolder->fgColor.addState(5);
         newFolder->fgColor.addState(7);
@@ -233,6 +238,7 @@ void testApp::loadFolder(string _path){
         newFolder->bgColor.addState(0);
         newFolder->bgColor.addState(2);
         newFolder->bgColor.addState(7);
+        newFolder->containerBox.size = defaultHeight;
         
         newFolder->father = &projectPath.containerBox;
         
@@ -245,30 +251,15 @@ void testApp::loadFolder(string _path){
     }
 }
 
-//------------------------------------------------------
-bool testApp::isAddonCore(string addon){
-    //  Pre define what's a core addon
-    //
-    vector<string>  coreAddons;
-    coreAddons.push_back("ofx3DModelLoader");
-    coreAddons.push_back("ofxAssimpModelLoader");
-    coreAddons.push_back("ofxDirList");
-    coreAddons.push_back("ofxNetwork");
-    coreAddons.push_back("ofxOpenCv");
-    coreAddons.push_back("ofxOsc");
-    coreAddons.push_back("ofxThread");
-    coreAddons.push_back("ofxThreadedImageLoader");
-    coreAddons.push_back("ofxVectorGraphics");
-    coreAddons.push_back("ofxVectorMath");
-    coreAddons.push_back("ofxXmlSettings");
-    coreAddons.push_back("ofxSvg");
-    
-    for (int i = 0; i < coreAddons.size(); i++){
-        if (coreAddons[i] == addon){
-            return true;
-        }
+void testApp::pathChange(string &_path){
+    string completePath = ofRoot + _path;
+
+    if ( isProjectFolder(completePath) ){
+        loadProject( completePath );
+    } else {
+        projectPath.setText(ofRoot + _path);
+        projectName.setText("newProject");
     }
-    return false;
 }
 
 void testApp::loadProject(string _path){

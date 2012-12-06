@@ -34,13 +34,13 @@ public:
     froebelColor bgColor;
     ofRectangle  slider;
     
+    int         size;
     int         maxHeight;
     bool        bEnable;
     bool        bCheckList;
     
 private:
     float       offsetY;
-    float       offsetPct;
     float       damp;
     float       totalBoxHeight;
     float       totalLenght;

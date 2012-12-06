@@ -28,6 +28,8 @@ public:
     void    update();
     void    draw();
     
+    ofEvent<string> focusLost;
+    
     froebelContainer containerBox;
     
 protected:
