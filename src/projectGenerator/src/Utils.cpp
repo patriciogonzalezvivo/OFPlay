@@ -595,8 +595,12 @@ bool isProjectFolder(string &_projFolder){
     //
     searchFor = searchFor+"/src";
     dir.open( searchFor );
-    if (!dir.isDirectory())
+    if (dir.exists()){
+        if (!dir.isDirectory())
+            return false;
+    } else {
         return false;
+    }
     
     //  4. Have main.cpp, testApp.h, testApp.cpp?
     //
@@ -605,8 +609,19 @@ bool isProjectFolder(string &_projFolder){
     bool    isTestAppH = test.open(searchFor+"/testApp.h");
     bool    isTestAppCpp = test.open(searchFor+"/testApp.cpp");
     
-    if ( !(isMainCpp && isTestAppH && isTestAppCpp) )
+    if ( isTestAppH ){
+        if ( isMainCpp && isTestAppCpp ){
+            return true;
+        } else {
+            isMainCpp = test.open(searchFor+"/main.mm");
+            isTestAppCpp = test.open(searchFor+"/testApp.mm");
+            if ( isMainCpp && isTestAppCpp ){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } else {
         return false;
-    
-    return true;
+    }
 }

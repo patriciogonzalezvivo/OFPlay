@@ -18,8 +18,6 @@ public:
     
     froebelFolderElement();
     
-    virtual void    addElement(string _value, bool _defVal = false, int _iconShape = -1, int _edgeCoorner = -1);
-    
     virtual string      getText();
     virtual ofRectangle getBoundingBox();
     

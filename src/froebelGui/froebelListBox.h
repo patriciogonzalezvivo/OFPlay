@@ -20,7 +20,6 @@ public:
     froebelListBox();
     
     void    addElement(string _value, bool _defVal = false, int _iconShape = -1, int _edgeCoorner = -1);
-    void    addFolder(string _value, bool _defVal = false, int _iconShape = -1, int _edgeCoorner = -1);
     bool    select(string _value);
     string  getSelectedAsString();
     virtual ofRectangle getBoundingBox();

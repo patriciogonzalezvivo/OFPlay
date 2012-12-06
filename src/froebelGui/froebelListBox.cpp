@@ -78,47 +78,6 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape, int
     bChange = true;
 }
 
-void froebelListBox::addFolder(string _value, bool _defVal, int _iconShape, int _edgeCoorner){
-    
-    //  Create new element
-    //
-    froebelFolderElement *newFolder = new froebelFolderElement();
-    newFolder->font = font;
-    newFolder->setSizeAndShapes(size,_edgeCoorner,_iconShape);
-    newFolder->setText(_value);
-    newFolder->setPrefix("  ");
-    newFolder->bSelected = _defVal;
-    newFolder->fgColor.clear();
-    newFolder->fgColor.addState(5);
-    newFolder->fgColor.addState(7);
-    newFolder->fgColor.addState(4);
-    newFolder->bgColor.clear();
-    newFolder->bgColor.addState(0);
-    newFolder->bgColor.addState(2);
-    newFolder->bgColor.addState(7);
-    
-    newFolder->father = &containerBox;
-    
-    newFolder->update();
-    
-    //  recalculate the container box
-    //
-    containerBox.x = x;
-    containerBox.y = y + height;
-    containerBox.width = width-( bEdge? size: 0);
-    containerBox.height = 0;
-    
-    //  Link it to the father container
-    //
-    
-    
-    //  Add it to the containerBox
-    //
-    containerBox.addElement(newFolder);
-    
-    bChange = true;
-}
-
 ofRectangle froebelListBox::getBoundingBox(){
     ofRectangle rta;
     

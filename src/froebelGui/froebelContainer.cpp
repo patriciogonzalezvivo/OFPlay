@@ -164,7 +164,7 @@ void froebelContainer::update(){
         }
     } else {
         if (totalBoxHeight != height)
-            height = ofLerp(height, 0, damp*0.5);
+            height = ofLerp(height, 0.0, damp);
     }
 }
 
@@ -190,33 +190,31 @@ void froebelContainer::draw(){
 bool froebelContainer::checkMousePressed(ofPoint _mouse){
     bool rta = false;
     
-    if ( inside(_mouse) ){
-        if (slider.inside(_mouse)){
-            rta = true;
-        } else {
+    if (slider.inside(_mouse)){
+        rta = true;
+    } else {
+        
+        int bClickedOn = -1;
+        for(int i = 0; i < elements.size(); i++){
             
-            int bClickedOn = -1;
-            for(int i = 0; i < elements.size(); i++){
-                
-                if ( inside( elements[i]->getCenter() )){
-                    if (elements[i]->checkMousePressed(_mouse)){
-                        bClickedOn = i;
+            if ( inside( elements[i]->getCenter() )){
+                if (elements[i]->checkMousePressed(_mouse)){
+                    bClickedOn = i;
+                }
+            }
+        }
+        
+        if (bClickedOn != -1){
+            if ( !bCheckList ){
+                for(int i = 0; i < elements.size(); i++){
+                    if ( i != bClickedOn ){
+                        elements[i]->bSelected = false;
                     }
                 }
             }
-            
-            if (bClickedOn != -1){
-                if ( !bCheckList ){
-                    for(int i = 0; i < elements.size(); i++){
-                        if ( i != bClickedOn ){
-                            elements[i]->bSelected = false;
-                        }
-                    }
-                }
-                rta = true;
-            } 
+            rta = true;
         }
-    } 
+    }
     
     return rta;
 }

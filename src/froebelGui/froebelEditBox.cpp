@@ -43,7 +43,7 @@ froebelEditBox::froebelEditBox(){
     
     //  STATE_ACTIVE
     //
-    fgColor.addState(3);
+    fgColor.addState(5);
     bgColor.addState(4);
     
     //  Specific
@@ -69,6 +69,7 @@ void froebelEditBox::disable(){
 	if(bEditing){
 		endEditing();
 	}
+    
 	if(bEnabled){
         ofRemoveListener(ofEvents().mousePressed, this, &froebelEditBox::mousePressed);
 		ofRemoveListener(ofEvents().mouseReleased, this, &froebelEditBox::mouseReleased);
@@ -231,8 +232,7 @@ void froebelEditBox::mouseReleased(ofMouseEventArgs& args){
         if(!bEditing && mouseDownInRect){
 	        beginEditing();
         }
-    }
-    else if(bEditing){
+    } else if(bEditing){
 		endEditing();
 	}
 }

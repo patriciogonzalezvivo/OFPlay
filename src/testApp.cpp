@@ -1,6 +1,5 @@
 #include "testApp.h"
 
-
 //--------------------------------------------------------------
 void testApp::setup(){
     ofEnableSmoothing();
@@ -224,8 +223,8 @@ void testApp::loadFolder(string _path){
         newFolder->font = &font;
         newFolder->setSizeAndShapes(defaultHeight);
         newFolder->setText(_path);
-        newFolder->setPrefix("  ");
         newFolder->rootPath = ofRoot;
+        newFolder->setPrefix("  ");
         newFolder->fgColor.clear();
         newFolder->fgColor.addState(5);
         newFolder->fgColor.addState(7);
@@ -493,7 +492,7 @@ void testApp::mouseDragged(int x, int y, int button){
 void testApp::mousePressed(int x, int y, int button){
     ofPoint mouse = ofPoint(x, y);
     
-    if ( projectPath.checkMousePressed( mouse )){
+    if ( projectPath.checkMousePressed( mouse ) ){
         /*
         string command = "";
         ofDirectory dir(ofFilePath::join(getOFRoot(),defaultLoc));
@@ -558,6 +557,8 @@ void testApp::windowResized(int w, int h){
     projectPath.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     platformsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     addonsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
+    
+//    projectPath.containerBox.maxHeight = ofGetHeight() - projectPath.y - projectName.y - defaultHeight*0.5;
     
     addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     addonsList.bChange = true;
