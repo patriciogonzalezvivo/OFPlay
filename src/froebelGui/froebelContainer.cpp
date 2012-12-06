@@ -39,6 +39,28 @@ void froebelContainer::addElement( froebelTextBox *_newElement){
     _newElement->y = lastY;
     
     elements.push_back(_newElement);
+    
+    width = 0;
+    totalBoxHeight = 0;
+    bool minWidthChange = false;
+    for(int i = 0; i < elements.size(); i++){
+        
+        if (totalBoxHeight < maxHeight)
+            totalBoxHeight += elements[i]->height;
+        
+        float elementWidth = elements[i]->getTextBoundingBox().width;
+        
+        if (elementWidth > width){
+            width = elementWidth;
+            minWidthChange = true;
+        }
+    }
+    
+    if (minWidthChange){
+        for(int i = 0; i < elements.size(); i++){
+            elements[i]->minWidth = width;
+        }
+    }
 }
 
 void froebelContainer::clear(){
@@ -80,32 +102,8 @@ vector<string> froebelContainer::getSelected(){
 
 void froebelContainer::update(){
     bgColor.update();
-    
-    width = 0;
-    totalBoxHeight = 0;
-    
+
     slider.x = x;
-    
-    bool minWidthChange = false;
-    
-    for(int i = 0; i < elements.size(); i++){
-        
-        if (totalBoxHeight < maxHeight)
-            totalBoxHeight += elements[i]->height;
-        
-        float elementWidth = elements[i]->getTextBoundingBox().width + elements[i]->getVerticalMargins();
-        
-        if (elementWidth > width){
-            width = elementWidth;
-            minWidthChange = true;
-        }
-    }
-    
-    if (minWidthChange){
-        for(int i = 0; i < elements.size(); i++){
-            elements[i]->minWidth = width;
-        }
-    }
     
     if (bEnable){
         //  Adjust the size
