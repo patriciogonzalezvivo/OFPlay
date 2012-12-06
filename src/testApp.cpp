@@ -19,7 +19,7 @@ void testApp::setup(){
 
     ofxXmlSettings XML;
     XML.loadFile("projectGeneratorSettings.xml");
-    string appToRoot = XML.getValue("appToRoot", "../../../../");
+    appToRoot = XML.getValue("appToRoot", "../../../../");
     defaultLoc = XML.getValue("defaultNewProjectLocation", "apps");
     
     //-------------------------------------
@@ -60,6 +60,7 @@ void testApp::setup(){
     projectPath.setSizeAndShapes(defaultHeight, 3);
     projectPath.x = defaultHeight;
     projectPath.y = defaultHeight;
+    projectPath.containerBox.bCheckList = false;
     loadFolder( "apps/" );
     loadFolder( "examples/" );
     
@@ -119,7 +120,7 @@ void testApp::setup(){
     platformsList.setPrefix("Platform: ");
     platformsList.setDivider(", ");
     platformsList.setSizeAndShapes(defaultHeight,3);
-    platformsList.conteinerBox.maxHeight = 200;
+    platformsList.containerBox.maxHeight = 200;
     platformsList.addElement("windows (codeblocks)",ofGetTargetPlatform()==OF_TARGET_WINGCC);
 	platformsList.addElement("windows (visualStudio)", ofGetTargetPlatform()==OF_TARGET_WINVS);
 	platformsList.addElement("linux (codeblocks)",ofGetTargetPlatform()==OF_TARGET_LINUX);
@@ -163,7 +164,7 @@ void testApp::setup(){
     addonsList.setDivider(", ");
     addonsList.setSizeAndShapes(defaultHeight,3);
     addonsList.maxWidth = 700;
-    addonsList.conteinerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
+    addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     loadAddons();
     
     froebelTextBox *subAddonsList = new froebelTextBox();
@@ -196,7 +197,7 @@ void testApp::setup(){
 }
 
 void testApp::loadAddons(){
-    addonsList.conteinerBox.clear();
+    addonsList.containerBox.clear();
     
     ofDirectory addonsFolder(addonsPath);
     addonsFolder.listDir();
@@ -217,14 +218,31 @@ void testApp::loadFolder(string _path){
     ofDirectory folder( ofFilePath::getAbsolutePath(ofFilePath::join(ofRoot,_path)) );
 
     if (folder.exists()){
-        projectPath.addElement(_path);
-        folder.listDir();
-        for(int i=0; i < (int)folder.size();i++){
-            if (folder.getFiles()[i].isDirectory()){
-                
-            }
-            
-        }
+        //  Create Folder Element
+        //
+        froebelFolderElement *newFolder = new froebelFolderElement();
+        newFolder->font = &font;
+        newFolder->setSizeAndShapes(defaultHeight);
+        newFolder->setText(_path);
+        newFolder->setPrefix("  ");
+        newFolder->rootPath = ofRoot;
+        newFolder->fgColor.clear();
+        newFolder->fgColor.addState(5);
+        newFolder->fgColor.addState(7);
+        newFolder->fgColor.addState(4);
+        newFolder->bgColor.clear();
+        newFolder->bgColor.addState(0);
+        newFolder->bgColor.addState(2);
+        newFolder->bgColor.addState(7);
+        
+        newFolder->father = &projectPath.containerBox;
+        
+        newFolder->update();
+
+        //  Added to the list
+        //
+        projectPath.containerBox.addElement( newFolder );
+        
     }
 }
 
@@ -267,7 +285,7 @@ void testApp::loadProject(string _path){
     
     //  Extracting Addons ( from addons.make)
     //
-    addonsList.conteinerBox.reset();
+    addonsList.containerBox.reset();
     
     //  Have addons.make??
     //
@@ -349,19 +367,19 @@ void testApp::setStatus(string newStatus){
 void testApp::generateProject(){
     
     vector <int> targetsToMake;
-    for(int i = 0; i < platformsList.conteinerBox.elements.size(); i++){
-        if ( platformsList.conteinerBox.elements[i]->bSelected == true ){
-            if (platformsList.conteinerBox.elements[i]->getText() == "windows (codeblocks)" ){
+    for(int i = 0; i < platformsList.containerBox.elements.size(); i++){
+        if ( platformsList.containerBox.elements[i]->bSelected == true ){
+            if (platformsList.containerBox.elements[i]->getText() == "windows (codeblocks)" ){
                 targetsToMake.push_back(OF_TARGET_WINGCC);
-            } else if (platformsList.conteinerBox.elements[i]->getText() == "windows (visualStudio)"){
+            } else if (platformsList.containerBox.elements[i]->getText() == "windows (visualStudio)"){
                 targetsToMake.push_back(OF_TARGET_WINVS);
-            } else if (platformsList.conteinerBox.elements[i]->getText() == "linux (codeblocks)"){
+            } else if (platformsList.containerBox.elements[i]->getText() == "linux (codeblocks)"){
                 targetsToMake.push_back(OF_TARGET_LINUX);
-            } else if (platformsList.conteinerBox.elements[i]->getText() == "linux64 (codeblocks)"){
+            } else if (platformsList.containerBox.elements[i]->getText() == "linux64 (codeblocks)"){
                 targetsToMake.push_back(OF_TARGET_LINUX64);
-            } else if (platformsList.conteinerBox.elements[i]->getText() == "osx (xcode)"){
+            } else if (platformsList.containerBox.elements[i]->getText() == "osx (xcode)"){
                 targetsToMake.push_back(OF_TARGET_OSX);
-            } else if (platformsList.conteinerBox.elements[i]->getText() == "ios (xcode)"){
+            } else if (platformsList.containerBox.elements[i]->getText() == "ios (xcode)"){
                 targetsToMake.push_back(OF_TARGET_IPHONE);
             }
         }
@@ -389,7 +407,7 @@ void testApp::generateProject(){
         
         if(project->create(path)){
             
-            vector<string> addons = addonsList.conteinerBox.getSelected();
+            vector<string> addons = addonsList.containerBox.getSelected();
             for (int i = 0; i < addons.size(); i++){
                 ofAddon addon;
                 addon.pathToOF = getOFRelPath(path);
@@ -400,7 +418,7 @@ void testApp::generateProject(){
             project->save(true);
         }
         
-        setStatus("generated: " + projectPath.getText() + "/" + projectName.getText() + " for " + platformsList.conteinerBox.getSelected()[i]);
+        setStatus("generated: " + projectPath.getText() + "/" + projectName.getText() + " for " + platformsList.containerBox.getSelected()[i]);
 	}
     
     printf("done with project generation \n");
@@ -541,7 +559,7 @@ void testApp::windowResized(int w, int h){
     platformsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     addonsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     
-    addonsList.conteinerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
+    addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     addonsList.bChange = true;
     
     generateButton.x = ofGetWidth() - defaultHeight - generateButton.width - defaultHeight*0.7;

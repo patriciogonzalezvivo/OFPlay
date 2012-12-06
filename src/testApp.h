@@ -33,7 +33,7 @@ public:
     //
     string          binPath;
     string          ofRoot;
-//    string          appToRoot;
+    string          appToRoot;
     string          defaultLoc;
     string          addonsPath;
     

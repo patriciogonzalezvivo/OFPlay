@@ -16,10 +16,18 @@ froebelContainer::froebelContainer(){
     offsetY         = 0.0;
     offsetPct       = 0.0;
     damp            = 0.1;
-    slider.width    = 10;
+    slider.width    = 20;
     
     bEnable         = false;
+    bCheckList      = false;
     bgColor.setFromPalet(0);
+}
+
+froebelContainer::~froebelContainer(){
+    for(int i = 0; i < elements.size(); i++){
+        delete elements[i];
+    }
+    elements.clear();
 }
 
 void froebelContainer::addElement( froebelTextBox *_newElement){
@@ -38,6 +46,8 @@ void froebelContainer::clear(){
         delete elements[i];
     }
     elements.clear();
+    width = 0;
+    height = 0;
 }
 
 void froebelContainer::reset(){
@@ -129,8 +139,6 @@ void froebelContainer::update(){
                     //                    } else {
                     //                        offsetY = ofLerp(offsetY, (-totalLenght + box.height), newDamp);
                     //                    }
-                    float diff = totalLenght - height;
-                    offsetY = ofLerp(offsetY,-diff * offsetPct,0.01);
                 }
                 
                 //  Slider Scrolling
@@ -180,21 +188,35 @@ void froebelContainer::draw(){
 }
 
 bool froebelContainer::checkMousePressed(ofPoint _mouse){
+    bool rta = false;
+    
     if ( inside(_mouse) ){
         if (slider.inside(_mouse)){
-            return true;
+            rta = true;
         } else {
             
+            int bClickedOn = -1;
             for(int i = 0; i < elements.size(); i++){
                 
                 if ( inside( elements[i]->getCenter() )){
                     if (elements[i]->checkMousePressed(_mouse)){
-                        return true;
+                        bClickedOn = i;
                     }
                 }
             }
+            
+            if (bClickedOn != -1){
+                if ( !bCheckList ){
+                    for(int i = 0; i < elements.size(); i++){
+                        if ( i != bClickedOn ){
+                            elements[i]->bSelected = false;
+                        }
+                    }
+                }
+                rta = true;
+            } 
         }
-    } else {
-        return false;
-    }
+    } 
+    
+    return rta;
 }

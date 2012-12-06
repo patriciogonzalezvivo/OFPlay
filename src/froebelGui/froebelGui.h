@@ -20,4 +20,7 @@
 #include "froebelEditBox.h"
 #include "froebelListBox.h"
 
+#include "froebelContainer.h"
+#include "froebelFolderElement.h"
+
 #endif

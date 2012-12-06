@@ -16,6 +16,7 @@ class froebelContainer : public ofRectangle {
 public:
     
     froebelContainer();
+    ~froebelContainer();
     
     void            addElement( froebelTextBox *_newElement);
     bool            select(string _value);
@@ -30,11 +31,13 @@ public:
     void        update();
     void        draw();
     
-    froebelColor    bgColor;
-    ofRectangle slider;
+    froebelColor bgColor;
+    ofRectangle  slider;
     
-    bool        bEnable;
     int         maxHeight;
+    bool        bEnable;
+    bool        bCheckList;
+    
 private:
     float       offsetY;
     float       offsetPct;

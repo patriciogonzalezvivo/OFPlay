@@ -27,6 +27,8 @@ froebelListBox::froebelListBox(){
     size            = 40;
     nState          = 0;
     
+    containerBox.bCheckList = true;
+    
     //  STATE_PASSIVE
     //
     fgColor.addState(2);
@@ -67,11 +69,52 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape, int
 
     //  recalculate the container box
     //
-    conteinerBox.x = x;
-    conteinerBox.y = y + height;
-    conteinerBox.width = width-( bEdge? size: 0);
-    conteinerBox.height = 0;
-    conteinerBox.addElement(newElement);
+    containerBox.x = x;
+    containerBox.y = y + height;
+    containerBox.width = width-( bEdge? size: 0);
+    containerBox.height = 0;
+    containerBox.addElement(newElement);
+    
+    bChange = true;
+}
+
+void froebelListBox::addFolder(string _value, bool _defVal, int _iconShape, int _edgeCoorner){
+    
+    //  Create new element
+    //
+    froebelFolderElement *newFolder = new froebelFolderElement();
+    newFolder->font = font;
+    newFolder->setSizeAndShapes(size,_edgeCoorner,_iconShape);
+    newFolder->setText(_value);
+    newFolder->setPrefix("  ");
+    newFolder->bSelected = _defVal;
+    newFolder->fgColor.clear();
+    newFolder->fgColor.addState(5);
+    newFolder->fgColor.addState(7);
+    newFolder->fgColor.addState(4);
+    newFolder->bgColor.clear();
+    newFolder->bgColor.addState(0);
+    newFolder->bgColor.addState(2);
+    newFolder->bgColor.addState(7);
+    
+    newFolder->father = &containerBox;
+    
+    newFolder->update();
+    
+    //  recalculate the container box
+    //
+    containerBox.x = x;
+    containerBox.y = y + height;
+    containerBox.width = width-( bEdge? size: 0);
+    containerBox.height = 0;
+    
+    //  Link it to the father container
+    //
+    
+    
+    //  Add it to the containerBox
+    //
+    containerBox.addElement(newFolder);
     
     bChange = true;
 }
@@ -84,26 +127,35 @@ ofRectangle froebelListBox::getBoundingBox(){
     if (subInfo != NULL)
         rta.growToInclude(*subInfo);
     
-    rta.growToInclude(conteinerBox);
+    rta.growToInclude(containerBox);
+    
+    for (int i = 0; i < containerBox.elements.size(); i++){
+        
+        if ((containerBox.elements[i]->bSelected) &&
+            (containerBox.inside(containerBox.elements[i]->getCenter())) ){
+                rta.growToInclude( containerBox.elements[i]->getBoundingBox() );
+        }
+        
+    }
     
     return rta;
 }
 
 bool froebelListBox::select(string _value){
-    return bChange = conteinerBox.select(_value);
+    return bChange = containerBox.select(_value);
 }
 
 
 string froebelListBox::getSelectedAsString(){
     string list;
     
-    for (int i = 0; i < conteinerBox.elements.size(); i++){
-        if ( conteinerBox.elements[i]->bSelected ){
+    for (int i = 0; i < containerBox.elements.size(); i++){
+        if ( containerBox.elements[i]->bSelected ){
             
             if (list.length() > 0)
                 list += deliminater;
             
-            list += conteinerBox.elements[i]->getText();
+            list += containerBox.elements[i]->getText();
         }
     }
     
@@ -118,7 +170,7 @@ bool froebelListBox::checkMousePressed(ofPoint _mouse){
         
     } else {
         
-        if ( conteinerBox.checkMousePressed(_mouse)){
+        if ( containerBox.checkMousePressed(_mouse)){
             text = getSelectedAsString();
             bChange = true;
             bSelected = true;
@@ -129,15 +181,15 @@ bool froebelListBox::checkMousePressed(ofPoint _mouse){
 
 void froebelListBox::update(){
     if ( bChange ){
-        minWidth = conteinerBox.width + size * 0.5;
+        minWidth = containerBox.width + size * 0.5;
     }
     
     froebelTextBox::update();
     
-    conteinerBox.x = x;
-    conteinerBox.y = y + height;
-    conteinerBox.bEnable = bSelected;
-    conteinerBox.update();
+    containerBox.x = x;
+    containerBox.y = y + height;
+    containerBox.bEnable = bSelected;
+    containerBox.update();
     
 }
 
@@ -153,7 +205,7 @@ void froebelListBox::draw(){
     //  Render Elements
     //
     if ( bSelected ){
-        conteinerBox.draw();
+        containerBox.draw();
     }
     
     froebelTextBox::draw();
