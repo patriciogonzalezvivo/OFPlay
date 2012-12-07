@@ -192,11 +192,20 @@ void testApp::setup(){
     generateButton.setText( "GENERATE" );
     generateButton.font = &font;
     generateButton.bFixedSize = true;
-    generateButton.bgColor.clear();
-    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
-    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
-    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+//    generateButton.bgColor.clear();
+//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
+//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
     generateButton.setSizeAndShapes(defaultHeight);
+    
+    openButton.setText( "OPEN" );
+    openButton.font = &font;
+    openButton.bFixedSize = true;
+//    openButton.bgColor.clear();
+//    openButton.bgColor.addState(ofFloatColor(0.0,0.0));
+//    openButton.bgColor.addState(ofFloatColor(0.0,0.0));
+//    openButton.bgColor.addState(ofFloatColor(0.0,0.0));
+    openButton.setSizeAndShapes(defaultHeight);
 }
 
 void testApp::loadAddons(){
@@ -435,6 +444,7 @@ void testApp::update(){
     addonsList.update();
     
     generateButton.update();
+    openButton.update();
     
     float diff = ofGetElapsedTimef()- statusSetTime;
     if (diff > 3){
@@ -454,6 +464,7 @@ void testApp::draw(){
     ofSetColor(255);
     logo.draw(ofGetWidth() - defaultHeight - logo.getWidth(),ofGetHeight() - defaultHeight - logo.getHeight());
     generateButton.draw();
+    openButton.draw();
     
     ofFill();
     ofSetColor(0 + 220 * (1-statusEnergy),0 + 220 * (1-statusEnergy),0 + 220 * (1-statusEnergy));
@@ -504,30 +515,37 @@ void testApp::mousePressed(int x, int y, int button){
             setStatus("path set to: " + result);
         }
         */
-        platformsList.bSelected = false;
-        addonsList.bSelected    = false;
-        projectName.bSelected   = false;
-        addonsList.bSelected    = false;
+        
         projectPath.bSelected   = true;
-    } else if ( addonsList.checkMousePressed(mouse)){
+        projectName.bSelected   = false;
         platformsList.bSelected = false;
         addonsList.bSelected    = false;
+        
+    } else if ( addonsList.checkMousePressed(mouse)){
         projectPath.bSelected   = false;
         projectName.bSelected   = false;
+        platformsList.bSelected = false;
         addonsList.bSelected    = true;
     } else if ( platformsList.checkMousePressed(mouse)){
-        platformsList.bSelected = false;
-        addonsList.bSelected    = false;
         projectPath.bSelected   = false;
         projectName.bSelected   = false;
         platformsList.bSelected = true;
+        addonsList.bSelected    = false;
     } else if ( generateButton.checkMousePressed(mouse)){
+        projectPath.bSelected   = false;
+        projectName.bSelected   = false;
+        platformsList.bSelected = false;
+        addonsList.bSelected    = false;
+        generateProject();
+        generateButton.bSelected = false;
+    } else if ( openButton.checkMousePressed(mouse)){
         platformsList.bSelected = false;
         addonsList.bSelected    = false;
         projectPath.bSelected   = false;
         projectName.bSelected   = false;
-        generateProject();
-        generateButton.bSelected = false;
+        string path = "open " + projectPath.getText() + "/"+ projectName.getText() + "/" +  projectName.getText() + ".xcodeproj";
+        system( path.c_str() );
+        openButton.bSelected = false;
     } else {
         platformsList.bSelected = false;
         addonsList.bSelected    = false;
@@ -554,8 +572,11 @@ void testApp::windowResized(int w, int h){
     addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     addonsList.bChange = true;
     
-    generateButton.x = ofGetWidth() - defaultHeight - generateButton.width - defaultHeight*0.7;
+    generateButton.x = ofGetWidth() - defaultHeight - logo.getWidth() + defaultHeight * 0.6;
     generateButton.y = ofGetHeight() - logo.getHeight()*0.5 - defaultHeight*1.5;
+    
+    openButton.x = ofGetWidth() - defaultHeight - openButton.width - defaultHeight*1.1;
+    openButton.y = ofGetHeight() - logo.getHeight()*0.5 - defaultHeight*1.5;
     
 }
 

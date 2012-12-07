@@ -52,7 +52,9 @@ public:
     froebelListBox  projectPath;
     froebelListBox  platformsList;
     froebelListBox  addonsList;
+    
     froebelTextBox  generateButton;
+    froebelTextBox  openButton;
     
     baseProject     *project;
     
