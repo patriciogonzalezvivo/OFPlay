@@ -34,7 +34,6 @@ public:
 
     //  Basic Paths
     //
-    string          binPath;
     string          ofRoot;
     string          addonsPath;
 

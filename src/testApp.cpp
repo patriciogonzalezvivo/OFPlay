@@ -2,45 +2,70 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
+    
     ofEnableSmoothing();
     ofEnableAlphaBlending();
     ofSetVerticalSync(true);
+    ofSetWindowShape(900,500);
     ofSetWindowTitle( "OFPlay" );
 //    ofSetLogLevel(OF_LOG_VERBOSE);
-    
-    ofSetWindowShape(900,500);
-    ofBackground(230);
-//    ofSetDataPathRoot("../Resources/");
+    ofSetDataPathRoot("../Resources/");
     
     ofxXmlSettings XML;
     XML.loadFile("projectGeneratorSettings.xml");
-    string appToRoot = XML.getValue("appToRoot", "../../../../");
-    string defaultLoc = XML.getValue("defaultNewProjectLocation", "apps");
     
+    appToRoot = XML.getValue("appToRoot", "../../../../");
+    ofRoot    = XML.getValue("ofRoot", "../../../");
+    defaultLoc = XML.getValue("defaultNewProjectLocation", "apps");
+    bOFFound = false;
+    
+    string binPath;
     //-------------------------------------
     // calculate the bin path (../../../ on osx) and the sketch path (bin -> root - > defaultLoc)
     //-------------------------------------
     // if appToRoot is wrong, we have alot of issues.  all these paths are used in this project:
     //
 #ifdef TARGET_OSX
-    mScreen.binPath = ofFilePath::getAbsolutePath(ofFilePath::join(ofFilePath::getCurrentWorkingDirectory(), "../../../"));
+    binPath = ofFilePath::getAbsolutePath(ofFilePath::join(ofFilePath::getCurrentWorkingDirectory(), "../../../"));
 #else
-    mScreen.binPath = ofFilePath::getCurrentExeDir();
+    binPath = ofFilePath::getCurrentExeDir();
 #endif
     
-    mScreen.ofRoot = ofFilePath::getAbsolutePath(ofFilePath::join( mScreen.binPath, appToRoot));
-    mScreen.addonsPath = ofFilePath::getAbsolutePath(ofFilePath::join( mScreen.ofRoot,"addons"));
-    string sketchPath = ofFilePath::getAbsolutePath(ofFilePath::join( mScreen.ofRoot, defaultLoc));
+    if ( !isOFFolder( ofFilePath::getAbsolutePath(ofFilePath::join( binPath, appToRoot)) ) ){
+        
+        while ( !isOFFolder(ofRoot)) {
+            
+            string command = "";
+            ofFileDialogResult res = ofSystemLoadDialog("OF project generator", "choose the folder of your OF install");
+            
+            string result = res.filePath;
+            convertWindowsToUnixPath(result);
+            ofRoot = result;
+            cout << ofRoot << endl;
+        }
+        
+    } else {
+        ofRoot = ofFilePath::getAbsolutePath( ofFilePath::join( binPath, appToRoot)  );
+    }
     
-    convertWindowsToUnixPath( mScreen.ofRoot );
-    convertWindowsToUnixPath( mScreen.addonsPath );
+    XML.setValue("ofRoot", ofRoot );
+    XML.saveFile("projectGeneratorSettings.xml");
+    
+    addonsPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, "addons"));
+    sketchPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, defaultLoc));
+    
+    convertWindowsToUnixPath( ofRoot );
+    convertWindowsToUnixPath( addonsPath );
     convertWindowsToUnixPath( sketchPath );
     
     // there's some issues internally in OF with non unix paths for OF root
     //
-    setOFRoot( mScreen.ofRoot);
+    setOFRoot( ofRoot );
     
-    mScreen.setup( sketchPath,"newProject");
+    mScreen.ofRoot = ofRoot;
+    mScreen.addonsPath = addonsPath;
+    mScreen.setup( sketchPath, "newProject");
+    bOFFound = true;
 }
 
 
@@ -48,10 +73,13 @@ void testApp::setup(){
 void testApp::update(){
     if (bOFFound)
         mScreen.update();
+    
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    ofBackground(230);
+    
     if (bOFFound)
         mScreen.draw();
 }

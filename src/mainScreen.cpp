@@ -234,14 +234,17 @@ void mainScreen::loadFolder(string _path){
 }
 
 void mainScreen::pathChange(string &_path){
+    
     string completePath = ofRoot + projectPath.getText();
     
     addonsList.containerBox.reset();
     addonsList.bChange = true;
     
+    cout << completePath << endl;
     if ( isProjectFolder(completePath) ){
         loadProject( completePath );
     } else {
+        projectPath.containerBox.reset();
         projectPath.setText(ofRoot + projectPath.getText());
         projectName.setText("newProject");
     }
@@ -262,8 +265,9 @@ void mainScreen::loadProject(string _path){
     string folder = "";
     
     extractFolderFromPath(_path,folder);
-    projectName.setText(folder);
+//    projectPath.containerBox.reset();
     projectPath.setText(_path);
+    projectName.setText(folder);
     
     setStatus("Project " + folder + " loaded ");
     

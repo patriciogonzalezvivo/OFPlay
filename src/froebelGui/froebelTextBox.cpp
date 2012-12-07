@@ -77,6 +77,11 @@ void froebelTextBox::setText(string _text ){
     bChange = true;
 }
 
+void froebelTextBox::reset(){
+    bSelected = false;
+    bChange = true;
+}
+
 string froebelTextBox::getText(){
     return text;
 }

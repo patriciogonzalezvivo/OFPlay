@@ -18,6 +18,7 @@ public:
     
     froebelFolderElement();
     
+    void                reset();
     virtual string      getText();
     virtual ofRectangle getBoundingBox();
     

@@ -24,5 +24,13 @@ public:
  
     mainScreen  mScreen;
     
+    string  appToRoot;
+    string  defaultLoc;
+    
+    string  ofRoot;
+    string  addonsPath;
+    string  sketchPath;
+    
+    
     bool    bOFFound;
 };

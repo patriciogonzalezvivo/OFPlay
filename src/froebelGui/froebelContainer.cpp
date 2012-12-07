@@ -78,7 +78,7 @@ void froebelContainer::clear(){
 
 void froebelContainer::reset(){
     for(int i = 0; i < elements.size(); i++){
-        elements[i]->bSelected = false;
+        elements[i]->reset();
     }
 }
 

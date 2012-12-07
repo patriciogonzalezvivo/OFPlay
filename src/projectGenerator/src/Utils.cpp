@@ -676,3 +676,31 @@ bool isAddonCore(string addon){
     }
     return false;
 }
+
+bool isOFFolder(string _path){
+    ofDirectory dir(_path);
+    
+    if (dir.exists()){
+        vector<string>  ofsubfolders;
+        ofsubfolders.push_back("addons");
+        ofsubfolders.push_back("apps");
+        ofsubfolders.push_back("examples");
+        ofsubfolders.push_back("libs");
+        
+        int check = 0;
+        dir.listDir();
+        for (int i = 0; i < dir.getFiles().size(); i++) {
+            for (int j = 0; j < ofsubfolders.size(); j++){
+                if ( ofsubfolders[j] == dir.getName(i) ){
+                    check++;
+                }
+            }
+        }
+        
+        if (check == ofsubfolders.size())
+            return true;
+        else
+            return false;
+    } else
+        return false;
+}

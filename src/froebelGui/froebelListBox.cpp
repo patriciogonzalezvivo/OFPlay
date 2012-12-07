@@ -100,10 +100,14 @@ ofRectangle froebelListBox::getBoundingBox(){
     return rta;
 }
 
+void froebelListBox::reset(){
+    froebelTextBox::reset();
+    containerBox.reset();
+}
+
 bool froebelListBox::select(string _value){
     return bChange = containerBox.select(_value);
 }
-
 
 string froebelListBox::getSelectedAsString(){
     string list;

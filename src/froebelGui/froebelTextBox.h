@@ -26,6 +26,7 @@ public:
     virtual void setDivider( string _deliminater );
     virtual void setText(string _text );
     
+    virtual void        reset();
     virtual string      getText();
     virtual float       getVerticalMargins();
     virtual ofRectangle getTextBoundingBox();

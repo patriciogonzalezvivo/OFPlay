@@ -272,8 +272,8 @@
 				3DAF84D1166E2EB9003BBA69 /* CBWinProject.h */,
 				3DAF84D2166E2EB9003BBA69 /* ofAddon.cpp */,
 				3DAF84D3166E2EB9003BBA69 /* ofAddon.h */,
-				3DAF84D4166E2EB9003BBA69 /* Utils.cpp */,
 				3DAF84D5166E2EB9003BBA69 /* Utils.h */,
+				3DAF84D4166E2EB9003BBA69 /* Utils.cpp */,
 				3DAF84D6166E2EB9003BBA69 /* visualStudioProject.cpp */,
 				3DAF84D7166E2EB9003BBA69 /* visualStudioProject.h */,
 				3DAF84D8166E2EB9003BBA69 /* xcodeProject.cpp */,
@@ -554,7 +554,7 @@
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
@@ -595,7 +595,7 @@
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};

@@ -22,6 +22,8 @@ public:
     void    addElement(string _value, bool _defVal = false, int _iconShape = -1, int _edgeCoorner = -1);
     bool    select(string _value);
     string  getSelectedAsString();
+    void    reset();
+    
     virtual ofRectangle getBoundingBox();
     bool    checkMousePressed(ofPoint _mouse);
     

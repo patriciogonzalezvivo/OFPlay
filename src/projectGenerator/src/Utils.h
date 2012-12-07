@@ -68,5 +68,6 @@ void fixStringCharacters(string &toFix);
 bool isAddonCore(string _addonName);
 bool isProjectFolder(string &_projFolder);
 bool isProjectGenerated(string _path, string _name);
+bool isOFFolder(string _path);
 
 #endif /* UTILS_H_ */

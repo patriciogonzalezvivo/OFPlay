@@ -49,6 +49,11 @@ froebelFolderElement::froebelFolderElement(){
     bgColor.addState(4);
 }
 
+void froebelFolderElement::reset(){
+    froebelTextBox::reset();
+    containerBox.reset();
+}
+
 string froebelFolderElement::getText(){
     string rta = text;
     
