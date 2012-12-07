@@ -2,10 +2,9 @@
 
 #include "ofMain.h"
 
-#include "ofxXmlSettings.h"
+#include "mainScreen.h"
 
-#include "froebelGui.h"
-#include "projectGenerator.h"
+#include "ofxXmlSettings.h"
 
 class testApp : public ofBaseApp{
 public:
@@ -23,46 +22,7 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
  
-    //  GUI
-    //
-    ofImage         logo;
-    ofTrueTypeFont  font;
-    float           defaultHeight;
+    mainScreen  mScreen;
     
-    //  Basic Paths
-    //
-    string          binPath;
-    string          ofRoot;
-    string          appToRoot;
-    string          defaultLoc;
-    string          addonsPath;
-    
-    //  Project Generator
-    //
-    void            loadAddons();
-    void            loadFolder(string _path);
-    void            loadProject(string _path);
-    void            checkProjectState();
-    
-    void            pathChange(string &_path);
-    void            nameChange(string &_path);
-    
-    string          setTarget(int targ);
-    void            generateProject();
-    
-    froebelEditBox  projectName;
-    froebelListBox  projectPath;
-    froebelListBox  platformsList;
-    froebelListBox  addonsList;
-    
-    froebelShapeButton  generateButton;
-    froebelShapeButton  openButton;
-    
-    baseProject     *project;
-    
-    //  Status
-    //
-    void            setStatus(string newStatus);
-    float           statusSetTime, statusEnergy;
-    string          status;
+    bool    bOFFound;
 };

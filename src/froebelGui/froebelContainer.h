@@ -21,6 +21,8 @@ public:
     void            addElement( froebelTextBox *_newElement);
     bool            select(string _value);
     vector<string>  getSelected();
+    
+    void            adjustShape();
     void            clear();
     void            reset();
     

@@ -561,6 +561,10 @@ bool isProjectFolder(string &_projFolder){
     ofDirectory dir;
     string searchFor = _projFolder;
     dir.open(searchFor);
+    if (!dir.exists()){
+        return false;
+    }
+    
     if ( dir.isDirectory() ){
         
         //  Is a project directory or a src directory?

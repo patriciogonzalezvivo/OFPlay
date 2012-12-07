@@ -10,6 +10,7 @@
 		3D3F8CF2166FC905003DFAC3 /* froebelContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3F8CF0166FC905003DFAC3 /* froebelContainer.cpp */; };
 		3D3F8CF516700F68003DFAC3 /* froebelFolderElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3F8CF316700F67003DFAC3 /* froebelFolderElement.cpp */; };
 		3D3F8DA51672412D003DFAC3 /* froebelShapeButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3F8DA31672412C003DFAC3 /* froebelShapeButton.cpp */; };
+		3D3F8DD01672817F003DFAC3 /* mainScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3F8DCE1672817F003DFAC3 /* mainScreen.cpp */; };
 		3DAF84BC166E2E32003BBA69 /* froebelColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84B1166E2E32003BBA69 /* froebelColor.cpp */; };
 		3DAF84BD166E2E32003BBA69 /* froebelEditBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84B3166E2E32003BBA69 /* froebelEditBox.cpp */; };
 		3DAF84BE166E2E32003BBA69 /* froebelListBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84B6166E2E32003BBA69 /* froebelListBox.cpp */; };
@@ -89,6 +90,8 @@
 		3D3F8DA31672412C003DFAC3 /* froebelShapeButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelShapeButton.cpp; sourceTree = "<group>"; };
 		3D3F8DA41672412D003DFAC3 /* froebelShapeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelShapeButton.h; sourceTree = "<group>"; };
 		3D3F8DA616724820003DFAC3 /* froebelGuiRef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = froebelGuiRef.png; sourceTree = "<group>"; };
+		3D3F8DCE1672817F003DFAC3 /* mainScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mainScreen.cpp; sourceTree = "<group>"; };
+		3D3F8DCF1672817F003DFAC3 /* mainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainScreen.h; sourceTree = "<group>"; };
 		3D520B6D166AF1EE00212598 /* OFPlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OFPlay.png; sourceTree = "<group>"; };
 		3D520B6E166AF23500212598 /* OFPlay.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OFPlay.icns; sourceTree = "<group>"; };
 		3DAF84B1166E2E32003BBA69 /* froebelColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelColor.cpp; sourceTree = "<group>"; };
@@ -377,6 +380,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
+				3D3F8DCF1672817F003DFAC3 /* mainScreen.h */,
+				3D3F8DCE1672817F003DFAC3 /* mainScreen.cpp */,
 				3DAF84B0166E2E32003BBA69 /* froebelGui */,
 				3DAF84C1166E2EB9003BBA69 /* projectGenerator */,
 			);
@@ -498,6 +503,7 @@
 				3D3F8CF2166FC905003DFAC3 /* froebelContainer.cpp in Sources */,
 				3D3F8CF516700F68003DFAC3 /* froebelFolderElement.cpp in Sources */,
 				3D3F8DA51672412D003DFAC3 /* froebelShapeButton.cpp in Sources */,
+				3D3F8DD01672817F003DFAC3 /* mainScreen.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -40,6 +40,10 @@ void froebelContainer::addElement( froebelTextBox *_newElement){
     
     elements.push_back(_newElement);
     
+    adjustShape();
+}
+
+void froebelContainer::adjustShape(){
     width = 0;
     totalBoxHeight = 0;
     bool minWidthChange = false;
