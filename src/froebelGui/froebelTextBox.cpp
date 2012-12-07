@@ -3,7 +3,7 @@
 //  OFPlay
 //
 //  Created by Patricio Gonzalez Vivo on 12/2/12.
-//  Copyright (c) 2012 http://www.patriciogonzalezvivo.com All rights reserved.
+//  http://www.patriciogonzalezvivo.com
 //
 
 #include "froebelTextBox.h"
@@ -144,7 +144,7 @@ void froebelTextBox::update(){
     
     //  Update Shape
     //
-    if (bChange){
+    if (bChange && font != NULL){
         //  Compose text
         //
         displayText = prefix + text;
@@ -267,14 +267,17 @@ void froebelTextBox::draw(){
         iconShape.draw();
     }
     
-    ofSetColor(fgColor);
-    
-    if (bLeftAlign){
-        font->drawString(displayText, size*0.5, size-13);
-    } else {
-        font->drawString(displayText, width-(-size*0.5)-textBox.width, size-13);
-    }
+    if (font != NULL){
         
+        ofSetColor(fgColor);
+        if (bLeftAlign){
+            font->drawString(displayText, size*0.5, size-13);
+        } else {
+            font->drawString(displayText, width-(-size*0.5)-textBox.width, size-13);
+        }
+        
+    }
+    
     ofPopMatrix();
     ofPopStyle();
     

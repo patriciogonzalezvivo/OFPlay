@@ -42,8 +42,10 @@ public:
     void            loadAddons();
     void            loadFolder(string _path);
     void            loadProject(string _path);
+    void            checkProjectState();
     
     void            pathChange(string &_path);
+    void            nameChange(string &_path);
     
     string          setTarget(int targ);
     void            generateProject();
@@ -53,8 +55,8 @@ public:
     froebelListBox  platformsList;
     froebelListBox  addonsList;
     
-    froebelTextBox  generateButton;
-    froebelTextBox  openButton;
+    froebelShapeButton  generateButton;
+    froebelShapeButton  openButton;
     
     baseProject     *project;
     

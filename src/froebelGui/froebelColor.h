@@ -3,7 +3,7 @@
 //  OFPlay
 //
 //  Created by Patricio Gonzalez Vivo on 12/3/12.
-//  Copyright (c) 2012 http://www.patriciogonzalezvivo.com All rights reserved.
+//  http://www.patriciogonzalezvivo.com
 //
 
 #ifndef FROEBELCOLOR
@@ -16,7 +16,7 @@ public:
     
     froebelColor();
     
-    void    setFromPalet( unsigned int _palletN  ); 
+    void    setFromPalet( unsigned int _palletN  );
     ofFloatColor    getFromPalet( unsigned int _palletN );
     
     void    clear();

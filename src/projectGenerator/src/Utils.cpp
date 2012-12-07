@@ -582,7 +582,7 @@ bool isProjectFolder(string &_projFolder){
         if (((int)name.find(".cbp") > 0) ||
             ((int)name.find(".workspace") > 0) ||
             ((int)name.find(".plist") > 0) ||
-            ((int)name.find(".xcconfig") > 0) ||
+            ((int)name.find(".xcodeproj") > 0) ||
             ((int)name.find(".make") > 0) ||
             ((int)name.find(".vcxproj") > 0 )){
             _projFolder = searchFor;
@@ -624,6 +624,22 @@ bool isProjectFolder(string &_projFolder){
     } else {
         return false;
     }
+}
+
+bool isProjectGenerated(string _path, string _name){
+    ofDirectory folder(_path+"/"+_name);
+    
+    if ( folder.exists() ){
+        if (folder.listDir() >= 2){
+            for (int i = 0; i < folder.getFiles().size(); i++) {
+                if (folder.getName(i) == (_name + ".xcodeproj") ){
+                    return true;
+                }
+            }
+        }
+    }
+    
+    return false;
 }
 
 bool isAddonCore(string addon){

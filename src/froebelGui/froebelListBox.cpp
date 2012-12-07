@@ -3,7 +3,7 @@
 //  OFPlay
 //
 //  Created by Patricio Gonzalez Vivo on 12/2/12.
-//  Copyright (c) 2012 http://www.patriciogonzalezvivo.com All rights reserved.
+//  http://www.patriciogonzalezvivo.com
 //
 
 #include "froebelListBox.h"
@@ -135,7 +135,7 @@ bool froebelListBox::checkMousePressed(ofPoint _mouse){
             bSelected = true;
             return true;
         } else {
-            string rta = getSelectedAsString();
+            string rta = getText();
             ofNotifyEvent(focusLost, rta);
         }
     }

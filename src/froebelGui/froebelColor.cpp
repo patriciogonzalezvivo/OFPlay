@@ -3,7 +3,7 @@
 //  OFPlay
 //
 //  Created by Patricio Gonzalez Vivo on 12/3/12.
-//  Copyright (c) 2012 http://www.patriciogonzalezvivo.com All rights reserved.
+//  http://www.patriciogonzalezvivo.com
 //
 
 #include "froebelColor.h"

@@ -3,7 +3,7 @@
 //  OFPlay
 //
 //  Created by Patricio Gonzalez Vivo on 12/5/12.
-//
+//  http://www.patriciogonzalezvivo.com
 //
 
 #include "froebelContainer.h"
@@ -123,16 +123,19 @@ void froebelContainer::update(){
             
             //  Scrolling
             //
-            if (inside(mouse)){
+            if ( inside(mouse) ){
     
-                float offsetPct = ofMap(mouse.y-y, 0,height,0.0,1.0,true);
-                float diff = totalLenght - height;
-                offsetY = ofLerp(offsetY, -diff * offsetPct, damp);
+//                if ( bCheckList || (getSelected().size() == 0) ){
                 
-                //  Slider Scrolling
-                //
-                slider.y = y + ofMap(offsetY,0,-totalLenght,0,height);
-                slider.height = (height/totalLenght)*height;
+                    float offsetPct = ofMap(mouse.y-y, 0,height,0.0,1.0,true);
+                    float diff = totalLenght - height;
+                    offsetY = ofLerp(offsetY, -diff * offsetPct, damp);
+                    
+                    //  Slider Scrolling
+                    //
+                    slider.y = y + ofMap(offsetY,0,-totalLenght,0,height);
+                    slider.height = (height/totalLenght)*height;
+//                }
             }
             
         }
@@ -189,6 +192,7 @@ bool froebelContainer::checkMousePressed(ofPoint _mouse){
         }
         
         if (bClickedOn != -1){
+            
             if ( !bCheckList ){
                 for(int i = 0; i < elements.size(); i++){
                     if ( i != bClickedOn ){
@@ -196,6 +200,7 @@ bool froebelContainer::checkMousePressed(ofPoint _mouse){
                     }
                 }
             }
+            
             rta = true;
         }
     }

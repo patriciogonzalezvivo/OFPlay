@@ -14,7 +14,7 @@ void testApp::setup(){
     project             = NULL;
     statusEnergy        = 0;
         
-    string  sketchName  = "newSketch";
+    string  sketchName  = "newProject";
 
     ofxXmlSettings XML;
     XML.loadFile("projectGeneratorSettings.xml");
@@ -70,7 +70,7 @@ void testApp::setup(){
     froebelTextBox *subProjectPath = new froebelTextBox();
     *subProjectPath = projectPath;
     subProjectPath->setPrefix("<< ");
-    subProjectPath->setText("CHANGE THE DIRECTORY");
+    subProjectPath->setText("CURRENT PATH");
     subProjectPath->font = &font;
     subProjectPath->bLeftAlign = false;
     subProjectPath->bFixedSize = true;
@@ -95,11 +95,12 @@ void testApp::setup(){
     projectName.x = defaultHeight;
     projectName.y = projectPath.y + projectPath.height + defaultHeight*0.5;
     projectName.enable();
+    ofAddListener(projectName.focusLost, this, &testApp::nameChange);
     
     froebelTextBox *subProjectName = new froebelTextBox();
     *subProjectName = projectName;
     subProjectName->setPrefix("<< ");
-    subProjectName->setText("CHANGE THE NAME");
+    subProjectName->setText("NEW PROJECT NAME");
     subProjectName->font = &font;//&secondFont;
     subProjectName->bLeftAlign = false;
     subProjectName->bFixedSize = true;
@@ -142,7 +143,7 @@ void testApp::setup(){
     froebelTextBox *subPlatformList = new froebelTextBox();
     *subPlatformList = platformsList;
     subPlatformList->setPrefix( "<< " );
-    subPlatformList->setText("CHANGE THE PLATFORM");
+    subPlatformList->setText("TARGET PLATFORM");
     subPlatformList->font = &font;//&secondFont;
     subPlatformList->bLeftAlign = false;
     subPlatformList->bFixedSize = true;
@@ -173,7 +174,7 @@ void testApp::setup(){
     froebelTextBox *subAddonsList = new froebelTextBox();
     *subAddonsList = addonsList;
     subAddonsList->setPrefix("<< ");
-    subAddonsList->setText("SELECT ADDONS");
+    subAddonsList->setText("SELECTED ADDONS");
     subAddonsList->font = &font;//&secondFont;
     subAddonsList->bLeftAlign = false;
     subAddonsList->bFixedSize = true;
@@ -189,23 +190,23 @@ void testApp::setup(){
     subAddonsList->width = ofGetWidth() - defaultHeight;
     addonsList.subInfo = subAddonsList;
     
-    generateButton.setText( "GENERATE" );
+    generateButton.setShape(0,132);
+    generateButton.color.set(0.0,0.0);
     generateButton.font = &font;
-    generateButton.bFixedSize = true;
-//    generateButton.bgColor.clear();
-//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
-//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
-//    generateButton.bgColor.addState(ofFloatColor(0.0,0.0));
-    generateButton.setSizeAndShapes(defaultHeight);
+    generateButton.text = "GENERATE";
+    generateButton.textColor.addState(4);
+    generateButton.textColor.addState(5);
+    generateButton.textColor.addState(3);
     
-    openButton.setText( "OPEN" );
+    openButton.setShape(2, 132);
+    openButton.color.set(0.0,0.0);
     openButton.font = &font;
-    openButton.bFixedSize = true;
-//    openButton.bgColor.clear();
-//    openButton.bgColor.addState(ofFloatColor(0.0,0.0));
-//    openButton.bgColor.addState(ofFloatColor(0.0,0.0));
-//    openButton.bgColor.addState(ofFloatColor(0.0,0.0));
-    openButton.setSizeAndShapes(defaultHeight);
+    openButton.text =  "OPEN";
+    openButton.textColor.addState(3);
+    openButton.textColor.addState(2);
+    openButton.textColor.addState(4);
+    
+    checkProjectState();
 }
 
 void testApp::loadAddons(){
@@ -256,19 +257,24 @@ void testApp::loadFolder(string _path){
         //  Added to the list
         //
         projectPath.containerBox.addElement( newFolder );
-        
     }
 }
 
 void testApp::pathChange(string &_path){
-    string completePath = ofRoot + _path;
+    string completePath = ofRoot + projectPath.getText();
 
     if ( isProjectFolder(completePath) ){
         loadProject( completePath );
     } else {
-        projectPath.setText(ofRoot + _path);
+        projectPath.setText(ofRoot + projectPath.getText());
         projectName.setText("newProject");
     }
+    
+    checkProjectState();
+}
+
+void testApp::nameChange(string &_path){
+    checkProjectState();
 }
 
 void testApp::loadProject(string _path){
@@ -363,6 +369,19 @@ void testApp::setStatus(string newStatus){
     statusSetTime = ofGetElapsedTimef();
 }
 
+void testApp::checkProjectState(){
+    openButton.bEnable = isProjectGenerated(projectPath.getText(),projectName.getText());
+    string projectPathString = projectPath.getText()+"/"+projectName.getText();
+    ofDirectory projectPath( projectPathString );
+    
+    if (openButton.bEnable || projectPath.exists()){
+        projectName.subInfo->setText("PROJECT NAME");
+    } else {
+        projectName.subInfo->setText("NEW PROJECT NAME");
+        
+    }
+}
+
 void testApp::generateProject(){
     
     vector <int> targetsToMake;
@@ -420,6 +439,7 @@ void testApp::generateProject(){
         setStatus("generated: " + projectPath.getText() + "/" + projectName.getText() + " for " + platformsList.containerBox.getSelected()[i]);
 	}
     
+    checkProjectState();
     printf("done with project generation \n");
 }
 
@@ -450,7 +470,6 @@ void testApp::update(){
     if (diff > 3){
         statusEnergy *= 0.99;;
     }
-    
 }
 
 //--------------------------------------------------------------
@@ -537,15 +556,15 @@ void testApp::mousePressed(int x, int y, int button){
         platformsList.bSelected = false;
         addonsList.bSelected    = false;
         generateProject();
-        generateButton.bSelected = false;
     } else if ( openButton.checkMousePressed(mouse)){
         platformsList.bSelected = false;
         addonsList.bSelected    = false;
         projectPath.bSelected   = false;
         projectName.bSelected   = false;
+        
         string path = "open " + projectPath.getText() + "/"+ projectName.getText() + "/" +  projectName.getText() + ".xcodeproj";
         system( path.c_str() );
-        openButton.bSelected = false;
+        
     } else {
         platformsList.bSelected = false;
         addonsList.bSelected    = false;
@@ -567,16 +586,14 @@ void testApp::windowResized(int w, int h){
     platformsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     addonsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     
-//    projectPath.containerBox.maxHeight = ofGetHeight() - projectPath.y - projectName.y - defaultHeight*0.5;
-    
     addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     addonsList.bChange = true;
     
-    generateButton.x = ofGetWidth() - defaultHeight - logo.getWidth() + defaultHeight * 0.6;
-    generateButton.y = ofGetHeight() - logo.getHeight()*0.5 - defaultHeight*1.5;
+    generateButton.x = ofGetWidth() - defaultHeight - logo.getWidth() + generateButton.size*0.5 + 3;
+    generateButton.y = ofGetHeight() - defaultHeight - logo.getHeight() + generateButton.size*0.5 + 2;
     
-    openButton.x = ofGetWidth() - defaultHeight - openButton.width - defaultHeight*1.1;
-    openButton.y = ofGetHeight() - logo.getHeight()*0.5 - defaultHeight*1.5;
+    openButton.x = ofGetWidth() - defaultHeight - logo.getWidth()*0.535 + openButton.size;
+    openButton.y = ofGetHeight() - defaultHeight - logo.getHeight() + openButton.size*0.5 + 2;
     
 }
 

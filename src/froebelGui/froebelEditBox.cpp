@@ -3,7 +3,7 @@
 //  OFPlay
 //
 //  Created by Patricio Gonzalez Vivo on 12/2/12.
-//  Copyright (c) 2012 http://www.patriciogonzalezvivo.com All rights reserved.
+//  http://www.patriciogonzalezvivo.com
 //
 
 #include "froebelEditBox.h"
@@ -166,6 +166,9 @@ void froebelEditBox::endEditing() {
             width = textBox.width + size;
             height = size;
         }
+        
+        string returnText = getText();
+        ofNotifyEvent(focusLost, returnText);
     }
 }
 
