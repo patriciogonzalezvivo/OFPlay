@@ -2,7 +2,6 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    
     ofEnableSmoothing();
     ofEnableAlphaBlending();
     ofSetVerticalSync(true);
@@ -11,13 +10,51 @@ void testApp::setup(){
 //    ofSetLogLevel(OF_LOG_VERBOSE);
     ofSetDataPathRoot("../Resources/");
     
-    ofxXmlSettings XML;
-    XML.loadFile("projectGeneratorSettings.xml");
+    nStep = INSTALL_XCODE;
     
-    appToRoot = XML.getValue("appToRoot", "../../../../");
-    ofRoot    = XML.getValue("ofRoot", "../../../");
-    defaultLoc = XML.getValue("defaultNewProjectLocation", "apps");
-    bOFFound = false;
+    ofDirectory testDir("/Applications/Xcode.app");
+    if (testDir.exists()){
+        cout << "XCODE PRESENT" << endl;
+        nStep = INSTALL_GIT;
+    }
+        
+    ofFile testFile("/usr/bin/git");
+    if (testFile.exists()){
+        cout << "GIT PRESENT" << endl;
+        nStep = INSTALL_OF;
+    }
+    
+    mScreen = NULL;
+}
+
+
+//--------------------------------------------------------------
+void testApp::update(){
+    
+    if (mScreen == NULL){
+        
+        if (nStep == INSTALL_XCODE){
+            
+        } else if (nStep == INSTALL_GIT){
+            
+        } else {
+            searchForOF();
+        }
+        
+    } else {
+        mScreen->update();
+    }
+    
+}
+
+void testApp::searchForOF(){
+    //  The XML will store basic information like the OF path
+    //
+    ofxXmlSettings XML;
+    XML.loadFile("config.xml");
+    string appToRoot = XML.getValue("appToRoot", "../../../../");
+    string ofRoot    = XML.getValue("ofRoot", "../../../");
+    string defaultLoc = XML.getValue("defaultNewProjectLocation", "apps/myApps");
     
     string binPath;
     //-------------------------------------
@@ -31,8 +68,12 @@ void testApp::setup(){
     binPath = ofFilePath::getCurrentExeDir();
 #endif
     
+    //  Try to search using the appToRoot that by defaul search 4 levels down ( distance from a /bin )
+    //
     if ( !isOFFolder( ofFilePath::getAbsolutePath(ofFilePath::join( binPath, appToRoot)) ) ){
         
+        //  Keep looping until found a OF path
+        //
         while ( !isOFFolder(ofRoot)) {
             
             string command = "";
@@ -40,48 +81,30 @@ void testApp::setup(){
             
             string result = res.filePath;
             convertWindowsToUnixPath(result);
-            ofRoot = result;
-            cout << ofRoot << endl;
+            ofRoot = result + "/";
         }
         
     } else {
         ofRoot = ofFilePath::getAbsolutePath( ofFilePath::join( binPath, appToRoot)  );
     }
-    
+    XML.setValue("appToRoot", appToRoot);
     XML.setValue("ofRoot", ofRoot );
-    XML.saveFile("projectGeneratorSettings.xml");
-    
-    addonsPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, "addons"));
-    sketchPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, defaultLoc));
-    
-    convertWindowsToUnixPath( ofRoot );
-    convertWindowsToUnixPath( addonsPath );
-    convertWindowsToUnixPath( sketchPath );
+    XML.setValue("defaultNewProjectLocation", defaultLoc);
+    XML.saveFile("config.xml");
     
     // there's some issues internally in OF with non unix paths for OF root
     //
     setOFRoot( ofRoot );
     
-    mScreen.ofRoot = ofRoot;
-    mScreen.addonsPath = addonsPath;
-    mScreen.setup( sketchPath, "newProject");
-    bOFFound = true;
-}
-
-
-//--------------------------------------------------------------
-void testApp::update(){
-    if (bOFFound)
-        mScreen.update();
-    
+    mScreen = new mainScreenOFPlay( ofRoot , defaultLoc, "newProject");
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     ofBackground(230);
     
-    if (bOFFound)
-        mScreen.draw();
+    if (mScreen != NULL)
+        mScreen->draw();
 }
 
 //--------------------------------------------------------------
@@ -105,8 +128,8 @@ void testApp::mouseDragged(int x, int y, int button){
 void testApp::mousePressed(int x, int y, int button){
     ofPoint mouse = ofPoint(x, y);
     
-    if (bOFFound)
-        mScreen.mousePressed(mouse);
+    if (mScreen != NULL)
+        mScreen->mousePressed(mouse);
 }
 
 //--------------------------------------------------------------
@@ -116,8 +139,8 @@ void testApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
-    if (bOFFound)
-        mScreen.resized();
+    if (mScreen != NULL)
+        mScreen->resized();
 }
 
 //--------------------------------------------------------------
@@ -133,8 +156,8 @@ void testApp::dragEvent(ofDragInfo dragInfo){
         string open = dragInfo.files[0];
         if (isProjectFolder(open)){
             
-            if (bOFFound)
-                mScreen.loadProject(open);
+            if (mScreen != NULL)
+                mScreen->loadProject(open);
         }
     }
 }

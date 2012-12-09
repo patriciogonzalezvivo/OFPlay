@@ -1,21 +1,23 @@
 //
-//  mainScreen.cpp
+//  mainScreenOFPlay.cpp
 //  OFPlay
 //
 //  Created by Patricio Gonzalez Vivo on 12/7/12.
 //
 //
 
-#include "mainScreen.h"
+#include "mainScreenOFPlay.h"
 
-mainScreen::mainScreen(){
-    project             = NULL;
-    statusEnergy        = 0;
+mainScreenOFPlay::mainScreenOFPlay( string _ofRoot, string _defaultPath, string _name ){
+    project = NULL;
+    statusEnergy = 0;
+    ofRoot = _ofRoot;
+    addonsPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, "addons"));
+    string sketchPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, _defaultPath));
     
-    
-}
-
-void mainScreen::setup( string _path, string _name ){
+    convertWindowsToUnixPath( ofRoot );
+    convertWindowsToUnixPath( addonsPath );
+    convertWindowsToUnixPath( sketchPath );
     
     //------------------------------------- GUI
     //
@@ -25,7 +27,7 @@ void mainScreen::setup( string _path, string _name ){
     
     //  PATH:
     //
-    projectPath.setText( _path );
+    projectPath.setText( sketchPath );
     projectPath.setPrefix("Path: ");
     projectPath.setDivider("/");
     projectPath.font = &font;
@@ -34,7 +36,7 @@ void mainScreen::setup( string _path, string _name ){
     projectPath.y = defaultHeight;
     projectPath.containerBox.bCheckList = false;
     
-    ofAddListener(projectPath.focusLost, this, &mainScreen::pathChange);
+    ofAddListener(projectPath.focusLost, this, &mainScreenOFPlay::pathChange);
     
     loadFolder( "apps/" );
     loadFolder( "examples/" );
@@ -68,7 +70,7 @@ void mainScreen::setup( string _path, string _name ){
     projectName.x = defaultHeight;
     projectName.y = projectPath.y + projectPath.height + defaultHeight*0.5;
     projectName.enable();
-    ofAddListener(projectName.focusLost, this, &mainScreen::nameChange);
+    ofAddListener(projectName.focusLost, this, &mainScreenOFPlay::nameChange);
     
     froebelTextBox *subProjectName = new froebelTextBox();
     *subProjectName = projectName;
@@ -89,7 +91,7 @@ void mainScreen::setup( string _path, string _name ){
     subProjectName->width = ofGetWidth() - defaultHeight;
     projectName.subInfo = subProjectName;
     
-    //  LOAD PLATFORMS
+    //  LOAD PLATFORMS (check if it have the template)
     //
     platformsList.x = defaultHeight;
     platformsList.y = projectName.y + projectName.height + defaultHeight*0.5;
@@ -98,19 +100,29 @@ void mainScreen::setup( string _path, string _name ){
     platformsList.setDivider(", ");
     platformsList.setSizeAndShapes(defaultHeight,3);
     platformsList.containerBox.maxHeight = 200;
-    platformsList.addElement("windows (codeblocks)",ofGetTargetPlatform()==OF_TARGET_WINGCC);
-	platformsList.addElement("windows (visualStudio)", ofGetTargetPlatform()==OF_TARGET_WINVS);
-	platformsList.addElement("linux (codeblocks)",ofGetTargetPlatform()==OF_TARGET_LINUX);
-	platformsList.addElement("linux64 (codeblocks)",ofGetTargetPlatform()==OF_TARGET_LINUX64);
     
-    //#define MAKE_IOS
-#ifdef MAKE_IOS
-	platformsList.addElement("osx (xcode)",false);
-	platformsList.addElement("ios (xcode)",true);
-#else
-    platformsList.addElement("osx (xcode)",ofGetTargetPlatform()==OF_TARGET_OSX);
-	platformsList.addElement("ios (xcode)",ofGetTargetPlatform()==OF_TARGET_IPHONE);
-#endif
+    ofDirectory testDir(ofRoot+"scripts/win_cb");
+    if (testDir.exists())
+        platformsList.addElement("windows (codeblocks)",ofGetTargetPlatform()==OF_TARGET_WINGCC);
+    
+    testDir.open(ofRoot+"scripts/vs2010");
+    if (testDir.exists())
+        platformsList.addElement("windows (visualStudio)", ofGetTargetPlatform()==OF_TARGET_WINVS);
+    
+    testDir.open(ofRoot+"scripts/linux");
+    if (testDir.exists()){
+        platformsList.addElement("linux (codeblocks)",ofGetTargetPlatform()==OF_TARGET_LINUX);
+        platformsList.addElement("linux64 (codeblocks)",ofGetTargetPlatform()==OF_TARGET_LINUX64);
+    }
+    
+    testDir.open(ofRoot+"scripts/osx");
+    if (testDir.exists())
+        platformsList.addElement("osx (xcode)",ofGetTargetPlatform()==OF_TARGET_OSX);
+    
+    testDir.open(ofRoot+"scripts/ios");
+    if (testDir.exists())
+        platformsList.addElement("ios (xcode)",ofGetTargetPlatform()==OF_TARGET_IPHONE);
+
     platformsList.setText( platformsList.getSelectedAsString() );
     
     froebelTextBox *subPlatformList = new froebelTextBox();
@@ -182,7 +194,7 @@ void mainScreen::setup( string _path, string _name ){
     checkProjectState();
 }
 
-void mainScreen::loadAddons(){
+void mainScreenOFPlay::loadAddons(){
     addonsList.containerBox.clear();
     
     ofDirectory addonsFolder(addonsPath);
@@ -200,7 +212,7 @@ void mainScreen::loadAddons(){
     }
 }
 
-void mainScreen::loadFolder(string _path){
+void mainScreenOFPlay::loadFolder(string _path){
     ofDirectory folder( ofFilePath::getAbsolutePath(ofFilePath::join(ofRoot,_path)) );
     
     if (folder.exists()){
@@ -233,7 +245,7 @@ void mainScreen::loadFolder(string _path){
     }
 }
 
-void mainScreen::pathChange(string &_path){
+void mainScreenOFPlay::pathChange(string &_path){
     
     string completePath = ofRoot + projectPath.getText();
     
@@ -252,14 +264,14 @@ void mainScreen::pathChange(string &_path){
     checkProjectState();
 }
 
-void mainScreen::nameChange(string &_path){
+void mainScreenOFPlay::nameChange(string &_path){
     addonsList.containerBox.reset();
     addonsList.bChange = true;
     
     checkProjectState();
 }
 
-void mainScreen::loadProject(string _path){
+void mainScreenOFPlay::loadProject(string _path){
     //  Extract Name and Path
     //
     string folder = "";
@@ -306,7 +318,7 @@ void mainScreen::loadProject(string _path){
     addonsList.setText( addonsList.getSelectedAsString() );
 }
 
-string mainScreen::setTarget(int targ){
+string mainScreenOFPlay::setTarget(int targ){
     
     if(project){
 		delete project;
@@ -346,13 +358,13 @@ string mainScreen::setTarget(int targ){
     return target;
 }
 
-void mainScreen::setStatus(string newStatus){
+void mainScreenOFPlay::setStatus(string newStatus){
     statusEnergy = 1;
     status = newStatus;
     statusSetTime = ofGetElapsedTimef();
 }
 
-void mainScreen::checkProjectState(){
+void mainScreenOFPlay::checkProjectState(){
     openButton.bEnable = isProjectGenerated(projectPath.getText(),projectName.getText());
     string projectPathString = projectPath.getText()+"/"+projectName.getText();
     ofDirectory projectPath( projectPathString );
@@ -365,7 +377,7 @@ void mainScreen::checkProjectState(){
     }
 }
 
-void mainScreen::generateProject(){
+void mainScreenOFPlay::generateProject(){
     
     vector <int> targetsToMake;
     for(int i = 0; i < platformsList.containerBox.elements.size(); i++){
@@ -426,7 +438,7 @@ void mainScreen::generateProject(){
     printf("done with project generation \n");
 }
 
-void mainScreen::update(){
+void mainScreenOFPlay::update(){
     projectPath.update();
     ofRectangle prev = projectPath.getBoundingBox();
     projectName.x = prev.x;
@@ -452,7 +464,7 @@ void mainScreen::update(){
     }
 }
 
-void mainScreen::draw(){
+void mainScreenOFPlay::draw(){
     projectName.draw();
     projectPath.draw();
     addonsList.draw();
@@ -470,7 +482,7 @@ void mainScreen::draw(){
     ofDrawBitmapString(status, 10,ofGetHeight()-8);
 }
 
-void mainScreen::mousePressed(ofPoint _mouse){
+void mainScreenOFPlay::mousePressed(ofPoint _mouse){
     if ( projectPath.checkMousePressed( _mouse ) ){
         /*
          string command = "";
@@ -531,7 +543,7 @@ void mainScreen::mousePressed(ofPoint _mouse){
     }
 }
 
-void mainScreen::resized(){
+void mainScreenOFPlay::resized(){
     projectName.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     projectPath.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     platformsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;

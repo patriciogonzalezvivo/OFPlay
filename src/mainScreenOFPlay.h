@@ -14,12 +14,11 @@
 #include "froebelGui.h"
 #include "projectGenerator.h"
 
-class mainScreen {
+class mainScreenOFPlay {
 public:
     
-    mainScreen();
+    mainScreenOFPlay(string _ofpath, string _path, string _name );
     
-    void    setup(string _path, string _name );
     void    update();
     void    draw();
 

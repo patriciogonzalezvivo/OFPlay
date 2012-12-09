@@ -2,8 +2,7 @@
 
 #include "ofMain.h"
 
-#include "mainScreen.h"
-
+#include "mainScreenOFPlay.h"
 #include "ofxXmlSettings.h"
 
 class testApp : public ofBaseApp{
@@ -22,15 +21,10 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
  
-    mainScreen  mScreen;
+    void searchForOF();
     
-    string  appToRoot;
-    string  defaultLoc;
+    enum { INSTALL_OF, INSTALL_GIT, INSTALL_XCODE };
+    int  nStep;
     
-    string  ofRoot;
-    string  addonsPath;
-    string  sketchPath;
-    
-    
-    bool    bOFFound;
+    mainScreenOFPlay  *mScreen;
 };

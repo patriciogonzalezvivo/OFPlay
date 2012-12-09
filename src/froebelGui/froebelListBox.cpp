@@ -139,8 +139,12 @@ bool froebelListBox::checkMousePressed(ofPoint _mouse){
             bSelected = true;
             return true;
         } else {
-            string rta = getText();
-            ofNotifyEvent(focusLost, rta);
+            if (!inside(_mouse)){
+                string rta = getText();
+                ofNotifyEvent(focusLost, rta);
+            } else {
+                bSelected = !bSelected;
+            }
         }
     }
 }
