@@ -5,15 +5,15 @@
     </default>
     
     <phrase>
-        <text>Everything is almost set</text>
+        <text>Everything is almost ready.</text>
     </phrase>
     <phrase>
-        <text>Please go to openFrameworks.cc and download the release distribution of openFrameworks libraries for your OS</text>
+        <text>Please go to openFrameworks.cc/download to get a copy of openFrameworks for your operating system</text>
     </phrase>
     <phrase>
-        <text>After download it un zip it and place it somewhere safe.</text>
+        <text>After downloading, unzip it anywhere safe, like "Documents".</text>
     </phrase>
     <phrase>
-        <text>This application will need to know here is that folder. Every time you move that folder and the first time it will ask you where is it</text>
+        <text>OFPlay needs to know where you unzipped openFrameworks, so it will ask you where it is.</text>
     </phrase>
 </textSequence>
