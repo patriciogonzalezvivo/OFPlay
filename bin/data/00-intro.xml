@@ -8,18 +8,18 @@
         <text>Welcome to openFrameworks</text>
     </phrase>
     <phrase>
-        <text>This program will assist you on the instalation process and then help you to manage your projects.</text>
+        <text>This program will assist you with the installation process and help you to manage your projects.</text>
     </phrase>
     <phrase>
-        <text>As you probably know openFrameworks it's not an application by it self.</text>
+        <text>As you probably know, openFrameworks isn't an application in itself.</text>
     </phrase>
     <phrase>
-        <text>It's just what is call a library.</text>
+        <text>It's what is called a "library".</text>
     </phrase>
     <phrase>
-        <text>Think it as a construction kit of building blocks.</text>
+        <text>Think of it as a construction kit of building blocks.</text>
     </phrase>
     <phrase>
-        <text>You will use this blocks elements for design and develop your own creative applications.</text>
+        <text>You will use these blocks to design and develop your own creative applications.</text>
     </phrase>
 </textSequence>
