@@ -94,7 +94,6 @@
 		3D3F8DA616724820003DFAC3 /* froebelGuiRef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = froebelGuiRef.png; sourceTree = "<group>"; };
 		3D3F8DCE1672817F003DFAC3 /* mainScreenOFPlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mainScreenOFPlay.cpp; sourceTree = "<group>"; };
 		3D3F8DCF1672817F003DFAC3 /* mainScreenOFPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainScreenOFPlay.h; sourceTree = "<group>"; };
-		3D520B6D166AF1EE00212598 /* OFPlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OFPlay.png; sourceTree = "<group>"; };
 		3D520B6E166AF23500212598 /* OFPlay.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OFPlay.icns; sourceTree = "<group>"; };
 		3D611D40167514830090E86D /* TextBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextBlock.cpp; sourceTree = "<group>"; };
 		3D611D41167514830090E86D /* TextBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBlock.h; sourceTree = "<group>"; };
@@ -380,7 +379,6 @@
 			children = (
 				3D3F8DA616724820003DFAC3 /* froebelGuiRef.png */,
 				3D520B6E166AF23500212598 /* OFPlay.icns */,
-				3D520B6D166AF1EE00212598 /* OFPlay.png */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
