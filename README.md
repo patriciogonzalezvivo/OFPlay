@@ -4,9 +4,11 @@ This is a modify version of [Zachary Lieberman's Project Generator](https://gith
 
 ![main](https://raw.github.com/patriciogonzalezvivo/OFPlay/master/ofplay_main.png)
 
-Is part of my Mayor Studio Project and [brief research](http://www.patriciogonzalezvivo.com/blog/?p=821) exploring how could be improve the first step into openFrameworks creative coding tool.
+Borns as a Major Studio project after a [brief research](http://www.patriciogonzalezvivo.com/blog/?p=821) exploring the difficult learning process of openFrameworks.
 
 The aesthetic have been delivery chosen to reinforce the metaphor of openFrameworks as a kit of building blocks. For that I was inspired on Froebel's gifts toys.
+
+![froebel](https://raw.github.com/patriciogonzalezvivo/OFPlay/master/froebelGuiRef.png)
 
 
 ##Features
