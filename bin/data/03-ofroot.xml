@@ -1,0 +1,19 @@
+<textSequence>
+    <default>
+        <hAlign>CENTER</hAlign>
+        <vAlign>MIDDLE</vAlign>
+    </default>
+    
+    <phrase>
+        <text>Everything is almost set</text>
+    </phrase>
+    <phrase>
+        <text>Please go to openFrameworks.cc and download the release distribution of openFrameworks libraries for your OS</text>
+    </phrase>
+    <phrase>
+        <text>After download it un zip it and place it somewhere safe.</text>
+    </phrase>
+    <phrase>
+        <text>This application will need to know here is that folder. Every time you move that folder and the first time it will ask you where is it</text>
+    </phrase>
+</textSequence>

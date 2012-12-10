@@ -34,7 +34,9 @@ public:
     void        draw();
     
     froebelColor bgColor;
+    
     ofRectangle  slider;
+    froebelColor sliderColor;
     
     int         size;
     int         maxHeight;

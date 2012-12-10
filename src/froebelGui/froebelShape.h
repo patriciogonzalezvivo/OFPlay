@@ -26,9 +26,8 @@ public:
     
     float           size;
     
-protected:
     ofPolyline      shape;
-    
+protected:
     int             type;
 };
 

@@ -16,7 +16,9 @@ froebelContainer::froebelContainer(){
     offsetY         = 0.0;
     damp            = 0.1;
     size            = 30;
+    
     slider.width    = 5;
+    sliderColor.setFromPalet(7);
     
     bEnable         = false;
     bCheckList      = false;
@@ -172,7 +174,7 @@ void froebelContainer::draw(){
     }
     
     if ( (totalLenght-5 >= maxHeight) ){
-        ofSetColor(bgColor.getFromPalet(2));
+        ofSetColor(sliderColor);
         ofRect(slider);
     }
     

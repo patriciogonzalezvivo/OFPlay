@@ -1,0 +1,14 @@
+<textSequence>
+    <default>
+        <hAlign>CENTER</hAlign>
+        <vAlign>MIDDLE</vAlign>
+    </default>
+    
+    <phrase>
+        <text>If you would like to use a git client to download new addons you could install it</text>
+    </phrase>
+    
+    <phrase>
+        <text> Go to XCode Preferences -> Downloads -> Components -> and click on install Command Line Tools </text>
+    </phrase>
+</textSequence>

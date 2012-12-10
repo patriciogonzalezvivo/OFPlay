@@ -22,7 +22,6 @@ mainScreenOFPlay::mainScreenOFPlay( string _ofRoot, string _defaultPath, string 
     //------------------------------------- GUI
     //
     defaultHeight       = 34;
-    logo.loadImage("OFPlay.png");
     font.loadFont("Inconsolata.otf", 12, true,false,false,0.5,90);
     
     //  PATH:
@@ -76,7 +75,7 @@ mainScreenOFPlay::mainScreenOFPlay( string _ofRoot, string _defaultPath, string 
     *subProjectName = projectName;
     subProjectName->setPrefix("<< ");
     subProjectName->setText("NEW PROJECT NAME");
-    subProjectName->font = &font;//&secondFont;
+    subProjectName->font = &font;
     subProjectName->bLeftAlign = false;
     subProjectName->bFixedSize = true;
     subProjectName->setSizeAndShapes(defaultHeight,1);
@@ -129,7 +128,7 @@ mainScreenOFPlay::mainScreenOFPlay( string _ofRoot, string _defaultPath, string 
     *subPlatformList = platformsList;
     subPlatformList->setPrefix( "<< " );
     subPlatformList->setText("TARGET PLATFORM");
-    subPlatformList->font = &font;//&secondFont;
+    subPlatformList->font = &font;
     subPlatformList->bLeftAlign = false;
     subPlatformList->bFixedSize = true;
     subPlatformList->setSizeAndShapes(defaultHeight,1);
@@ -160,7 +159,7 @@ mainScreenOFPlay::mainScreenOFPlay( string _ofRoot, string _defaultPath, string 
     *subAddonsList = addonsList;
     subAddonsList->setPrefix("<< ");
     subAddonsList->setText("SELECTED ADDONS");
-    subAddonsList->font = &font;//&secondFont;
+    subAddonsList->font = &font;
     subAddonsList->bLeftAlign = false;
     subAddonsList->bFixedSize = true;
     subAddonsList->setSizeAndShapes(defaultHeight,1);
@@ -471,7 +470,7 @@ void mainScreenOFPlay::draw(){
     platformsList.draw();
     
     ofSetColor(255);
-    logo.draw(ofGetWidth() - defaultHeight - logo.getWidth(),ofGetHeight() - defaultHeight - logo.getHeight());
+    logo->draw(ofGetWidth() - defaultHeight - logo->getWidth(),ofGetHeight() - defaultHeight - logo->getHeight());
     generateButton.draw();
     openButton.draw();
     
@@ -552,9 +551,9 @@ void mainScreenOFPlay::resized(){
     addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     addonsList.containerBox.adjustShape();
     
-    generateButton.x = ofGetWidth() - defaultHeight - logo.getWidth() + generateButton.size*0.5 + 3;
-    generateButton.y = ofGetHeight() - defaultHeight - logo.getHeight() + generateButton.size*0.5 + 2;
+    generateButton.x = ofGetWidth() - defaultHeight - logo->getWidth() + generateButton.size*0.5 + 3;
+    generateButton.y = ofGetHeight() - defaultHeight - logo->getHeight() + generateButton.size*0.5 + 2;
     
-    openButton.x = ofGetWidth() - defaultHeight - logo.getWidth()*0.535 + openButton.size;
-    openButton.y = ofGetHeight() - defaultHeight - logo.getHeight() + openButton.size*0.5 + 2;
+    openButton.x = ofGetWidth() - defaultHeight - logo->getWidth()*0.535 + openButton.size;
+    openButton.y = ofGetHeight() - defaultHeight - logo->getHeight() + openButton.size*0.5 + 2;
 }

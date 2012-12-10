@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    ofEnableSmoothing();
+//    ofEnableSmoothing();
     ofEnableAlphaBlending();
     ofSetVerticalSync(true);
     ofSetWindowShape(900,500);
@@ -10,21 +10,28 @@ void testApp::setup(){
 //    ofSetLogLevel(OF_LOG_VERBOSE);
     ofSetDataPathRoot("../Resources/");
     
-    nStep = INSTALL_XCODE;
-    
-    ofDirectory testDir("/Applications/Xcode.app");
-    if (testDir.exists()){
-        cout << "XCODE PRESENT" << endl;
-        nStep = INSTALL_GIT;
-    }
-        
-    ofFile testFile("/usr/bin/git");
-    if (testFile.exists()){
-        cout << "GIT PRESENT" << endl;
-        nStep = INSTALL_OF;
-    }
-    
     mScreen = NULL;
+    logo.loadImage("OFPlay.png");
+    font.loadFont("Inconsolata.otf", 15, true,false,false,0.5,90);
+    textSeq.set(900*0.5-(logo.getWidth()+75)*0.5,250,logo.getWidth()+75,150);
+    textSeq.font = &font;
+
+    //  Get addons list
+    //
+    ofSaveURLTo("http://www.patriciogonzalezvivo.com/ofplay.xml","ofplay.xml");
+    
+    //  First time??
+    //
+    ofFile testFile("config.xml");
+    if (testFile.exists()){
+        nStep = INSTALL_OF;
+        textSeq.loadSequence("03-ofroot.xml");
+        textSeq.bFinish = true;
+    } else {
+        nStep = OFPLAY_INTRO;
+        
+        textSeq.loadSequence("00-intro.xml");
+    }
 }
 
 
@@ -33,18 +40,70 @@ void testApp::update(){
     
     if (mScreen == NULL){
         
-        if (nStep == INSTALL_XCODE){
+        if (nStep == OFPLAY_INTRO){
+            
+            if (textSeq.bFinish){
+                //  Only for OSX ( help need to port to other platform)
+                //
+                ofDirectory testDir("/Applications/Xcode.app");
+                if (testDir.exists()){
+                    nStep = INSTALL_GIT;
+                } else {
+                    testDir.open("/Developer/Applications/Xcode.app");
+                    if (testDir.exists()){
+                        nStep = INSTALL_GIT;
+                    } else {
+                        nStep =INSTALL_XCODE;
+                        textSeq.loadSequence("01-xcode.xml");
+                    }
+                }
+            }
+            
+        } else if (nStep == INSTALL_XCODE){
+            
+            ofDirectory testDir("/Applications/Xcode.app");
+            if (testDir.exists()){
+                nStep = INSTALL_GIT;
+                textSeq.loadSequence("02-git.xml");
+            } else {
+                testDir.open("/Developer/Applications/Xcode.app");
+                if (testDir.exists()){
+                    nStep = INSTALL_GIT;
+                    textSeq.loadSequence("02-git.xml");
+                } else {
+                    if (textSeq.bFinish){
+                        nStep =INSTALL_XCODE;
+                        textSeq.loadSequence("01-xcode.xml");
+                    }
+                }
+            }
             
         } else if (nStep == INSTALL_GIT){
             
-        } else {
-            searchForOF();
+            ofFile testFile("/usr/bin/git");
+            if (testFile.exists()){
+                nStep = INSTALL_OF;
+                textSeq.loadSequence("03-ofroot.xml");
+            } else {
+                //  NOT REALLY SEARCHING FOR IT
+                //
+                if (textSeq.bFinish){
+                    nStep = INSTALL_OF;
+                    textSeq.loadSequence("03-ofroot.xml");
+                }
+            }
+            
+        } else if (nStep == INSTALL_OF){
+            
+            if (textSeq.bFinish){
+                searchForOF();
+            }
         }
         
+        textSeq.update();
     } else {
         mScreen->update();
     }
-    
 }
 
 void testApp::searchForOF(){
@@ -87,6 +146,7 @@ void testApp::searchForOF(){
     } else {
         ofRoot = ofFilePath::getAbsolutePath( ofFilePath::join( binPath, appToRoot)  );
     }
+
     XML.setValue("appToRoot", appToRoot);
     XML.setValue("ofRoot", ofRoot );
     XML.setValue("defaultNewProjectLocation", defaultLoc);
@@ -97,19 +157,33 @@ void testApp::searchForOF(){
     setOFRoot( ofRoot );
     
     mScreen = new mainScreenOFPlay( ofRoot , defaultLoc, "newProject");
+    mScreen->logo = &logo;
+    mScreen->resized();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     ofBackground(230);
     
-    if (mScreen != NULL)
+    if (mScreen != NULL){
         mScreen->draw();
+    } else {
+        ofSetColor(255);
+        logo.draw(ofGetWidth()*0.5-logo.getWidth()*0.5, ofGetHeight()*0.5-logo.getHeight());
+        
+        textSeq.draw();
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
+    if (mScreen == NULL){
+        if ( key == OF_KEY_RIGHT){
+            textSeq.setNextLine();
+        } else if ( key == OF_KEY_LEFT){
+            textSeq.setPrevLine();
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -128,8 +202,25 @@ void testApp::mouseDragged(int x, int y, int button){
 void testApp::mousePressed(int x, int y, int button){
     ofPoint mouse = ofPoint(x, y);
     
-    if (mScreen != NULL)
+    if (mScreen != NULL){
         mScreen->mousePressed(mouse);
+    } else {
+        int rta = -1;
+        
+        for (int i = 0; i < textSeq.size(); i++) {
+            if (textSeq.buttons[i].checkMousePressed(mouse)){
+                rta = i;
+            }
+        }
+        
+        if (rta != -1){
+            textSeq.setLine(rta);
+        } else if ( x > ofGetWidth()*0.5 ){
+            textSeq.setNextLine();
+        } else {
+            textSeq.setPrevLine();
+        }
+    }
 }
 
 //--------------------------------------------------------------

@@ -1,0 +1,25 @@
+<textSequence>
+    <default>
+        <hAlign>CENTER</hAlign>
+        <vAlign>MIDDLE</vAlign>
+    </default>
+    
+    <phrase>
+        <text>Welcome to openFrameworks</text>
+    </phrase>
+    <phrase>
+        <text>This program will assist you on the instalation process and then help you to manage your projects.</text>
+    </phrase>
+    <phrase>
+        <text>As you probably know openFrameworks it's not an application by it self.</text>
+    </phrase>
+    <phrase>
+        <text>It's just what is call a library.</text>
+    </phrase>
+    <phrase>
+        <text>Think it as a construction kit of building blocks.</text>
+    </phrase>
+    <phrase>
+        <text>You will use this blocks elements for design and develop your own creative applications.</text>
+    </phrase>
+</textSequence>

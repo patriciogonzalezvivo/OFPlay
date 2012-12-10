@@ -1,0 +1,19 @@
+<textSequence>
+    <default>
+        <hAlign>CENTER</hAlign>
+        <vAlign>MIDDLE</vAlign>
+    </default>
+    
+    <phrase>
+        <text>Before we can start coding we need to install the default IDE for your platform</text>
+    </phrase>
+    <phrase>
+        <text>An IDE is a special type of text editor specially designed to work with code</text>
+    </phrase>
+    <phrase>
+        <text>For OSX the default one is call xcode and is free.</text>
+    </phrase>
+    <phrase>
+        <text>Please go to you AppStore and install it.</text>
+    </phrase>
+</textSequence>

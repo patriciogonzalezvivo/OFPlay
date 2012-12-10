@@ -2,8 +2,10 @@
 
 #include "ofMain.h"
 
-#include "mainScreenOFPlay.h"
 #include "ofxXmlSettings.h"
+
+#include "TextSequencer.h"
+#include "mainScreenOFPlay.h"
 
 class testApp : public ofBaseApp{
 public:
@@ -23,8 +25,15 @@ public:
  
     void searchForOF();
     
-    enum { INSTALL_OF, INSTALL_GIT, INSTALL_XCODE };
+    enum { INSTALL_OF, INSTALL_GIT, INSTALL_XCODE, OFPLAY_INTRO };
     int  nStep;
     
-    mainScreenOFPlay  *mScreen;
+    ofImage             logo;
+    ofTrueTypeFont      font;
+    
+    TextSequencer       textSeq;
+    
+    mainScreenOFPlay    *mScreen;
+    
+    bool    bXcodeInstalled;
 };
