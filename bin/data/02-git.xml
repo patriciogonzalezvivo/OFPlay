@@ -5,10 +5,10 @@
     </default>
     
     <phrase>
-        <text>If you would like to use a git client to download new addons you could install it</text>
+        <text>If you would like to download new addons automatically, you need to install git.</text>
     </phrase>
     
     <phrase>
-        <text> Go to XCode Preferences -> Downloads -> Components -> and click on install Command Line Tools </text>
+        <text>Go to XCode Preferences -> Downloads -> Components -> and click on "Install Command Line Tools".</text>
     </phrase>
 </textSequence>
