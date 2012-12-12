@@ -22,6 +22,7 @@ mainScreenOFPlay::mainScreenOFPlay( string _ofRoot, string _defaultPath, string 
     //------------------------------------- GUI
     //
     defaultHeight       = 34;
+    logo.loadImage("OFPlay.png");
     font.loadFont("Inconsolata.otf", 12, true,false,false,0.5,90);
     
     //  PATH:
@@ -470,7 +471,7 @@ void mainScreenOFPlay::draw(){
     platformsList.draw();
     
     ofSetColor(255);
-    logo->draw(ofGetWidth() - defaultHeight - logo->getWidth(),ofGetHeight() - defaultHeight - logo->getHeight());
+    logo.draw(ofGetWidth() - defaultHeight - logo.getWidth(),ofGetHeight() - defaultHeight - logo.getHeight());
     generateButton.draw();
     openButton.draw();
     
@@ -551,9 +552,9 @@ void mainScreenOFPlay::resized(){
     addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     addonsList.containerBox.adjustShape();
     
-    generateButton.x = ofGetWidth() - defaultHeight - logo->getWidth() + generateButton.size*0.5 + 3;
-    generateButton.y = ofGetHeight() - defaultHeight - logo->getHeight() + generateButton.size*0.5 + 2;
+    generateButton.x = ofGetWidth() - defaultHeight - logo.getWidth() + generateButton.size*0.5 + 3;
+    generateButton.y = ofGetHeight() - defaultHeight - logo.getHeight() + generateButton.size*0.5 + 2;
     
-    openButton.x = ofGetWidth() - defaultHeight - logo->getWidth()*0.535 + openButton.size;
-    openButton.y = ofGetHeight() - defaultHeight - logo->getHeight() + openButton.size*0.5 + 2;
+    openButton.x = ofGetWidth() - defaultHeight - logo.getWidth()*0.535 + openButton.size;
+    openButton.y = ofGetHeight() - defaultHeight - logo.getHeight() + openButton.size*0.5 + 2;
 }

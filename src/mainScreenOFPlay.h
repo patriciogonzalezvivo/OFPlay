@@ -27,7 +27,7 @@ public:
 
     //  GUI
     //
-    ofImage         *logo;
+    ofImage         logo;
     ofTrueTypeFont  font;
     float           defaultHeight;
 

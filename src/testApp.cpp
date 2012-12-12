@@ -157,7 +157,6 @@ void testApp::searchForOF(){
     setOFRoot( ofRoot );
     
     mScreen = new mainScreenOFPlay( ofRoot , defaultLoc, "newProject");
-    mScreen->logo = &logo;
     mScreen->resized();
 }
 

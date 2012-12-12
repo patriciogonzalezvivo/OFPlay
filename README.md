@@ -21,11 +21,11 @@ The aesthetic have been delivery chosen to reinforce the metaphor of openFramewo
 
 ##Download Compiled Version
 
-* 	[OSX 10.6 or > ](https://dl.dropbox.com/u/335522/OFPlay-0.1.zip)
+* 	[OSX 10.6 or > ](https://dl.dropbox.com/u/335522/OFPlay-0.2.zip)
 
 ##TODO
 *	windows and linux implementation
 *	git integration for downloading suggested addons at demand
 
 ##Thanks
-Special thanks to Zachary Lieberman, Ted Byfield, Navit Keren and the 44 students that fill the forms of the [initial questionary for the research](http://www.patriciogonzalezvivo.com/blog/?p=821)
+Special thanks to Zachary Lieberman, Ted Byfield, Navit Keren, Kyle McDonnald and the 44 students that fill the forms of the [initial questionary for the research](http://www.patriciogonzalezvivo.com/blog/?p=821)
