@@ -17,8 +17,9 @@
 class mainScreenOFPlay {
 public:
     
-    mainScreenOFPlay(string _ofpath, string _path, string _name );
+    mainScreenOFPlay();
     
+    void    setup(string _ofpath, string _path, string _name );
     void    update();
     void    draw();
 

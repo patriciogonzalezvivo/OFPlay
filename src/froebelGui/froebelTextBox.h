@@ -19,6 +19,7 @@ public:
     froebelTextBox();
     
     void    setSizeAndShapes(float _size, int _endingShape = -1, int _iconShape = -1);
+    void    setSubInfo(string _comment);
     
     virtual bool checkMousePressed(ofPoint _mouse);
     

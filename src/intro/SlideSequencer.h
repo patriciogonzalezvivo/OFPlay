@@ -1,12 +1,12 @@
 //
-//  TextSequencer.h
+//  SlideSequencer.h
 //
 //  Created by Patricio Gonzalez Vivo on 4/1/12.
 //  Copyright (c) 2012 http://PatricioGonzalezVivo.com All rights reserved.
 //
 
-#ifndef TEXTSEQUENCER
-#define TEXTSEQUENCER
+#ifndef SLIDESEQUENCER
+#define SLIDESEQUENCER
 
 #include "ofMain.h"
 
@@ -18,51 +18,50 @@
 #include "ofxXmlSettings.h"
 
 typedef struct {
-    string                  text;
+    string                  image;
+    vector<string>          text;
     horizontalAlignment     hAlign;
     verticalAlignment       vAlign;
-} textPhrase;
+} Slide;
 
-class TextSequencer: public ofRectangle {
+class SlideSequencer: public ofRectangle {
 public:
-    TextSequencer();
+    SlideSequencer();
     
     bool    loadSequence(string _xmlFile);
     
-    int     size(){ return script.size(); }
+    int     size(){ return slides.size(); }
     void    setLine( unsigned int _nLine);
-    void    setNextPhrase(textPhrase &_phrase );
+    void    setNextPhrase(Slide &_slide );
     
     void    setPrevLine();
     void    setNextLine();
     
     int     getLineNumber() { return currentLine; }
-    string  getLineText(){return (text !=NULL)? text->getText(): ""; };
     
     void    update();
     void    draw();
     
     vector<froebelShapeButton>  buttons;
     
-    froebelColor    textColor;
     froebelColor    elemColor;
+    froebelColor    textColor;
     
-    ofTrueTypeFont  *font;
     bool            bFinish;
 
 protected:
-    vector<textPhrase>  script;
-
-    string              rawText;
+    vector<Slide>   slides;
     
+    ofImage             image;
+    string              imagePath;
     TextBlock           *text;
     
     verticalAlignment   defaultVertAlign;
     horizontalAlignment defaultHoriAlign;
-    
-    int                 desiredLine;
-    int                 currentLine;
-    int                 countDown;
+
+    int             desiredLine;
+    int             currentLine;
+    int             countDown;
 };
 
 #endif

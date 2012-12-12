@@ -4,7 +4,7 @@
 
 #include "ofxXmlSettings.h"
 
-#include "TextSequencer.h"
+#include "SlideSequencer.h"
 #include "mainScreenOFPlay.h"
 
 class testApp : public ofBaseApp{
@@ -31,7 +31,7 @@ public:
     ofImage             logo;
     ofTrueTypeFont      font;
     
-    TextSequencer       textSeq;
+    SlideSequencer       textSeq;
     
     mainScreenOFPlay    *mScreen;
     

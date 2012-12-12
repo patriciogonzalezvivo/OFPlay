@@ -12,10 +12,8 @@ void testApp::setup(){
     
     mScreen = NULL;
     logo.loadImage("OFPlay.png");
-    font.loadFont("Inconsolata.otf", 15, true,false,false,0.5,90);
-    textSeq.set(900*0.5-(logo.getWidth()+75)*0.5,250,logo.getWidth()+75,150);
-    textSeq.font = &font;
-
+    textSeq.set(0,0,900,450);
+    
     //  Get addons list
     //
     ofSaveURLTo("http://www.patriciogonzalezvivo.com/ofplay.xml","ofplay.xml");
@@ -24,13 +22,9 @@ void testApp::setup(){
     //
     ofFile testFile("config.xml");
     if (testFile.exists()){
-        nStep = INSTALL_OF;
-        textSeq.loadSequence("03-ofroot.xml");
-        textSeq.bFinish = true;
+        searchForOF();
     } else {
-        nStep = OFPLAY_INTRO;
-        
-        textSeq.loadSequence("00-intro.xml");
+        textSeq.loadSequence("intro.xml");
     }
 }
 
@@ -38,75 +32,49 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
     
-    if (mScreen == NULL){
-        
-        if (nStep == OFPLAY_INTRO){
+    if (mScreen != NULL){
+        mScreen->update();
+    } else {
+        textSeq.update();
+    
+        if (textSeq.getLineNumber() == 3){
+            ofDirectory testDir01("/Applications/Xcode.app");
+            ofDirectory testDir02("/Developer/Applications/Xcode.app");
             
-            if (textSeq.bFinish){
-                //  Only for OSX ( help need to port to other platform)
-                //
-                ofDirectory testDir("/Applications/Xcode.app");
-                if (testDir.exists()){
-                    nStep = INSTALL_GIT;
-                } else {
-                    testDir.open("/Developer/Applications/Xcode.app");
-                    if (testDir.exists()){
-                        nStep = INSTALL_GIT;
-                    } else {
-                        nStep =INSTALL_XCODE;
-                        textSeq.loadSequence("01-xcode.xml");
-                    }
-                }
-            }
-            
-        } else if (nStep == INSTALL_XCODE){
-            
-            ofDirectory testDir("/Applications/Xcode.app");
-            if (testDir.exists()){
-                nStep = INSTALL_GIT;
-                textSeq.loadSequence("02-git.xml");
-            } else {
-                testDir.open("/Developer/Applications/Xcode.app");
-                if (testDir.exists()){
-                    nStep = INSTALL_GIT;
-                    textSeq.loadSequence("02-git.xml");
-                } else {
-                    if (textSeq.bFinish){
-                        nStep =INSTALL_XCODE;
-                        textSeq.loadSequence("01-xcode.xml");
-                    }
-                }
-            }
-            
-        } else if (nStep == INSTALL_GIT){
-            
-            ofFile testFile("/usr/bin/git");
-            if (testFile.exists()){
-                nStep = INSTALL_OF;
-                textSeq.loadSequence("03-ofroot.xml");
-            } else {
-                //  NOT REALLY SEARCHING FOR IT
-                //
-                if (textSeq.bFinish){
-                    nStep = INSTALL_OF;
-                    textSeq.loadSequence("03-ofroot.xml");
-                }
-            }
-            
-        } else if (nStep == INSTALL_OF){
-            
-            if (textSeq.bFinish){
-                searchForOF();
+            if (testDir01.exists() || testDir02.exists() ){
+                textSeq.setLine(6);
             }
         }
         
-        textSeq.update();
-    } else {
-        mScreen->update();
+        if (textSeq.getLineNumber() > 5){
+            ofDirectory testDir01("/Applications/Xcode.app");
+            ofDirectory testDir02("/Developer/Applications/Xcode.app");
+            
+            if (testDir01.exists() || testDir02.exists() ){
+                
+            } else {
+                textSeq.setLine(3);
+            }
+        }
+        
+        if (textSeq.getLineNumber() == 6){
+            ofFile testFile("/usr/bin/git");
+            if (testFile.exists()){
+                textSeq.setLine(7);
+            }
+        }
+        
+        if (textSeq.bFinish)
+            searchForOF();
     }
 }
 
 void testApp::searchForOF(){
+    
+    if (mScreen != NULL)
+        delete mScreen;
+    mScreen = NULL;
+    
     //  The XML will store basic information like the OF path
     //
     ofxXmlSettings XML;
@@ -130,7 +98,6 @@ void testApp::searchForOF(){
     //  Try to search using the appToRoot that by defaul search 4 levels down ( distance from a /bin )
     //
     if ( !isOFFolder( ofFilePath::getAbsolutePath(ofFilePath::join( binPath, appToRoot)) ) ){
-        
         //  Keep looping until found a OF path
         //
         while ( !isOFFolder(ofRoot)) {
@@ -156,7 +123,9 @@ void testApp::searchForOF(){
     //
     setOFRoot( ofRoot );
     
-    mScreen = new mainScreenOFPlay( ofRoot , defaultLoc, "newProject");
+    mScreen = new mainScreenOFPlay();
+    mScreen->setup( ofRoot , defaultLoc, "newProject");
+    mScreen->update();
     mScreen->resized();
 }
 
@@ -168,8 +137,6 @@ void testApp::draw(){
         mScreen->draw();
     } else {
         ofSetColor(255);
-        logo.draw(ofGetWidth()*0.5-logo.getWidth()*0.5, ofGetHeight()*0.5-logo.getHeight());
-        
         textSeq.draw();
     }
 }

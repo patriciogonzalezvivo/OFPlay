@@ -8,9 +8,13 @@
 
 #include "mainScreenOFPlay.h"
 
-mainScreenOFPlay::mainScreenOFPlay( string _ofRoot, string _defaultPath, string _name ){
+mainScreenOFPlay::mainScreenOFPlay(){
     project = NULL;
     statusEnergy = 0;
+}
+
+void mainScreenOFPlay::setup( string _ofRoot, string _defaultPath, string _name ){
+    
     ofRoot = _ofRoot;
     addonsPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, "addons"));
     string sketchPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, _defaultPath));
@@ -27,78 +31,43 @@ mainScreenOFPlay::mainScreenOFPlay( string _ofRoot, string _defaultPath, string 
     
     //  PATH:
     //
+    projectPath.x = defaultHeight;
+    projectPath.y = defaultHeight;
+    projectPath.font = &font;
+    projectPath.setSizeAndShapes(defaultHeight, 3);
     projectPath.setText( sketchPath );
     projectPath.setPrefix("Path: ");
     projectPath.setDivider("/");
-    projectPath.font = &font;
-    projectPath.setSizeAndShapes(defaultHeight, 3);
-    projectPath.x = defaultHeight;
-    projectPath.y = defaultHeight;
+    projectPath.setSubInfo("CHOOSE PATH");
     projectPath.containerBox.bCheckList = false;
-    
     ofAddListener(projectPath.focusLost, this, &mainScreenOFPlay::pathChange);
     
     loadFolder( "apps/" );
     loadFolder( "examples/" );
     loadFolder( "addons/" );
     
-    froebelTextBox *subProjectPath = new froebelTextBox();
-    *subProjectPath = projectPath;
-    subProjectPath->setPrefix("<< ");
-    subProjectPath->setText("CURRENT PATH");
-    subProjectPath->font = &font;
-    subProjectPath->bLeftAlign = false;
-    subProjectPath->bFixedSize = true;
-    subProjectPath->setSizeAndShapes(defaultHeight,1);
-    subProjectPath->fgColor.clear();
-    subProjectPath->fgColor.addState(5);
-    subProjectPath->fgColor.addState(7);
-    subProjectPath->fgColor.addState(5);
-    subProjectPath->bgColor.clear();
-    subProjectPath->bgColor.addState(0);
-    subProjectPath->bgColor.addState(2);
-    subProjectPath->bgColor.addState(0);
-    subProjectPath->width = ofGetWidth() - defaultHeight;
-    projectPath.subInfo = subProjectPath;
-    
     //  NAME:
     //
-    projectName.setText( _name );
-    projectName.setPrefix("Name: ");
-    projectName.font = &font;
-    projectName.setSizeAndShapes(defaultHeight, 3);
     projectName.x = defaultHeight;
     projectName.y = projectPath.y + projectPath.height + defaultHeight*0.5;
+    projectName.font = &font;
+    projectName.setText( _name );
+    projectName.setPrefix("Name: ");
+    projectName.setSizeAndShapes(defaultHeight, 3);
+    projectName.setSubInfo("NEW PROJECT NAME");
+    
     projectName.enable();
     ofAddListener(projectName.focusLost, this, &mainScreenOFPlay::nameChange);
-    
-    froebelTextBox *subProjectName = new froebelTextBox();
-    *subProjectName = projectName;
-    subProjectName->setPrefix("<< ");
-    subProjectName->setText("NEW PROJECT NAME");
-    subProjectName->font = &font;
-    subProjectName->bLeftAlign = false;
-    subProjectName->bFixedSize = true;
-    subProjectName->setSizeAndShapes(defaultHeight,1);
-    subProjectName->fgColor.clear();
-    subProjectName->fgColor.addState(5);
-    subProjectName->fgColor.addState(7);
-    subProjectName->fgColor.addState(5);
-    subProjectName->bgColor.clear();
-    subProjectName->bgColor.addState(0);
-    subProjectName->bgColor.addState(2);
-    subProjectName->bgColor.addState(0);
-    subProjectName->width = ofGetWidth() - defaultHeight;
-    projectName.subInfo = subProjectName;
     
     //  LOAD PLATFORMS (check if it have the template)
     //
     platformsList.x = defaultHeight;
     platformsList.y = projectName.y + projectName.height + defaultHeight*0.5;
     platformsList.font = &font;
+    platformsList.setSizeAndShapes(defaultHeight,3);
     platformsList.setPrefix("Platform: ");
     platformsList.setDivider(", ");
-    platformsList.setSizeAndShapes(defaultHeight,3);
+    platformsList.setSubInfo("TARGET PLATFORM");
     platformsList.containerBox.maxHeight = 200;
     
     ofDirectory testDir(ofRoot+"scripts/win_cb");
@@ -125,55 +94,18 @@ mainScreenOFPlay::mainScreenOFPlay( string _ofRoot, string _defaultPath, string 
 
     platformsList.setText( platformsList.getSelectedAsString() );
     
-    froebelTextBox *subPlatformList = new froebelTextBox();
-    *subPlatformList = platformsList;
-    subPlatformList->setPrefix( "<< " );
-    subPlatformList->setText("TARGET PLATFORM");
-    subPlatformList->font = &font;
-    subPlatformList->bLeftAlign = false;
-    subPlatformList->bFixedSize = true;
-    subPlatformList->setSizeAndShapes(defaultHeight,1);
-    subPlatformList->fgColor.clear();
-    subPlatformList->fgColor.addState(5);
-    subPlatformList->fgColor.addState(7);
-    subPlatformList->fgColor.addState(5);
-    subPlatformList->bgColor.clear();
-    subPlatformList->bgColor.addState(0);
-    subPlatformList->bgColor.addState(2);
-    subPlatformList->bgColor.addState(0);
-    subPlatformList->width = ofGetWidth() - defaultHeight;
-    platformsList.subInfo = subPlatformList;
-    
     //  LOAD ADDONS
     //
     addonsList.x = defaultHeight;
     addonsList.y = platformsList.y + platformsList.height + defaultHeight*0.5;
+    addonsList.maxWidth = 700;
     addonsList.font = &font;
+    addonsList.setSizeAndShapes(defaultHeight,3);
     addonsList.setPrefix("Addons: ");
     addonsList.setDivider(", ");
-    addonsList.setSizeAndShapes(defaultHeight,3);
-    addonsList.maxWidth = 700;
+    addonsList.setSubInfo("SELECTED ADDONS");
     addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     loadAddons();
-    
-    froebelTextBox *subAddonsList = new froebelTextBox();
-    *subAddonsList = addonsList;
-    subAddonsList->setPrefix("<< ");
-    subAddonsList->setText("SELECTED ADDONS");
-    subAddonsList->font = &font;
-    subAddonsList->bLeftAlign = false;
-    subAddonsList->bFixedSize = true;
-    subAddonsList->setSizeAndShapes(defaultHeight,1);
-    subAddonsList->fgColor.clear();
-    subAddonsList->fgColor.addState(5);
-    subAddonsList->fgColor.addState(7);
-    subAddonsList->fgColor.addState(5);
-    subAddonsList->bgColor.clear();
-    subAddonsList->bgColor.addState(0);
-    subAddonsList->bgColor.addState(2);
-    subAddonsList->bgColor.addState(0);
-    subAddonsList->width = ofGetWidth() - defaultHeight;
-    addonsList.subInfo = subAddonsList;
     
     generateButton.setShape(0,132);
     generateButton.color.set(0.0,0.0);

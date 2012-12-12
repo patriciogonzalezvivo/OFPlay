@@ -62,6 +62,32 @@ void froebelTextBox::setSizeAndShapes(float _size, int _endingShape, int _iconSh
     bChange = true;
 }
 
+void froebelTextBox::setSubInfo(string _comment){
+    if (subInfo == NULL){
+        subInfo = new froebelTextBox();
+        subInfo->x = x;
+        subInfo->y = y;
+        subInfo->width = ofGetWidth() - size;
+        subInfo->height = size;
+        subInfo->font = font;
+        subInfo->bFixedSize = true;
+        subInfo->bLeftAlign = false;
+        subInfo->setPrefix("<< ");
+        subInfo->setText( _comment );
+        subInfo->setSizeAndShapes(size,1);
+        subInfo->fgColor.clear();
+        subInfo->fgColor.addState(5);
+        subInfo->fgColor.addState(7);
+        subInfo->fgColor.addState(5);
+        subInfo->bgColor.clear();
+        subInfo->bgColor.addState(0);
+        subInfo->bgColor.addState(2);
+        subInfo->bgColor.addState(0);
+    } else {
+        subInfo->setText( _comment );
+    }
+}
+
 void froebelTextBox::setPrefix( string _prefix ){
     prefix = _prefix;
     bChange = true;

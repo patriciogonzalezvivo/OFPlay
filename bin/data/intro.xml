@@ -1,0 +1,54 @@
+<sequence>
+    <slide>
+        <image>OFPlay.png</image>
+        <text>Welcome to openFrameworks</text>
+        <text>This program will assist you with the installation process and help you to manage your projects.</text>
+    </slide>
+    
+    <slide>
+        <image>ofbb.png</image>
+        <text>As you probably know, openFrameworks isn't an application in itself.</text>
+        <text>It's what is called a "library".</text>
+    </slide>
+    
+    <slide>
+        <image>ofbb.png</image>
+        <text>Think of it as a construction kit of building blocks.</text>
+        <text>You will use these blocks to design and develop your own creative applications.</text>
+    </slide>
+    
+    <slide>
+        <image>ofide.png</image>
+        <text>Before we can start coding we need to install the default IDE for your platform.</text>
+    </slide>
+    
+    <slide>
+        <image>ofide.png</image>
+        <text>An IDE is a special type of text editor specially designed to work with code.</text>
+        <text>For OS X the default IDE is called XCode, and it's free.</text>
+    </slide>
+    
+    <slide>
+        <image>ofide.png</image>
+        <text>Please go to the App Store and install it.</text>
+    </slide>
+    
+    <slide>
+        <image>ofide.png</image>
+        <text>If you would like to download new addons automatically, you need to install git.</text>
+        <text>Go to XCode Preferences -> Downloads -> Components -> and click on "Install Command Line Tools".</text>
+    </slide>
+    
+    <slide>
+        <image>OFPlay.png</image>
+        <text>Everything is almost ready.</text>
+        <text>Unless you alreadid did it, please go to openFrameworks.cc/download to get a copy of openFrameworks for your operating system</text>
+    </slide>
+    
+    <slide>
+        <image>offolder.png</image>
+        <text>After downloading, unzip it anywhere safe, like "Documents".</text>
+        <text>OFPlay needs to know where you unzipped openFrameworks, so it will ask you where it is.</text>
+    </slide>
+    
+</sequence>

@@ -53,18 +53,58 @@ typedef struct {
     float       height;
 } lineBlock;
 
+class textFont: public ofTrueTypeFont {
+public:
+    textFont(){
+    }
+    
+    float getCharacterWidth(char ch){
+        if (ch=='\n')
+            return 10.0;
+        else {
+            if (ch==' ') ch='i';
+            if (ch=='\xE0') ch='a'; //ˆ
+            if (ch=='\xE1') ch='a'; //‡
+            if (ch=='\xE2') ch='a'; //‰
+            if (ch=='\xE3') ch='a'; //‹
+            if (ch=='\xE4') ch='a'; //Š
+            if (ch=='\xE6') ch='a'; //¾
+            if (ch=='\xE8') ch='e'; //
+            if (ch=='\xE9') ch='e'; //Ž
+            if (ch=='\xEA') ch='e'; //
+            if (ch=='\xEB') ch='e'; //‘
+            if (ch=='\xEC') ch='i'; //“
+            if (ch=='\xED') ch='i'; //’
+            if (ch=='\xEE') ch='i'; //”
+            if (ch=='\xEF') ch='i'; //•
+            if (ch=='\xF2') ch='o'; //˜
+            if (ch=='\xF3') ch='o'; //—
+            if (ch=='\xF4') ch='o'; //™
+            if (ch=='\xF5') ch='o'; //›
+            if (ch=='\xF6') ch='o'; //š
+            if (ch=='\xF9') ch='u'; //
+            if (ch=='\xFA') ch='u'; //œ
+            if (ch=='\xFB') ch='u'; //ž
+            if (ch=='\xFC') ch='u'; //Ÿ
+            if (ch=='\xC7') ch='c'; //
+            return cps[ch-NUM_CHARACTER_TO_START].setWidth;
+        }
+    }
+};
+
 class TextBlock : public ofRectangle{
 public:
     TextBlock();
 
-    void    linkFont(ofTrueTypeFont *_font);
-    
+    void    loadFont(string _fontLocation, float _fontSize, int _dpi = 90);
     void    setAlignment(horizontalAlignment _hAlignment , verticalAlignment _vAlignment = OF_TEXT_ALIGN_TOP);
     
     float   getTextWidth();
     float   getTextHeight();
     
     void    setText(string _inputText);
+    void    setText(vector<string> _inputText);
+    void    appendText(string _inputText);
     string  getText()const{return rawText;};
     
     void    draw();
@@ -72,6 +112,16 @@ public:
     
 protected:
     void    _loadWords();
+    void    _subsChars(string & origString){
+        
+        static charSubstitution chars[]={ {"Ã ","\xE0"}, {"Ã¡","\xE1"}, {"Ã¢","\xE2"}, {"Ã£","\xE3"}, {"Ã¤","\xE4"}, {"Ã¦","\xE6"}, {"Ã²","\xF2"},{"Ã³","\xF3"}, {"Ã´","\xF4"}, {"Ãµ","\xF5"}, {"Ã¶","\xF6"}, {"Ã¹","\xF9"}, {"Ãº","\xFA"}, {"Ã»","\xFB"}, {"Ã¼","\xFC"}, {"Ã¨","\xE8"}, {"Ã©","\xE9"}, {"Ãª","\xEA"}, {"Ã«","\xEB"}, {"Ã¬","\xEC"}, {"Ã­","\xED"}, {"Ã®","\xEE"}, {"Ã¯","\xEF"}, {"Ã§","\xE7"}, {"Ã‡","\xC7"} };
+        
+        for(int i=0; i<24; i++){
+            while(origString.find(chars[i].character) !=string::npos){
+                origString = origString.substr(0,origString.find(chars[i].character)) + chars[i].code + origString.substr(origString.find(chars[i].character)+2);
+            }
+        };
+    }
 
     void    _trimLineSpaces();
     float   _getWidthOfWords();
@@ -85,7 +135,7 @@ protected:
     vector<wordBlock>   words;
     vector<lineBlock>   lines;
     wordBlock           blankSpaceWord;
-    ofTrueTypeFont      *font;
+    textFont            font;
     
     horizontalAlignment hAlignment;
     verticalAlignment   vAlignment;

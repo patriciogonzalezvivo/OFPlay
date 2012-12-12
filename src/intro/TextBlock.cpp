@@ -20,26 +20,27 @@
 #include "TextBlock.h"
 
 TextBlock::TextBlock(){
-    font = NULL;
-    
     x = 0;
     y = 0;
     width = ofGetWidth();
     height = ofGetHeight();
 
-    hAlignment  =   OF_TEXT_ALIGN_LEFT;
-    vAlignment  =   OF_TEXT_ALIGN_TOP; 
+    rawText = "";
+    
+    hAlignment  =   OF_TEXT_ALIGN_CENTER;
+    vAlignment  =   OF_TEXT_ALIGN_MIDDLE;
 }
 
-void TextBlock::linkFont(ofTrueTypeFont *_font){
-    font = _font;
+void TextBlock::loadFont(string _fontLocation, float _fontSize, int _dpi){
+    font.loadFont(_fontLocation, _fontSize, true, true);
+    font.setGlobalDpi(_dpi);
     
     //Set up the blank space word
     //
     blankSpaceWord.rawWord = " ";
-    blankSpaceWord.width   = font->stringWidth ("x");
-    blankSpaceWord.height  = font->stringHeight("i");
-}
+    blankSpaceWord.width   = font.stringWidth ("x");
+    blankSpaceWord.height  = font.stringHeight("i");
+};
 
 void TextBlock::setAlignment(horizontalAlignment _hAlignment , verticalAlignment _vAlignment){
     hAlignment = _hAlignment;
@@ -52,8 +53,29 @@ void TextBlock::setText(string _inputText){
     
     //  Process words extractint width in order to arrange the lines in the specify format
     //
+    _subsChars(rawText);
     _loadWords();
     
+    _wrapTextX(width);
+}
+
+void TextBlock::setText(vector<string> _inputText){
+    for (int i = 0; i < _inputText.size(); i++){
+        appendText( _inputText[i] );
+    }
+}
+
+void TextBlock::appendText(string _inputText){
+    
+    if ( rawText == "" ){
+        rawText = _inputText;
+    } else {
+        string newLine = " NEWLINE " + _inputText;
+        rawText.append(newLine);
+    }
+
+    _subsChars(rawText);
+    _loadWords();
     _wrapTextX(width);
 }
 
@@ -98,10 +120,10 @@ void TextBlock::draw(){
                     currentWordID = lines[l].wordsID[w];
                     
                     drawX = x + currX;
-                    drawY = yAlig + (font->getLineHeight() * (l + 1));
+                    drawY = yAlig + (font.getLineHeight() * (l + 1));
                     
                     ofPushMatrix();
-                    font->drawString(words[currentWordID].rawWord.c_str(), drawX, drawY);
+                    font.drawString(words[currentWordID].rawWord.c_str(), drawX, drawY);
                     currX += words[currentWordID].width;
                     ofPopMatrix();
                     
@@ -125,14 +147,14 @@ void TextBlock::draw(){
                     currentWordID = lines[l].wordsID[w];
                     
                     drawX = -currX - words[currentWordID].width;
-                    drawY = font->getLineHeight() * (l + 1);
+                    drawY = font.getLineHeight() * (l + 1);
                     
                     ofPushMatrix();
                     
                     //Move to top left point using pre-scaled co-ordinates
                     ofTranslate(x + width, yAlig, 0.0f);
                     
-                    font->drawString(words[currentWordID].rawWord.c_str(), drawX, drawY);
+                    font.drawString(words[currentWordID].rawWord.c_str(), drawX, drawY);
                     currX += words[currentWordID].width;
                     
                     ofPopMatrix();
@@ -171,14 +193,14 @@ void TextBlock::draw(){
                     currentWordID = lines[l].wordsID[w];
                     
                     drawX = currX;
-                    drawY = font->getLineHeight() * (l + 1);
+                    drawY = font.getLineHeight() * (l + 1);
                     
                     ofPushMatrix();
                     //Move to top left point using pre-scaled co-ordinates
                     ofTranslate(x, yAlig, 0.0f);
                     
                     if (words[currentWordID].rawWord != " ") {
-                        font->drawString(words[currentWordID].rawWord.c_str(), drawX, drawY);
+                        font.drawString(words[currentWordID].rawWord.c_str(), drawX, drawY);
                         currX += words[currentWordID].width;
                     } else {
                         currX += pixelsPerSpace;
@@ -213,12 +235,12 @@ void TextBlock::draw(){
                     currentWordID = lines[l].wordsID[w];
                     
                     drawX = -(lineWidth / 2) + currX;
-                    drawY = font->getLineHeight() * (l + 1);
+                    drawY = font.getLineHeight() * (l + 1);
                     
                     ofPushMatrix();
                     //Move to central point using pre-scaled co-ordinates
                     ofTranslate(getCenter().x, yAlig, 0.0f);
-                    font->drawString(words[currentWordID].rawWord.c_str(), drawX, drawY);
+                    font.drawString(words[currentWordID].rawWord.c_str(), drawX, drawY);
                     currX += words[currentWordID].width;
                     ofPopMatrix();
                     
@@ -266,8 +288,15 @@ void TextBlock::_loadWords(){
     wordBlock tmpWord;
     for(int i = 0; i < tokens.size(); i++){
         tmpWord.rawWord = tokens.at(i);
-        tmpWord.width   = font->stringWidth(tmpWord.rawWord);
-        tmpWord.height  = font->stringHeight(tmpWord.rawWord);
+        
+        if ( "NEWLINE" == tmpWord.rawWord ){
+            tmpWord.rawWord = "";
+            tmpWord.width   = width;
+            tmpWord.height  = 0.0;//font.stringHeight(tmpWord.rawWord)*0.5;
+        } else {
+            tmpWord.width   = font.stringWidth(tmpWord.rawWord);
+            tmpWord.height  = font.stringHeight(tmpWord.rawWord);
+        }
         words.push_back(tmpWord);
         
         //  add spaces into the words vector if it is not the last word.
@@ -397,7 +426,7 @@ float TextBlock::getTextWidth(){
 
 float TextBlock::getTextHeight(){
     if (words.size() > 0) {
-        return font->getLineHeight() * lines.size();
+        return font.getLineHeight() * lines.size();
     }
     else return 0;
 }
