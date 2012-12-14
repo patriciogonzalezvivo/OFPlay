@@ -26,4 +26,4 @@ Borns as a Major Studio project after a [brief research](http://www.patriciogonz
 *	git integration for downloading suggested addons at demand
 
 ##Thanks
-Special thanks to Zachary Lieberman, Ted Byfield, Navit Keren, Kyle McDonnald and the 44 students that fill the forms of the [initial questionary for the research](http://www.patriciogonzalezvivo.com/blog/?p=821)
+Special thanks to Zachary Lieberman, Ted Byfield, Navit Keren, Kyle McDonnald, Quincy Bock and the 44 students that fill the forms of the [initial questionary for the research](http://www.patriciogonzalezvivo.com/blog/?p=821)
