@@ -20,6 +20,7 @@ public:
     froebelTab();
     
     void    addElement(string _title);
+    bool    checkMousePressed(ofPoint _mouse);
     
     int     size(){ return buttons.size(); }
     void    setElement( unsigned int _nLine);

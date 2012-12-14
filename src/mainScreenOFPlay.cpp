@@ -375,6 +375,7 @@ void mainScreenOFPlay::update(){
         projectName.y = ofLerp(projectName.y,prev.y + prev.height + defaultHeight*0.5,0.1);
         projectName.update();
         projectName.enable();
+        projectName.subInfo->setText("NEW PROJECT NAME");
         prev = projectName.getBoundingBox();
         
         platformsList.x = prev.x;
@@ -393,6 +394,7 @@ void mainScreenOFPlay::update(){
         projectName.y = ofLerp(projectName.y,prev.y + prev.height + defaultHeight*0.5,0.1);
         projectName.update();
         projectName.disable();
+        projectName.subInfo->setText("PROJECT TO BE UPDATE");
         prev = projectName.getBoundingBox();
         
         platformsList.x = prev.x;
@@ -410,11 +412,9 @@ void mainScreenOFPlay::update(){
         projectName.y = ofLerp(projectName.y,prev.y + prev.height + defaultHeight*0.5,0.1);
         projectName.update();
         projectName.disable();
+        projectName.subInfo->setText("PROJECT TO BE OPEN");
         prev = projectName.getBoundingBox();
-        
     }
-    
-    
     
     button.text = tab.getElementText();
     button.update();
@@ -515,6 +515,11 @@ void mainScreenOFPlay::mousePressed(ofPoint _mouse){
             system( path.c_str() );
         }
         
+    } else if (tab.checkMousePressed(_mouse)){
+        platformsList.bSelected = false;
+        addonsList.bSelected    = false;
+        projectPath.bSelected   = false;
+        projectName.bSelected   = false;
     } else {
         platformsList.bSelected = false;
         addonsList.bSelected    = false;

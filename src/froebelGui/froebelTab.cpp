@@ -75,6 +75,23 @@ void froebelTab::setElement( unsigned int _nElement){
     }
 }
 
+bool froebelTab::checkMousePressed(ofPoint _mouse){
+    bool rta = false;
+    
+    _mouse.x -= x+width*0.5;
+    _mouse.y -= y+height;
+    
+    for(int i = 0; i < buttons.size(); i++){
+        if (buttons[i].checkMousePressed(_mouse)){
+            rta = true;
+            setElement(i);
+            break;
+        }
+    }
+    
+    return rta;
+}
+
 void froebelTab::update(){
     
     if ( buttons.size() > 0 ){

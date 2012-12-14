@@ -2,14 +2,10 @@
 
 This is a modify version of [Zachary Lieberman's Project Generator](https://github.com/ofZach/projectGeneratorSimple) to be very playful and intuitive for beginners.
 
+![intor](https://raw.github.com/patriciogonzalezvivo/OFPlay/master/ofplay_intro.png)
 ![main](https://raw.github.com/patriciogonzalezvivo/OFPlay/master/ofplay_main.png)
 
 Borns as a Major Studio project after a [brief research](http://www.patriciogonzalezvivo.com/blog/?p=821) exploring the difficult learning process of openFrameworks.
-
-The aesthetic have been delivery chosen to reinforce the metaphor of openFrameworks as a kit of building blocks. For that I was inspired on Froebel's gifts toys.
-
-![froebel](https://raw.github.com/patriciogonzalezvivo/OFPlay/master/froebelGuiRef.png)
-
 
 ##Features
 *	Guides new users on the Xcode installation
@@ -22,8 +18,8 @@ The aesthetic have been delivery chosen to reinforce the metaphor of openFramewo
 ##Download Compiled Version
 
 
-* 	[Version 0.3 Beta - MacSO 10.6 or > ](https://dl.dropbox.com/u/335522/OFPlay-0.3.zip) 
-* 	[Version 0.2 - MacSO 10.6 or >](https://dl.dropbox.com/u/335522/OFPlay-0.2.zip)
+* 	[Beta Version 0.4 - MacSO 10.6 or > ](https://dl.dropbox.com/u/335522/OFPlay-0.4.zip)
+
 
 ##TODO
 *	windows and linux implementation
