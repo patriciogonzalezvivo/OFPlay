@@ -26,4 +26,5 @@
 #include "froebelListBox.h"
 #include "froebelFolderElement.h"
 
+#include "froebelTab.h"
 #endif

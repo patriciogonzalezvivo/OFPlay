@@ -35,7 +35,7 @@ froebelTextBox::froebelTextBox(){
     
     //  STATE_HOVER
     //
-    fgColor.addState(4);
+    fgColor.addState(9);
     bgColor.addState(5);
     
     //  STATE_ACTIVE
@@ -74,14 +74,14 @@ void froebelTextBox::setSubInfo(string _comment){
         subInfo->bLeftAlign = false;
         subInfo->setPrefix("<< ");
         subInfo->setText( _comment );
-        subInfo->setSizeAndShapes(size,1);
+        subInfo->setSizeAndShapes(size);
         subInfo->fgColor.clear();
         subInfo->fgColor.addState(5);
-        subInfo->fgColor.addState(7);
+        subInfo->fgColor.addState(5);
         subInfo->fgColor.addState(5);
         subInfo->bgColor.clear();
         subInfo->bgColor.addState(0);
-        subInfo->bgColor.addState(2);
+        subInfo->bgColor.addState(1);
         subInfo->bgColor.addState(0);
     } else {
         subInfo->setText( _comment );

@@ -149,6 +149,8 @@ void testApp::keyPressed(int key){
         } else if ( key == OF_KEY_LEFT){
             textSeq.setPrevLine();
         }
+    } else {
+        mScreen->keyPressed(key);
     }
 }
 

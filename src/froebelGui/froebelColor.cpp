@@ -37,7 +37,7 @@ ofFloatColor froebelColor::getFromPalet( unsigned int _palletNum ){
 //    palette[7] = ofColor(233,88,43);
     
     palette[0] = ofColor(220);
-    palette[1] = ofColor(4, 49, 7);
+    palette[1] = ofColor(175);//ofColor(4, 49, 7);
     palette[2] = ofColor(220, 202, 185);
     palette[3] = ofColor(186, 1, 23);
     palette[4] = ofColor(247, 181, 55);
@@ -45,6 +45,7 @@ ofFloatColor froebelColor::getFromPalet( unsigned int _palletNum ){
     palette[6] = ofColor(62, 2, 35);
     palette[7] = ofColor(193, 66, 11);
     palette[8] = ofColor(0,0);
+    palette[8] = ofColor(255);
     
     if (_palletNum < 8){
         color = palette[_palletNum];

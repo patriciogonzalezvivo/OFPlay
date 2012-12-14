@@ -18,7 +18,7 @@ froebelContainer::froebelContainer(){
     size            = 30;
     
     slider.width    = 5;
-    sliderColor.setFromPalet(7);
+    sliderColor.setFromPalet(5);
     
     bEnable         = false;
     bCheckList      = false;

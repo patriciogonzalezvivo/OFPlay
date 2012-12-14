@@ -17,7 +17,7 @@ void mainScreenOFPlay::setup( string _ofRoot, string _defaultPath, string _name 
     
     ofRoot = _ofRoot;
     addonsPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, "addons"));
-    string sketchPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, _defaultPath));
+    sketchPath = ofFilePath::getAbsolutePath(ofFilePath::join( ofRoot, _defaultPath));
     
     convertWindowsToUnixPath( ofRoot );
     convertWindowsToUnixPath( addonsPath );
@@ -29,10 +29,16 @@ void mainScreenOFPlay::setup( string _ofRoot, string _defaultPath, string _name 
     logo.loadImage("OFPlay.png");
     font.loadFont("Inconsolata.otf", 12, true,false,false,0.5,90);
     
+    tab.set(0,0,ofGetWidth(),defaultHeight*2);
+    tab.font.loadFont("Inconsolata.otf", 18, true,false,false,0.5,90);
+    tab.addElement("MAKE");
+    tab.addElement("UPDATE");
+    tab.addElement("OPEN");
+    
     //  PATH:
     //
     projectPath.x = defaultHeight;
-    projectPath.y = defaultHeight;
+    projectPath.y = tab.height + defaultHeight;
     projectPath.font = &font;
     projectPath.setSizeAndShapes(defaultHeight, 3);
     projectPath.setText( sketchPath );
@@ -107,23 +113,16 @@ void mainScreenOFPlay::setup( string _ofRoot, string _defaultPath, string _name 
     addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     loadAddons();
     
-    generateButton.setShape(0,132);
-    generateButton.color.set(0.0,0.0);
-    generateButton.font = &font;
-    generateButton.text = "GENERATE";
-    generateButton.textColor.addState(4);
-    generateButton.textColor.addState(5);
-    generateButton.textColor.addState(3);
+    button.setShape(2, 76);
+    button.color.set(0.0,0.0);
+    button.font = &font;
+    button.text = "NONE";
+    button.textColor.addState(3);
+    button.textColor.addState(2);
+    button.textColor.addState(4);
     
-    openButton.setShape(2, 132);
-    openButton.color.set(0.0,0.0);
-    openButton.font = &font;
-    openButton.text =  "OPEN";
-    openButton.textColor.addState(3);
-    openButton.textColor.addState(2);
-    openButton.textColor.addState(4);
-    
-    checkProjectState();
+//    checkProjectState();
+    tab.setElement(0);
 }
 
 void mainScreenOFPlay::loadAddons(){
@@ -159,12 +158,12 @@ void mainScreenOFPlay::loadFolder(string _path){
         newFolder->setPrefix("");
         newFolder->fgColor.clear();
         newFolder->fgColor.addState(5);
-        newFolder->fgColor.addState(7);
-        newFolder->fgColor.addState(4);
+        newFolder->fgColor.addState(5);
+        newFolder->fgColor.addState(9);
         newFolder->bgColor.clear();
         newFolder->bgColor.addState(0);
-        newFolder->bgColor.addState(2);
-        newFolder->bgColor.addState(7);
+        newFolder->bgColor.addState(0);
+        newFolder->bgColor.addState(5);
         newFolder->containerBox.size = defaultHeight;
         
         newFolder->father = &projectPath.containerBox;
@@ -184,23 +183,24 @@ void mainScreenOFPlay::pathChange(string &_path){
     addonsList.containerBox.reset();
     addonsList.bChange = true;
     
-    cout << completePath << endl;
-    if ( isProjectFolder(completePath) ){
-        loadProject( completePath );
-    } else {
-        projectPath.containerBox.reset();
-        projectPath.setText(ofRoot + projectPath.getText());
-        projectName.setText("newProject");
+    if (tab.getElementText() == "UPDATE" || tab.getElementText() == "OPEN"){
+        if ( isProjectFolder(completePath) ){
+            loadProject( completePath );
+        } else {
+            projectPath.containerBox.reset();
+            projectPath.setText(ofRoot + projectPath.getText());
+            projectName.setText("newProject");
+        }
     }
     
-    checkProjectState();
+//    checkProjectState();
 }
 
 void mainScreenOFPlay::nameChange(string &_path){
     addonsList.containerBox.reset();
     addonsList.bChange = true;
     
-    checkProjectState();
+//    checkProjectState();
 }
 
 void mainScreenOFPlay::loadProject(string _path){
@@ -296,19 +296,6 @@ void mainScreenOFPlay::setStatus(string newStatus){
     statusSetTime = ofGetElapsedTimef();
 }
 
-void mainScreenOFPlay::checkProjectState(){
-    openButton.bEnable = isProjectGenerated(projectPath.getText(),projectName.getText());
-    string projectPathString = projectPath.getText()+"/"+projectName.getText();
-    ofDirectory projectPath( projectPathString );
-    
-    if (openButton.bEnable || projectPath.exists()){
-        projectName.subInfo->setText("PROJECT NAME");
-    } else {
-        projectName.subInfo->setText("NEW PROJECT NAME");
-        
-    }
-}
-
 void mainScreenOFPlay::generateProject(){
     
     vector <int> targetsToMake;
@@ -366,29 +353,57 @@ void mainScreenOFPlay::generateProject(){
         setStatus("generated: " + projectPath.getText() + "/" + projectName.getText() + " for " + platformsList.containerBox.getSelected()[i]);
 	}
     
-    checkProjectState();
+//    checkProjectState();
     printf("done with project generation \n");
 }
 
 void mainScreenOFPlay::update(){
+    tab.x = 0;
+    tab.y = 0;
+    tab.update();
+    
+    projectPath.x = defaultHeight;
+    projectPath.y = tab.y + tab.height + defaultHeight;
     projectPath.update();
+    
     ofRectangle prev = projectPath.getBoundingBox();
-    projectName.x = prev.x;
-    projectName.y = prev.y + prev.height + defaultHeight*0.5;
-    projectName.update();
     
-    prev = projectName.getBoundingBox();
-    platformsList.x = prev.x;
-    platformsList.y = prev.y + prev.height + defaultHeight*0.5;
-    platformsList.update();
+    if ( tab.getElementText() == "MAKE"){
+        projectPath.subInfo->setText("CHOOSE A DIRECTORY");
+        
+        projectName.x = prev.x;
+        projectName.y = ofLerp(projectName.y,prev.y + prev.height + defaultHeight*0.5,0.1);
+        projectName.update();
+        prev = projectName.getBoundingBox();
+        
+        platformsList.x = prev.x;
+        platformsList.y = ofLerp(platformsList.y, prev.y + prev.height + defaultHeight*0.5,0.1);
+        platformsList.update();
+        
+        prev = platformsList.getBoundingBox();
+        addonsList.x = prev.x;
+        addonsList.y = ofLerp(addonsList.y, prev.y + prev.height + defaultHeight*0.5,0.1);
+        addonsList.update();
+        
+    } else if ( tab.getElementText() == "UPDATE"){
+        projectPath.subInfo->setText("CHOSE A PROJECT FOLDER OR DRAG ONE");
+        
+        platformsList.x = prev.x;
+        platformsList.y = ofLerp(platformsList.y, prev.y + prev.height + defaultHeight*0.5,0.1);
+        platformsList.update();
+        
+        prev = platformsList.getBoundingBox();
+        addonsList.x = prev.x;
+        addonsList.y = ofLerp(addonsList.y, prev.y + prev.height + defaultHeight*0.5,0.1);
+        addonsList.update();
+    } else {
+        projectPath.subInfo->setText("PICK A PROJECT");
+    }
     
-    prev = platformsList.getBoundingBox();
-    addonsList.x = prev.x;
-    addonsList.y = prev.y + prev.height + defaultHeight*0.5;
-    addonsList.update();
     
-    generateButton.update();
-    openButton.update();
+    
+    button.text = tab.getElementText();
+    button.update();
     
     float diff = ofGetElapsedTimef()- statusSetTime;
     if (diff > 3){
@@ -397,15 +412,22 @@ void mainScreenOFPlay::update(){
 }
 
 void mainScreenOFPlay::draw(){
-    projectName.draw();
+    tab.draw();
+    
     projectPath.draw();
-    addonsList.draw();
-    platformsList.draw();
+    
+    if ( tab.getElementText() == "MAKE"){
+    projectName.draw();
+    }
+    
+    if ( tab.getElementText() == "MAKE" || tab.getElementText() == "UPDATE"){
+        addonsList.draw();
+        platformsList.draw();
+    }
     
     ofSetColor(255);
     logo.draw(ofGetWidth() - defaultHeight - logo.getWidth(),ofGetHeight() - defaultHeight - logo.getHeight());
-    generateButton.draw();
-    openButton.draw();
+    button.draw();
     
     ofFill();
     ofSetColor(0 + 220 * (1-statusEnergy),0 + 220 * (1-statusEnergy),0 + 220 * (1-statusEnergy));
@@ -414,30 +436,47 @@ void mainScreenOFPlay::draw(){
     ofDrawBitmapString(status, 10,ofGetHeight()-8);
 }
 
+void mainScreenOFPlay::keyPressed(int key){
+    if ( key == OF_KEY_RIGHT){
+        if (tab.getElementText() == "MAKE"){
+            string completePath = projectPath.getText() + "/" + projectName.getText();
+            projectPath.setText(completePath);
+        }
+        tab.setNext();
+    } else if ( key == OF_KEY_LEFT){
+        tab.setPrev();
+    }
+}
+
 void mainScreenOFPlay::mousePressed(ofPoint _mouse){
     if ( projectPath.checkMousePressed( _mouse ) ){
-        /*
-         string command = "";
-         ofDirectory dir(ofFilePath::join(getOFRoot(),defaultLoc));
-         
-         if (!dir.exists()){
-         dir.create();
-         }
-         
-         #ifdef TARGET_WIN32
-         ofFileDialogResult res = ofSystemLoadDialog("please select sketch folder", true, windowsFromUnixPath(dir.path()));
-         #else
-         ofFileDialogResult res = ofSystemLoadDialog("please select sketch folder", true, dir.path());
-         #endif
-         if (res.bSuccess){
-         string result = res.filePath;
-         convertWindowsToUnixPath(result);
-         projectPath.setText(result);
-         setStatus("path set to: " + result);
-         }
-         */
         
-        projectPath.bSelected   = true;
+        if (tab.getElementText() == "MAKE"){
+            projectPath.bSelected = false;
+            
+            string command = "";
+            ofDirectory dir(ofFilePath::join(getOFRoot(),sketchPath));
+            
+            if (!dir.exists()){
+                dir.create();
+            }
+            
+#ifdef TARGET_WIN32
+            ofFileDialogResult res = ofSystemLoadDialog("please select sketch folder", true, windowsFromUnixPath(dir.path()));
+#else
+            ofFileDialogResult res = ofSystemLoadDialog("please select sketch folder", true, dir.path());
+#endif
+            if (res.bSuccess){
+                string result = res.filePath;
+                convertWindowsToUnixPath(result);
+                projectPath.setText(result);
+                setStatus("path set to: " + result);
+            }
+        } else {
+            projectPath.bSelected   = true;
+        }
+        
+        
         projectName.bSelected   = false;
         platformsList.bSelected = false;
         addonsList.bSelected    = false;
@@ -452,20 +491,18 @@ void mainScreenOFPlay::mousePressed(ofPoint _mouse){
         projectName.bSelected   = false;
         platformsList.bSelected = true;
         addonsList.bSelected    = false;
-    } else if ( generateButton.checkMousePressed(_mouse)){
+    } else if ( button.checkMousePressed(_mouse)){
         projectPath.bSelected   = false;
         projectName.bSelected   = false;
         platformsList.bSelected = false;
         addonsList.bSelected    = false;
-        generateProject();
-    } else if ( openButton.checkMousePressed(_mouse)){
-        platformsList.bSelected = false;
-        addonsList.bSelected    = false;
-        projectPath.bSelected   = false;
-        projectName.bSelected   = false;
         
-        string path = "open " + projectPath.getText() + "/"+ projectName.getText() + "/" +  projectName.getText() + ".xcodeproj";
-        system( path.c_str() );
+        if (tab.getElementText() == "MAKE" || tab.getElementText() == "UPDATE"){
+            generateProject();
+        } else {
+            string path = "open " + projectPath.getText() + "/"+ projectName.getText() + "/" +  projectName.getText() + ".xcodeproj";
+            system( path.c_str() );
+        }
         
     } else {
         platformsList.bSelected = false;
@@ -476,17 +513,18 @@ void mainScreenOFPlay::mousePressed(ofPoint _mouse){
 }
 
 void mainScreenOFPlay::resized(){
-    projectName.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
+    tab.width = ofGetWidth();
+    
     projectPath.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
+    
+    projectName.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
+    
     platformsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     addonsList.subInfo->width = ofGetWidth() - defaultHeight * 2.0;
     
     addonsList.containerBox.maxHeight = ofGetHeight() - addonsList.y - defaultHeight*3.0;
     addonsList.containerBox.adjustShape();
     
-    generateButton.x = ofGetWidth() - defaultHeight - logo.getWidth() + generateButton.size*0.5 + 3;
-    generateButton.y = ofGetHeight() - defaultHeight - logo.getHeight() + generateButton.size*0.5 + 2;
-    
-    openButton.x = ofGetWidth() - defaultHeight - logo.getWidth()*0.535 + openButton.size;
-    openButton.y = ofGetHeight() - defaultHeight - logo.getHeight() + openButton.size*0.5 + 2;
+    button.x = ofGetWidth() - defaultHeight - logo.getWidth()*0.535 + button.size;
+    button.y = ofGetHeight() - defaultHeight - logo.getHeight() + button.size*0.5 + 2;
 }

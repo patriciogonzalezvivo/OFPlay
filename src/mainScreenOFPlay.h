@@ -23,6 +23,7 @@ public:
     void    update();
     void    draw();
 
+    void    keyPressed(int key);
     void    mousePressed(ofPoint _mouse);
     void    resized();
 
@@ -31,18 +32,20 @@ public:
     ofImage         logo;
     ofTrueTypeFont  font;
     float           defaultHeight;
+    froebelTab      tab;
 
     //  Basic Paths
     //
     string          ofRoot;
     string          addonsPath;
+    string          sketchPath;
 
     //  Project Generator
     //
     void            loadAddons();
     void            loadFolder(string _path);
     void            loadProject(string _path);
-    void            checkProjectState();
+//    void            checkProjectState();
 
     void            pathChange(string &_path);
     void            nameChange(string &_path);
@@ -55,8 +58,7 @@ public:
     froebelListBox  platformsList;
     froebelListBox  addonsList;
 
-    froebelShapeButton  generateButton;
-    froebelShapeButton  openButton;
+    froebelShapeButton  button;
 
     baseProject     *project;
 

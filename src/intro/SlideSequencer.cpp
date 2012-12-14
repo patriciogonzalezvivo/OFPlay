@@ -32,7 +32,7 @@ bool SlideSequencer::loadSequence(string _xmlFile){
         slides.clear();
         buttons.clear();
         
-        float buttonSize = 20;
+        float buttonSize = 15;
         
         XML.pushTag("sequence");
         
@@ -97,9 +97,9 @@ bool SlideSequencer::loadSequence(string _xmlFile){
             //
             froebelShapeButton newButton;
             newButton.setShape(0, buttonSize);
-            newButton.color.addState(2);
+            newButton.color.addState(ofColor(175));
             newButton.color.addState(0);
-            newButton.color.addState(7);
+            newButton.color.addState(5);
             newButton.textColor.set(0.0,0.0);
             buttons.push_back(newButton);
             

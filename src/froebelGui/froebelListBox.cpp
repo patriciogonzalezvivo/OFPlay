@@ -57,12 +57,12 @@ void froebelListBox::addElement(string _value, bool _defVal, int _iconShape, int
     
     newElement->fgColor.clear();
     newElement->fgColor.addState(5);
-    newElement->fgColor.addState(7);
-    newElement->fgColor.addState(4);
+    newElement->fgColor.addState(5);
+    newElement->fgColor.addState(9);
     newElement->bgColor.clear();
     newElement->bgColor.addState(0);
-    newElement->bgColor.addState(2);
-    newElement->bgColor.addState(7);
+    newElement->bgColor.addState(1);
+    newElement->bgColor.addState(5);
     
     newElement->update();
 

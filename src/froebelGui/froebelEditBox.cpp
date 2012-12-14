@@ -38,7 +38,7 @@ froebelEditBox::froebelEditBox(){
     
     //  STATE_HOVER
     //
-    fgColor.addState(4);
+    fgColor.addState(9);
     bgColor.addState(5);
     
     //  STATE_ACTIVE

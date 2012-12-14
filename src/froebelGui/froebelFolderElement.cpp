@@ -129,12 +129,12 @@ bool froebelFolderElement::checkMousePressed(ofPoint _mouse){
                         
                         newElement->fgColor.clear();
                         newElement->fgColor.addState(5);
-                        newElement->fgColor.addState(7);
-                        newElement->fgColor.addState(4);
+                        newElement->fgColor.addState(5);
+                        newElement->fgColor.addState(9);
                         newElement->bgColor.clear();
                         newElement->bgColor.addState(0);
-                        newElement->bgColor.addState(2);
-                        newElement->bgColor.addState(7);
+                        newElement->bgColor.addState(1);
+                        newElement->bgColor.addState(5);
                         
                         newElement->update();
                     
@@ -148,12 +148,12 @@ bool froebelFolderElement::checkMousePressed(ofPoint _mouse){
                         newFolder->rootPath = rootPath + text ;
                         newFolder->fgColor.clear();
                         newFolder->fgColor.addState(5);
-                        newFolder->fgColor.addState(7);
-                        newFolder->fgColor.addState(4);
+                        newFolder->fgColor.addState(5);
+                        newFolder->fgColor.addState(9);
                         newFolder->bgColor.clear();
                         newFolder->bgColor.addState(0);
-                        newFolder->bgColor.addState(2);
-                        newFolder->bgColor.addState(7);
+                        newFolder->bgColor.addState(1);
+                        newFolder->bgColor.addState(5);
                         newFolder->containerBox.size = size;
                         
                         newFolder->father = &containerBox;

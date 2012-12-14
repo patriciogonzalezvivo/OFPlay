@@ -44,9 +44,6 @@ public:
     
     vector<froebelShapeButton>  buttons;
     
-    froebelColor    elemColor;
-    froebelColor    textColor;
-    
     bool            bFinish;
 
 protected:
@@ -54,7 +51,9 @@ protected:
     
     ofImage             image;
     string              imagePath;
+    
     TextBlock           *text;
+    froebelColor    textColor;
     
     verticalAlignment   defaultVertAlign;
     horizontalAlignment defaultHoriAlign;
