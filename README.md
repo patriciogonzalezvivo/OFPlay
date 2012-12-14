@@ -21,7 +21,9 @@ The aesthetic have been delivery chosen to reinforce the metaphor of openFramewo
 
 ##Download Compiled Version
 
-* 	[OSX 10.6 or > ](https://dl.dropbox.com/u/335522/OFPlay-0.2.zip)
+
+* 	[Version 0.3 Beta - MacSO 10.6 or > ](https://dl.dropbox.com/u/335522/OFPlay-0.3.zip) 
+* 	[Version 0.2 - MacSO 10.6 or >](https://dl.dropbox.com/u/335522/OFPlay-0.2.zip)
 
 ##TODO
 *	windows and linux implementation

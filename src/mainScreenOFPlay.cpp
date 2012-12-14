@@ -374,6 +374,7 @@ void mainScreenOFPlay::update(){
         projectName.x = prev.x;
         projectName.y = ofLerp(projectName.y,prev.y + prev.height + defaultHeight*0.5,0.1);
         projectName.update();
+        projectName.enable();
         prev = projectName.getBoundingBox();
         
         platformsList.x = prev.x;
@@ -388,6 +389,12 @@ void mainScreenOFPlay::update(){
     } else if ( tab.getElementText() == "UPDATE"){
         projectPath.subInfo->setText("CHOSE A PROJECT FOLDER OR DRAG ONE");
         
+        projectName.x = prev.x;
+        projectName.y = ofLerp(projectName.y,prev.y + prev.height + defaultHeight*0.5,0.1);
+        projectName.update();
+        projectName.disable();
+        prev = projectName.getBoundingBox();
+        
         platformsList.x = prev.x;
         platformsList.y = ofLerp(platformsList.y, prev.y + prev.height + defaultHeight*0.5,0.1);
         platformsList.update();
@@ -398,6 +405,13 @@ void mainScreenOFPlay::update(){
         addonsList.update();
     } else {
         projectPath.subInfo->setText("PICK A PROJECT");
+        
+        projectName.x = prev.x;
+        projectName.y = ofLerp(projectName.y,prev.y + prev.height + defaultHeight*0.5,0.1);
+        projectName.update();
+        projectName.disable();
+        prev = projectName.getBoundingBox();
+        
     }
     
     
@@ -415,10 +429,7 @@ void mainScreenOFPlay::draw(){
     tab.draw();
     
     projectPath.draw();
-    
-    if ( tab.getElementText() == "MAKE"){
     projectName.draw();
-    }
     
     if ( tab.getElementText() == "MAKE" || tab.getElementText() == "UPDATE"){
         addonsList.draw();
@@ -439,8 +450,8 @@ void mainScreenOFPlay::draw(){
 void mainScreenOFPlay::keyPressed(int key){
     if ( key == OF_KEY_RIGHT){
         if (tab.getElementText() == "MAKE"){
-            string completePath = projectPath.getText() + "/" + projectName.getText();
-            projectPath.setText(completePath);
+            //string completePath = projectPath.getText() + "/" + projectName.getText();
+            //projectPath.setText(completePath);
         }
         tab.setNext();
     } else if ( key == OF_KEY_LEFT){
