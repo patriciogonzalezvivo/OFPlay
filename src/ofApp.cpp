@@ -1,4 +1,4 @@
-#include "testApp.h"
+#include "ofApp.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -13,10 +13,6 @@ void testApp::setup(){
     mScreen = NULL;
     logo.loadImage("OFPlay.png");
     textSeq.set(0,0,900,450);
-    
-    //  Get addons list
-    //
-    ofSaveURLTo("http://www.patriciogonzalezvivo.com/ofplay.xml","ofplay.xml");
     
     //  First time??
     //

@@ -35,7 +35,7 @@ bool CBWinProject::createProjectFile(){
         // let's make it windows friendly:
         for(int i = 0; i < relRootWindows.length(); i++) {
             if( relRootWindows[i] == '/' )
-                relRootWindows[i] = '\\'; 
+                relRootWindows[i] = '\\';
         }
 
         findandreplaceInTexfile(workspace, "../../../", relRoot);

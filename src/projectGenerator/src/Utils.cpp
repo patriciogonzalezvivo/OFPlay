@@ -610,15 +610,15 @@ bool isProjectFolder(string &_projFolder){
     //
     ofFile test;
     bool    isMainCpp = test.open(searchFor+"/main.cpp");
-    bool    isTestAppH = test.open(searchFor+"/testApp.h");
-    bool    isTestAppCpp = test.open(searchFor+"/testApp.cpp");
+    bool    isTestAppH = test.open(searchFor+"/testApp.h") || test.open(searchFor+"/ofApp.h");
+    bool    isTestAppCpp = test.open(searchFor+"/testApp.cpp") || test.open(searchFor+"/ofApp.cpp");
     
     if ( isTestAppH ){
         if ( isMainCpp && isTestAppCpp ){
             return true;
         } else {
             isMainCpp = test.open(searchFor+"/main.mm");
-            isTestAppCpp = test.open(searchFor+"/testApp.mm");
+            isTestAppCpp = test.open(searchFor+"/testApp.mm") || test.open(searchFor+"/ofApp.mm");
             if ( isMainCpp && isTestAppCpp ){
                 return true;
             } else {

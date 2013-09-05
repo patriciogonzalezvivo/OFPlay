@@ -3,34 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D1CBA9716795E1D0030E4A7 /* froebelTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D1CBA9516795E1C0030E4A7 /* froebelTab.cpp */; };
-		3D3958B116791FE400B3FC40 /* SlideSequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3958AD16791FE400B3FC40 /* SlideSequencer.cpp */; };
-		3D3958B216791FE400B3FC40 /* TextBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3958AF16791FE400B3FC40 /* TextBlock.cpp */; };
-		3D3F8CF2166FC905003DFAC3 /* froebelContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3F8CF0166FC905003DFAC3 /* froebelContainer.cpp */; };
-		3D3F8CF516700F68003DFAC3 /* froebelFolderElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3F8CF316700F67003DFAC3 /* froebelFolderElement.cpp */; };
-		3D3F8DA51672412D003DFAC3 /* froebelShapeButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3F8DA31672412C003DFAC3 /* froebelShapeButton.cpp */; };
-		3D3F8DD01672817F003DFAC3 /* mainScreenOFPlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D3F8DCE1672817F003DFAC3 /* mainScreenOFPlay.cpp */; };
-		3DAF84BC166E2E32003BBA69 /* froebelColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84B1166E2E32003BBA69 /* froebelColor.cpp */; };
-		3DAF84BD166E2E32003BBA69 /* froebelEditBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84B3166E2E32003BBA69 /* froebelEditBox.cpp */; };
-		3DAF84BE166E2E32003BBA69 /* froebelListBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84B6166E2E32003BBA69 /* froebelListBox.cpp */; };
-		3DAF84BF166E2E32003BBA69 /* froebelShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84B8166E2E32003BBA69 /* froebelShape.cpp */; };
-		3DAF84C0166E2E32003BBA69 /* froebelTextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84BA166E2E32003BBA69 /* froebelTextBox.cpp */; };
-		3DAF84DA166E2EB9003BBA69 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84C9166E2EB9003BBA69 /* pugixml.cpp */; };
-		3DAF84DB166E2EB9003BBA69 /* baseProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84CC166E2EB9003BBA69 /* baseProject.cpp */; };
-		3DAF84DC166E2EB9003BBA69 /* CBLinuxProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84CE166E2EB9003BBA69 /* CBLinuxProject.cpp */; };
-		3DAF84DD166E2EB9003BBA69 /* CBWinProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84D0166E2EB9003BBA69 /* CBWinProject.cpp */; };
-		3DAF84DE166E2EB9003BBA69 /* ofAddon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84D2166E2EB9003BBA69 /* ofAddon.cpp */; };
-		3DAF84DF166E2EB9003BBA69 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84D4166E2EB9003BBA69 /* Utils.cpp */; };
-		3DAF84E0166E2EB9003BBA69 /* visualStudioProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84D6166E2EB9003BBA69 /* visualStudioProject.cpp */; };
-		3DAF84E1166E2EB9003BBA69 /* xcodeProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF84D8166E2EB9003BBA69 /* xcodeProject.cpp */; };
+		10773daa07a492118deba6c36bdf2d1b /* froebelTextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840b87d12bb3402e8c20050aa90f29fd /* froebelTextBox.cpp */; };
+		275b85fe4892d536d955ed0fa708d166 /* readme.txt in Sources */ = {isa = PBXBuildFile; fileRef = c52d3fd302ee1f852f7cddb310b5f4a9 /* readme.txt */; };
+		2ab409b9f1108ac144a9bc9d42cd98dd /* CBLinuxProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = f9ac62e20dc5f1a4bed88a718475d436 /* CBLinuxProject.cpp */; };
+		476b1afbb68daed7078f949768a58e69 /* froebelColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = d293147ba8c2022a509ee9e89fa2a801 /* froebelColor.cpp */; };
 		5a4349e9754d6fa14c0f2a3a1abc30b6 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = fc5da1c87211d4f6377da7199d8c5a1e /* tinyxmlparser.cpp */; };
+		5ce8223c9807cccece3c9d3c7450b68a /* froebelShapeButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = d5211f1fb0df838f7460c9e26aa41d9b /* froebelShapeButton.cpp */; };
+		5dd443cf7485afee12a75ba571c2a346 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = c4bc05349055ecd1f9096676b3a4cec8 /* Utils.cpp */; };
 		63b57ac5bf4ef088491e0317dbb2ecaa /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50df87d612c5aae17aafa6c02c6bc570 /* ofxXmlSettings.cpp */; };
+		9122186e124c6fa9f8ec25945cfbb64a /* froebelFolderElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4a8806113b9c4b89c6a013c7f052182f /* froebelFolderElement.cpp */; };
+		9225977ac95ba799da25db3631d99b21 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = b22772b379e7e26a46e88a423119038b /* pugixml.cpp */; };
 		933a2227713c720ceff80fd967d0a8ee /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2b40eda85beb63e46785bc299a638898 /* tinyxml.cpp */; };
+		9948400a7c65373c21d5149c1ad02e0f /* froebelListBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70a1757acfb52b0562a2bdb9273aebde /* froebelListBox.cpp */; };
 		9d44dc88ef9e7991b4a09951e2e4769f /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 832bdc407620cdba568b713d2252c43c /* tinyxmlerror.cpp */; };
+		9f2d47e0713ab1a818cfc597dccf025a /* froebelContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55152dcc00ab33b1b6fd0616d1abdb70 /* froebelContainer.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -43,7 +33,7 @@
 		E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9790E8CC7DD009D7055 /* OpenGL.framework */; };
 		E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
-		E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */; };
+		E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
 		E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424410CC5A17004149E2 /* AppKit.framework */; };
 		E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424510CC5A17004149E2 /* Cocoa.framework */; };
 		E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424610CC5A17004149E2 /* IOKit.framework */; };
@@ -51,6 +41,17 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
+		a8ea0933faa7e2b219f79fa04b73b79b /* xcodeProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1bf1dc806bc533fb61e926d825cc20c9 /* xcodeProject.cpp */; };
+		b1c960d1889cb00b68fd22b18387bcab /* froebelShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 561d5c138cfec5bdd2909fbf11c38828 /* froebelShape.cpp */; };
+		bf8f332a50ed9330c509db24f3b9016d /* TextBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = e8ad508d8b13628d3505ec0944145721 /* TextBlock.cpp */; };
+		c4727d85cb5fcbe1798c014cad97ac02 /* SlideSequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = a401c76786787779dc0f4275e383cc7e /* SlideSequencer.cpp */; };
+		cb3caa3b2716a3bceeafdb9b398f5a7a /* baseProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42596bbee1f1a848765d7ffa70d6d062 /* baseProject.cpp */; };
+		dc64ca6cd0819d37de342172d57250cd /* ofAddon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 630957091111df1c34d21c52583e1c3f /* ofAddon.cpp */; };
+		dcb63524b11db1e547c5acc335c93a7a /* CBWinProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = f186968e0ccf9803ff5122874ea397f5 /* CBWinProject.cpp */; };
+		dde541bf276076dbf6326128f3df3083 /* froebelEditBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8cd2da95f59689df4f2df628ae271106 /* froebelEditBox.cpp */; };
+		e93a2eab6d74d2ff7d19775b498f156f /* froebelTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = b3ef1384bcc32325a0d64359d0aac0fa /* froebelTab.cpp */; };
+		f2876e6f3ed22f37e6c0c69cb0065037 /* visualStudioProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = cbf96d15c8cbbd433f824933d628bffb /* visualStudioProject.cpp */; };
+		f2b98ed66d73d33e0e5b67750c18cdfe /* mainScreenOFPlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = a13396fd5c374ce293bee72f756f6428 /* mainScreenOFPlay.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,56 +86,35 @@
 
 /* Begin PBXFileReference section */
 		01dcc0911400f9acf5b65578af4ec8f9 /* ofxXmlSettings.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxXmlSettings.h; path = ../../../addons/ofxXmlSettings/src/ofxXmlSettings.h; sourceTree = SOURCE_ROOT; };
+		16ab902988298322d28153b3cd4b4e99 /* pugixml.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = pugixml.hpp; path = src/projectGenerator/libs/pugixml/src/pugixml.hpp; sourceTree = SOURCE_ROOT; };
+		1bf1dc806bc533fb61e926d825cc20c9 /* xcodeProject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = xcodeProject.cpp; path = src/projectGenerator/src/xcodeProject.cpp; sourceTree = SOURCE_ROOT; };
+		1c31b5bc5baae926f166705e28e51d26 /* projectGenerator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = projectGenerator.h; path = src/projectGenerator/src/projectGenerator.h; sourceTree = SOURCE_ROOT; };
 		2b40eda85beb63e46785bc299a638898 /* tinyxml.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxml.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxml.cpp; sourceTree = SOURCE_ROOT; };
-		3D1CBA9516795E1C0030E4A7 /* froebelTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelTab.cpp; sourceTree = "<group>"; };
-		3D1CBA9616795E1C0030E4A7 /* froebelTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelTab.h; sourceTree = "<group>"; };
-		3D3958AD16791FE400B3FC40 /* SlideSequencer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlideSequencer.cpp; sourceTree = "<group>"; };
-		3D3958AE16791FE400B3FC40 /* SlideSequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideSequencer.h; sourceTree = "<group>"; };
-		3D3958AF16791FE400B3FC40 /* TextBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextBlock.cpp; sourceTree = "<group>"; };
-		3D3958B016791FE400B3FC40 /* TextBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBlock.h; sourceTree = "<group>"; };
-		3D3F8CF0166FC905003DFAC3 /* froebelContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelContainer.cpp; sourceTree = "<group>"; };
-		3D3F8CF1166FC905003DFAC3 /* froebelContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelContainer.h; sourceTree = "<group>"; };
-		3D3F8CF316700F67003DFAC3 /* froebelFolderElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelFolderElement.cpp; sourceTree = "<group>"; };
-		3D3F8CF416700F68003DFAC3 /* froebelFolderElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelFolderElement.h; sourceTree = "<group>"; };
-		3D3F8DA31672412C003DFAC3 /* froebelShapeButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelShapeButton.cpp; sourceTree = "<group>"; };
-		3D3F8DA41672412D003DFAC3 /* froebelShapeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelShapeButton.h; sourceTree = "<group>"; };
-		3D3F8DA616724820003DFAC3 /* froebelGuiRef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = froebelGuiRef.png; sourceTree = "<group>"; };
-		3D3F8DCE1672817F003DFAC3 /* mainScreenOFPlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mainScreenOFPlay.cpp; sourceTree = "<group>"; };
-		3D3F8DCF1672817F003DFAC3 /* mainScreenOFPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainScreenOFPlay.h; sourceTree = "<group>"; };
-		3D520B6E166AF23500212598 /* OFPlay.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OFPlay.icns; sourceTree = "<group>"; };
-		3DAF84B1166E2E32003BBA69 /* froebelColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelColor.cpp; sourceTree = "<group>"; };
-		3DAF84B2166E2E32003BBA69 /* froebelColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelColor.h; sourceTree = "<group>"; };
-		3DAF84B3166E2E32003BBA69 /* froebelEditBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelEditBox.cpp; sourceTree = "<group>"; };
-		3DAF84B4166E2E32003BBA69 /* froebelEditBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelEditBox.h; sourceTree = "<group>"; };
-		3DAF84B5166E2E32003BBA69 /* froebelGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelGui.h; sourceTree = "<group>"; };
-		3DAF84B6166E2E32003BBA69 /* froebelListBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelListBox.cpp; sourceTree = "<group>"; };
-		3DAF84B7166E2E32003BBA69 /* froebelListBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelListBox.h; sourceTree = "<group>"; };
-		3DAF84B8166E2E32003BBA69 /* froebelShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelShape.cpp; sourceTree = "<group>"; };
-		3DAF84B9166E2E32003BBA69 /* froebelShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelShape.h; sourceTree = "<group>"; };
-		3DAF84BA166E2E32003BBA69 /* froebelTextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = froebelTextBox.cpp; sourceTree = "<group>"; };
-		3DAF84BB166E2E32003BBA69 /* froebelTextBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = froebelTextBox.h; sourceTree = "<group>"; };
-		3DAF84C5166E2EB9003BBA69 /* foreach.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = foreach.hpp; sourceTree = "<group>"; };
-		3DAF84C6166E2EB9003BBA69 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
-		3DAF84C8166E2EB9003BBA69 /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
-		3DAF84C9166E2EB9003BBA69 /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cpp; sourceTree = "<group>"; };
-		3DAF84CA166E2EB9003BBA69 /* pugixml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hpp; sourceTree = "<group>"; };
-		3DAF84CC166E2EB9003BBA69 /* baseProject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = baseProject.cpp; sourceTree = "<group>"; };
-		3DAF84CD166E2EB9003BBA69 /* baseProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseProject.h; sourceTree = "<group>"; };
-		3DAF84CE166E2EB9003BBA69 /* CBLinuxProject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CBLinuxProject.cpp; sourceTree = "<group>"; };
-		3DAF84CF166E2EB9003BBA69 /* CBLinuxProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBLinuxProject.h; sourceTree = "<group>"; };
-		3DAF84D0166E2EB9003BBA69 /* CBWinProject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CBWinProject.cpp; sourceTree = "<group>"; };
-		3DAF84D1166E2EB9003BBA69 /* CBWinProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBWinProject.h; sourceTree = "<group>"; };
-		3DAF84D2166E2EB9003BBA69 /* ofAddon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofAddon.cpp; sourceTree = "<group>"; };
-		3DAF84D3166E2EB9003BBA69 /* ofAddon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofAddon.h; sourceTree = "<group>"; };
-		3DAF84D4166E2EB9003BBA69 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
-		3DAF84D5166E2EB9003BBA69 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
-		3DAF84D6166E2EB9003BBA69 /* visualStudioProject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = visualStudioProject.cpp; sourceTree = "<group>"; };
-		3DAF84D7166E2EB9003BBA69 /* visualStudioProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = visualStudioProject.h; sourceTree = "<group>"; };
-		3DAF84D8166E2EB9003BBA69 /* xcodeProject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xcodeProject.cpp; sourceTree = "<group>"; };
-		3DAF84D9166E2EB9003BBA69 /* xcodeProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcodeProject.h; sourceTree = "<group>"; };
-		3DAF84E3166E2EDC003BBA69 /* projectGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = projectGenerator.h; sourceTree = "<group>"; };
+		341dc11bd6f5ee79340bea9ba5a65634 /* ofAddon.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofAddon.h; path = src/projectGenerator/src/ofAddon.h; sourceTree = SOURCE_ROOT; };
+		36dabba301dc92197d02f3c5dede5428 /* froebelListBox.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelListBox.h; path = src/froebelGui/froebelListBox.h; sourceTree = SOURCE_ROOT; };
+		3D8018F117D8E05300D8C1E4 /* OFPlay.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OFPlay.icns; sourceTree = "<group>"; };
+		407a75378f22ff75b8cb9f20119f5275 /* froebelFolderElement.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelFolderElement.h; path = src/froebelGui/froebelFolderElement.h; sourceTree = SOURCE_ROOT; };
+		42596bbee1f1a848765d7ffa70d6d062 /* baseProject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = baseProject.cpp; path = src/projectGenerator/src/baseProject.cpp; sourceTree = SOURCE_ROOT; };
+		42e41edbaaf7061fd01e385c1717c30e /* xcodeProject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = xcodeProject.h; path = src/projectGenerator/src/xcodeProject.h; sourceTree = SOURCE_ROOT; };
+		4a7bdd95ed297589b0561f60ca4cfb19 /* froebelGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelGui.h; path = src/froebelGui/froebelGui.h; sourceTree = SOURCE_ROOT; };
+		4a8806113b9c4b89c6a013c7f052182f /* froebelFolderElement.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = froebelFolderElement.cpp; path = src/froebelGui/froebelFolderElement.cpp; sourceTree = SOURCE_ROOT; };
+		4e218b276b3f3af5e2db3ff495c361c8 /* Utils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Utils.h; path = src/projectGenerator/src/Utils.h; sourceTree = SOURCE_ROOT; };
 		50df87d612c5aae17aafa6c02c6bc570 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxXmlSettings.cpp; path = ../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp; sourceTree = SOURCE_ROOT; };
+		55152dcc00ab33b1b6fd0616d1abdb70 /* froebelContainer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = froebelContainer.cpp; path = src/froebelGui/froebelContainer.cpp; sourceTree = SOURCE_ROOT; };
+		561d5c138cfec5bdd2909fbf11c38828 /* froebelShape.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = froebelShape.cpp; path = src/froebelGui/froebelShape.cpp; sourceTree = SOURCE_ROOT; };
+		630957091111df1c34d21c52583e1c3f /* ofAddon.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofAddon.cpp; path = src/projectGenerator/src/ofAddon.cpp; sourceTree = SOURCE_ROOT; };
+		6558eabbf7cb41d36d5a427a823763c3 /* CBWinProject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = CBWinProject.h; path = src/projectGenerator/src/CBWinProject.h; sourceTree = SOURCE_ROOT; };
+		70a1757acfb52b0562a2bdb9273aebde /* froebelListBox.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = froebelListBox.cpp; path = src/froebelGui/froebelListBox.cpp; sourceTree = SOURCE_ROOT; };
+		78fad991113fd55003baa51bd9bbdfae /* froebelColor.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelColor.h; path = src/froebelGui/froebelColor.h; sourceTree = SOURCE_ROOT; };
+		7c7ac5931b8ba45d66b2b1a4a4617263 /* visualStudioProject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = visualStudioProject.h; path = src/projectGenerator/src/visualStudioProject.h; sourceTree = SOURCE_ROOT; };
 		832bdc407620cdba568b713d2252c43c /* tinyxmlerror.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxmlerror.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxmlerror.cpp; sourceTree = SOURCE_ROOT; };
+		83f1fa2e966e8fde455839d085afc817 /* foreach.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = foreach.hpp; path = src/projectGenerator/libs/pugixml/contrib/foreach.hpp; sourceTree = SOURCE_ROOT; };
+		840b87d12bb3402e8c20050aa90f29fd /* froebelTextBox.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = froebelTextBox.cpp; path = src/froebelGui/froebelTextBox.cpp; sourceTree = SOURCE_ROOT; };
+		8948f1abf0e9e7a824853d28e3555d1f /* froebelShape.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelShape.h; path = src/froebelGui/froebelShape.h; sourceTree = SOURCE_ROOT; };
+		898255ce22f016fb7c5e0a06c34d73cb /* froebelEditBox.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelEditBox.h; path = src/froebelGui/froebelEditBox.h; sourceTree = SOURCE_ROOT; };
+		8cd2da95f59689df4f2df628ae271106 /* froebelEditBox.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = froebelEditBox.cpp; path = src/froebelGui/froebelEditBox.cpp; sourceTree = SOURCE_ROOT; };
+		8d342fc39ef7a0277196997b4d6adb29 /* SlideSequencer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SlideSequencer.h; path = src/intro/SlideSequencer.h; sourceTree = SOURCE_ROOT; };
+		9aa714bb13944b344c03062e4faeabea /* froebelContainer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelContainer.h; path = src/froebelGui/froebelContainer.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -148,8 +128,8 @@
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
 		E4B69B5B0A3A1756003C02F2 /* OFPlayDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OFPlayDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
-		E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = testApp.cpp; path = src/testApp.cpp; sourceTree = SOURCE_ROOT; };
-		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
+		E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
+		E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ofApp.h; path = src/ofApp.h; sourceTree = SOURCE_ROOT; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		E4C2424510CC5A17004149E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -159,7 +139,27 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
+		a13396fd5c374ce293bee72f756f6428 /* mainScreenOFPlay.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = mainScreenOFPlay.cpp; path = src/mainScreenOFPlay.cpp; sourceTree = SOURCE_ROOT; };
+		a2011422cc0fc1d2f040797a402c0155 /* pugiconfig.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = pugiconfig.hpp; path = src/projectGenerator/libs/pugixml/src/pugiconfig.hpp; sourceTree = SOURCE_ROOT; };
+		a401c76786787779dc0f4275e383cc7e /* SlideSequencer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SlideSequencer.cpp; path = src/intro/SlideSequencer.cpp; sourceTree = SOURCE_ROOT; };
+		ad3f7da9762d75a131c3bef84e477087 /* baseProject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = baseProject.h; path = src/projectGenerator/src/baseProject.h; sourceTree = SOURCE_ROOT; };
+		b033ef55242b7366ba23e63e3d22a00e /* froebelTab.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelTab.h; path = src/froebelGui/froebelTab.h; sourceTree = SOURCE_ROOT; };
 		b21e7e5f548eea92f368040bb1aa2f69 /* tinyxml.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = tinyxml.h; path = ../../../addons/ofxXmlSettings/libs/tinyxml.h; sourceTree = SOURCE_ROOT; };
+		b22772b379e7e26a46e88a423119038b /* pugixml.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = pugixml.cpp; path = src/projectGenerator/libs/pugixml/src/pugixml.cpp; sourceTree = SOURCE_ROOT; };
+		b3ef1384bcc32325a0d64359d0aac0fa /* froebelTab.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = froebelTab.cpp; path = src/froebelGui/froebelTab.cpp; sourceTree = SOURCE_ROOT; };
+		c4bc05349055ecd1f9096676b3a4cec8 /* Utils.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Utils.cpp; path = src/projectGenerator/src/Utils.cpp; sourceTree = SOURCE_ROOT; };
+		c52d3fd302ee1f852f7cddb310b5f4a9 /* readme.txt */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 30; name = readme.txt; path = src/projectGenerator/libs/pugixml/readme.txt; sourceTree = SOURCE_ROOT; };
+		c5653e7b89cda12eeaa39d58ec719590 /* TextBlock.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = TextBlock.h; path = src/intro/TextBlock.h; sourceTree = SOURCE_ROOT; };
+		c663f10b3f819fab0df66a31e86a106a /* froebelShapeButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelShapeButton.h; path = src/froebelGui/froebelShapeButton.h; sourceTree = SOURCE_ROOT; };
+		cbf96d15c8cbbd433f824933d628bffb /* visualStudioProject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = visualStudioProject.cpp; path = src/projectGenerator/src/visualStudioProject.cpp; sourceTree = SOURCE_ROOT; };
+		d293147ba8c2022a509ee9e89fa2a801 /* froebelColor.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = froebelColor.cpp; path = src/froebelGui/froebelColor.cpp; sourceTree = SOURCE_ROOT; };
+		d3aa8905c8025abe394aabbedc1a7ea2 /* froebelTextBox.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = froebelTextBox.h; path = src/froebelGui/froebelTextBox.h; sourceTree = SOURCE_ROOT; };
+		d5211f1fb0df838f7460c9e26aa41d9b /* froebelShapeButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = froebelShapeButton.cpp; path = src/froebelGui/froebelShapeButton.cpp; sourceTree = SOURCE_ROOT; };
+		e8ad508d8b13628d3505ec0944145721 /* TextBlock.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = TextBlock.cpp; path = src/intro/TextBlock.cpp; sourceTree = SOURCE_ROOT; };
+		ea43df5ed799c473f819d525e1477029 /* CBLinuxProject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = CBLinuxProject.h; path = src/projectGenerator/src/CBLinuxProject.h; sourceTree = SOURCE_ROOT; };
+		f09696d33dc694fa882fdbb6f4c2fb8a /* mainScreenOFPlay.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = mainScreenOFPlay.h; path = src/mainScreenOFPlay.h; sourceTree = SOURCE_ROOT; };
+		f186968e0ccf9803ff5122874ea397f5 /* CBWinProject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CBWinProject.cpp; path = src/projectGenerator/src/CBWinProject.cpp; sourceTree = SOURCE_ROOT; };
+		f9ac62e20dc5f1a4bed88a718475d436 /* CBLinuxProject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CBLinuxProject.cpp; path = src/projectGenerator/src/CBLinuxProject.cpp; sourceTree = SOURCE_ROOT; };
 		fc5da1c87211d4f6377da7199d8c5a1e /* tinyxmlparser.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxmlparser.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -191,6 +191,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05c29d8809fcbaf78a52e652fbadb7c3 /* pugixml */ = {
+			isa = PBXGroup;
+			children = (
+				ba83aa3ab94f54d14d1e173f9bf38c59 /* contrib */,
+				c52d3fd302ee1f852f7cddb310b5f4a9 /* readme.txt */,
+				6f1f24acca1b48e0c4b93863338d108e /* src */,
+			);
+			name = pugixml;
+			sourceTree = "<group>";
+		};
 		1f4fb5c423662b96adfdcc0badec1cb0 /* ofxXmlSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,108 +210,45 @@
 			name = ofxXmlSettings;
 			sourceTree = "<group>";
 		};
-		3D3958AC16791FE400B3FC40 /* intro */ = {
+		20d33ea6cd9f772f8456e689057f0ca4 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				3D3958AE16791FE400B3FC40 /* SlideSequencer.h */,
-				3D3958AD16791FE400B3FC40 /* SlideSequencer.cpp */,
-				3D3958AF16791FE400B3FC40 /* TextBlock.cpp */,
-				3D3958B016791FE400B3FC40 /* TextBlock.h */,
+				42596bbee1f1a848765d7ffa70d6d062 /* baseProject.cpp */,
+				ad3f7da9762d75a131c3bef84e477087 /* baseProject.h */,
+				f9ac62e20dc5f1a4bed88a718475d436 /* CBLinuxProject.cpp */,
+				ea43df5ed799c473f819d525e1477029 /* CBLinuxProject.h */,
+				f186968e0ccf9803ff5122874ea397f5 /* CBWinProject.cpp */,
+				6558eabbf7cb41d36d5a427a823763c3 /* CBWinProject.h */,
+				630957091111df1c34d21c52583e1c3f /* ofAddon.cpp */,
+				341dc11bd6f5ee79340bea9ba5a65634 /* ofAddon.h */,
+				1c31b5bc5baae926f166705e28e51d26 /* projectGenerator.h */,
+				c4bc05349055ecd1f9096676b3a4cec8 /* Utils.cpp */,
+				4e218b276b3f3af5e2db3ff495c361c8 /* Utils.h */,
+				cbf96d15c8cbbd433f824933d628bffb /* visualStudioProject.cpp */,
+				7c7ac5931b8ba45d66b2b1a4a4617263 /* visualStudioProject.h */,
+				1bf1dc806bc533fb61e926d825cc20c9 /* xcodeProject.cpp */,
+				42e41edbaaf7061fd01e385c1717c30e /* xcodeProject.h */,
 			);
-			path = intro;
+			name = src;
 			sourceTree = "<group>";
 		};
-		3DAF84B0166E2E32003BBA69 /* froebelGui */ = {
+		4bdc54663860b639807233cfda5cc668 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				3DAF84B5166E2E32003BBA69 /* froebelGui.h */,
-				3DAF84B2166E2E32003BBA69 /* froebelColor.h */,
-				3DAF84B1166E2E32003BBA69 /* froebelColor.cpp */,
-				3DAF84B9166E2E32003BBA69 /* froebelShape.h */,
-				3DAF84B8166E2E32003BBA69 /* froebelShape.cpp */,
-				3D1CBA9616795E1C0030E4A7 /* froebelTab.h */,
-				3D1CBA9516795E1C0030E4A7 /* froebelTab.cpp */,
-				3D3F8DA41672412D003DFAC3 /* froebelShapeButton.h */,
-				3D3F8DA31672412C003DFAC3 /* froebelShapeButton.cpp */,
-				3DAF84BB166E2E32003BBA69 /* froebelTextBox.h */,
-				3DAF84BA166E2E32003BBA69 /* froebelTextBox.cpp */,
-				3DAF84B4166E2E32003BBA69 /* froebelEditBox.h */,
-				3DAF84B3166E2E32003BBA69 /* froebelEditBox.cpp */,
-				3DAF84B7166E2E32003BBA69 /* froebelListBox.h */,
-				3DAF84B6166E2E32003BBA69 /* froebelListBox.cpp */,
-				3D3F8CF1166FC905003DFAC3 /* froebelContainer.h */,
-				3D3F8CF0166FC905003DFAC3 /* froebelContainer.cpp */,
-				3D3F8CF416700F68003DFAC3 /* froebelFolderElement.h */,
-				3D3F8CF316700F67003DFAC3 /* froebelFolderElement.cpp */,
+				05c29d8809fcbaf78a52e652fbadb7c3 /* pugixml */,
 			);
-			path = froebelGui;
+			name = libs;
 			sourceTree = "<group>";
 		};
-		3DAF84C1166E2EB9003BBA69 /* projectGenerator */ = {
+		5d1e45850e0042f84cbfd646fb2af320 /* intro */ = {
 			isa = PBXGroup;
 			children = (
-				3DAF84C2166E2EB9003BBA69 /* libs */,
-				3DAF84CB166E2EB9003BBA69 /* src */,
+				a401c76786787779dc0f4275e383cc7e /* SlideSequencer.cpp */,
+				8d342fc39ef7a0277196997b4d6adb29 /* SlideSequencer.h */,
+				e8ad508d8b13628d3505ec0944145721 /* TextBlock.cpp */,
+				c5653e7b89cda12eeaa39d58ec719590 /* TextBlock.h */,
 			);
-			path = projectGenerator;
-			sourceTree = "<group>";
-		};
-		3DAF84C2166E2EB9003BBA69 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				3DAF84C3166E2EB9003BBA69 /* pugixml */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		3DAF84C3166E2EB9003BBA69 /* pugixml */ = {
-			isa = PBXGroup;
-			children = (
-				3DAF84C4166E2EB9003BBA69 /* contrib */,
-				3DAF84C6166E2EB9003BBA69 /* readme.txt */,
-				3DAF84C7166E2EB9003BBA69 /* src */,
-			);
-			path = pugixml;
-			sourceTree = "<group>";
-		};
-		3DAF84C4166E2EB9003BBA69 /* contrib */ = {
-			isa = PBXGroup;
-			children = (
-				3DAF84C5166E2EB9003BBA69 /* foreach.hpp */,
-			);
-			path = contrib;
-			sourceTree = "<group>";
-		};
-		3DAF84C7166E2EB9003BBA69 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				3DAF84C8166E2EB9003BBA69 /* pugiconfig.hpp */,
-				3DAF84C9166E2EB9003BBA69 /* pugixml.cpp */,
-				3DAF84CA166E2EB9003BBA69 /* pugixml.hpp */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		3DAF84CB166E2EB9003BBA69 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				3DAF84CC166E2EB9003BBA69 /* baseProject.cpp */,
-				3DAF84CD166E2EB9003BBA69 /* baseProject.h */,
-				3DAF84CE166E2EB9003BBA69 /* CBLinuxProject.cpp */,
-				3DAF84CF166E2EB9003BBA69 /* CBLinuxProject.h */,
-				3DAF84D0166E2EB9003BBA69 /* CBWinProject.cpp */,
-				3DAF84D1166E2EB9003BBA69 /* CBWinProject.h */,
-				3DAF84D2166E2EB9003BBA69 /* ofAddon.cpp */,
-				3DAF84D3166E2EB9003BBA69 /* ofAddon.h */,
-				3DAF84D5166E2EB9003BBA69 /* Utils.h */,
-				3DAF84D4166E2EB9003BBA69 /* Utils.cpp */,
-				3DAF84D6166E2EB9003BBA69 /* visualStudioProject.cpp */,
-				3DAF84D7166E2EB9003BBA69 /* visualStudioProject.h */,
-				3DAF84D8166E2EB9003BBA69 /* xcodeProject.cpp */,
-				3DAF84D9166E2EB9003BBA69 /* xcodeProject.h */,
-				3DAF84E3166E2EDC003BBA69 /* projectGenerator.h */,
-			);
-			path = src;
+			name = intro;
 			sourceTree = "<group>";
 		};
 		6e54289412d2d94f45a051132369530c /* libs */ = {
@@ -320,6 +267,16 @@
 			children = (
 				50df87d612c5aae17aafa6c02c6bc570 /* ofxXmlSettings.cpp */,
 				01dcc0911400f9acf5b65578af4ec8f9 /* ofxXmlSettings.h */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		6f1f24acca1b48e0c4b93863338d108e /* src */ = {
+			isa = PBXGroup;
+			children = (
+				a2011422cc0fc1d2f040797a402c0155 /* pugiconfig.hpp */,
+				b22772b379e7e26a46e88a423119038b /* pugixml.cpp */,
+				16ab902988298322d28153b3cd4b4e99 /* pugixml.hpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -382,8 +339,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
-				3D3F8DA616724820003DFAC3 /* froebelGuiRef.png */,
-				3D520B6E166AF23500212598 /* OFPlay.icns */,
+				3D8018F117D8E05300D8C1E4 /* OFPlay.icns */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
@@ -398,13 +354,13 @@
 			isa = PBXGroup;
 			children = (
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
-				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
-				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
-				3D3F8DCF1672817F003DFAC3 /* mainScreenOFPlay.h */,
-				3D3F8DCE1672817F003DFAC3 /* mainScreenOFPlay.cpp */,
-				3D3958AC16791FE400B3FC40 /* intro */,
-				3DAF84B0166E2E32003BBA69 /* froebelGui */,
-				3DAF84C1166E2EB9003BBA69 /* projectGenerator */,
+				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				c22abf79275e68a6e5ae2270e1b9ac3c /* froebelGui */,
+				5d1e45850e0042f84cbfd646fb2af320 /* intro */,
+				a13396fd5c374ce293bee72f756f6428 /* mainScreenOFPlay.cpp */,
+				f09696d33dc694fa882fdbb6f4c2fb8a /* mainScreenOFPlay.h */,
+				eeec302eb5c0120fc73243b6775fc1b8 /* projectGenerator */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -416,6 +372,49 @@
 				E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */,
 			);
 			name = openFrameworks;
+			sourceTree = "<group>";
+		};
+		ba83aa3ab94f54d14d1e173f9bf38c59 /* contrib */ = {
+			isa = PBXGroup;
+			children = (
+				83f1fa2e966e8fde455839d085afc817 /* foreach.hpp */,
+			);
+			name = contrib;
+			sourceTree = "<group>";
+		};
+		c22abf79275e68a6e5ae2270e1b9ac3c /* froebelGui */ = {
+			isa = PBXGroup;
+			children = (
+				d293147ba8c2022a509ee9e89fa2a801 /* froebelColor.cpp */,
+				78fad991113fd55003baa51bd9bbdfae /* froebelColor.h */,
+				55152dcc00ab33b1b6fd0616d1abdb70 /* froebelContainer.cpp */,
+				9aa714bb13944b344c03062e4faeabea /* froebelContainer.h */,
+				8cd2da95f59689df4f2df628ae271106 /* froebelEditBox.cpp */,
+				898255ce22f016fb7c5e0a06c34d73cb /* froebelEditBox.h */,
+				4a8806113b9c4b89c6a013c7f052182f /* froebelFolderElement.cpp */,
+				407a75378f22ff75b8cb9f20119f5275 /* froebelFolderElement.h */,
+				4a7bdd95ed297589b0561f60ca4cfb19 /* froebelGui.h */,
+				70a1757acfb52b0562a2bdb9273aebde /* froebelListBox.cpp */,
+				36dabba301dc92197d02f3c5dede5428 /* froebelListBox.h */,
+				561d5c138cfec5bdd2909fbf11c38828 /* froebelShape.cpp */,
+				8948f1abf0e9e7a824853d28e3555d1f /* froebelShape.h */,
+				d5211f1fb0df838f7460c9e26aa41d9b /* froebelShapeButton.cpp */,
+				c663f10b3f819fab0df66a31e86a106a /* froebelShapeButton.h */,
+				b3ef1384bcc32325a0d64359d0aac0fa /* froebelTab.cpp */,
+				b033ef55242b7366ba23e63e3d22a00e /* froebelTab.h */,
+				840b87d12bb3402e8c20050aa90f29fd /* froebelTextBox.cpp */,
+				d3aa8905c8025abe394aabbedc1a7ea2 /* froebelTextBox.h */,
+			);
+			name = froebelGui;
+			sourceTree = "<group>";
+		};
+		eeec302eb5c0120fc73243b6775fc1b8 /* projectGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				4bdc54663860b639807233cfda5cc668 /* libs */,
+				20d33ea6cd9f772f8456e689057f0ca4 /* src */,
+			);
+			name = projectGenerator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,8 +444,11 @@
 /* Begin PBXProject section */
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
 			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "OFPlay" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -493,7 +495,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";";
+			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -503,31 +505,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
-				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				476b1afbb68daed7078f949768a58e69 /* froebelColor.cpp in Sources */,
+				9f2d47e0713ab1a818cfc597dccf025a /* froebelContainer.cpp in Sources */,
+				dde541bf276076dbf6326128f3df3083 /* froebelEditBox.cpp in Sources */,
+				9122186e124c6fa9f8ec25945cfbb64a /* froebelFolderElement.cpp in Sources */,
+				9948400a7c65373c21d5149c1ad02e0f /* froebelListBox.cpp in Sources */,
+				b1c960d1889cb00b68fd22b18387bcab /* froebelShape.cpp in Sources */,
+				5ce8223c9807cccece3c9d3c7450b68a /* froebelShapeButton.cpp in Sources */,
+				e93a2eab6d74d2ff7d19775b498f156f /* froebelTab.cpp in Sources */,
+				10773daa07a492118deba6c36bdf2d1b /* froebelTextBox.cpp in Sources */,
+				c4727d85cb5fcbe1798c014cad97ac02 /* SlideSequencer.cpp in Sources */,
+				bf8f332a50ed9330c509db24f3b9016d /* TextBlock.cpp in Sources */,
+				f2b98ed66d73d33e0e5b67750c18cdfe /* mainScreenOFPlay.cpp in Sources */,
+				275b85fe4892d536d955ed0fa708d166 /* readme.txt in Sources */,
+				9225977ac95ba799da25db3631d99b21 /* pugixml.cpp in Sources */,
+				cb3caa3b2716a3bceeafdb9b398f5a7a /* baseProject.cpp in Sources */,
+				2ab409b9f1108ac144a9bc9d42cd98dd /* CBLinuxProject.cpp in Sources */,
+				dcb63524b11db1e547c5acc335c93a7a /* CBWinProject.cpp in Sources */,
+				dc64ca6cd0819d37de342172d57250cd /* ofAddon.cpp in Sources */,
+				5dd443cf7485afee12a75ba571c2a346 /* Utils.cpp in Sources */,
+				f2876e6f3ed22f37e6c0c69cb0065037 /* visualStudioProject.cpp in Sources */,
+				a8ea0933faa7e2b219f79fa04b73b79b /* xcodeProject.cpp in Sources */,
 				63b57ac5bf4ef088491e0317dbb2ecaa /* ofxXmlSettings.cpp in Sources */,
 				933a2227713c720ceff80fd967d0a8ee /* tinyxml.cpp in Sources */,
 				9d44dc88ef9e7991b4a09951e2e4769f /* tinyxmlerror.cpp in Sources */,
 				5a4349e9754d6fa14c0f2a3a1abc30b6 /* tinyxmlparser.cpp in Sources */,
-				3DAF84BC166E2E32003BBA69 /* froebelColor.cpp in Sources */,
-				3DAF84BD166E2E32003BBA69 /* froebelEditBox.cpp in Sources */,
-				3DAF84BE166E2E32003BBA69 /* froebelListBox.cpp in Sources */,
-				3DAF84BF166E2E32003BBA69 /* froebelShape.cpp in Sources */,
-				3DAF84C0166E2E32003BBA69 /* froebelTextBox.cpp in Sources */,
-				3DAF84DA166E2EB9003BBA69 /* pugixml.cpp in Sources */,
-				3DAF84DB166E2EB9003BBA69 /* baseProject.cpp in Sources */,
-				3DAF84DC166E2EB9003BBA69 /* CBLinuxProject.cpp in Sources */,
-				3DAF84DD166E2EB9003BBA69 /* CBWinProject.cpp in Sources */,
-				3DAF84DE166E2EB9003BBA69 /* ofAddon.cpp in Sources */,
-				3DAF84DF166E2EB9003BBA69 /* Utils.cpp in Sources */,
-				3DAF84E0166E2EB9003BBA69 /* visualStudioProject.cpp in Sources */,
-				3DAF84E1166E2EB9003BBA69 /* xcodeProject.cpp in Sources */,
-				3D3F8CF2166FC905003DFAC3 /* froebelContainer.cpp in Sources */,
-				3D3F8CF516700F68003DFAC3 /* froebelFolderElement.cpp in Sources */,
-				3D3F8DA51672412D003DFAC3 /* froebelShapeButton.cpp in Sources */,
-				3D3F8DD01672817F003DFAC3 /* mainScreenOFPlay.cpp in Sources */,
-				3D3958B116791FE400B3FC40 /* SlideSequencer.cpp in Sources */,
-				3D3958B216791FE400B3FC40 /* TextBlock.cpp in Sources */,
-				3D1CBA9716795E1D0030E4A7 /* froebelTab.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,20 +568,22 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
-					src/ProjectGeneratorMotor/libs/pugixml,
-					src/ProjectGeneratorMotor/libs/pugixml/contrib,
-					src/ProjectGeneratorMotor/libs/pugixml/src,
-					src/ProjectGeneratorMotor/src,
-					src/gui,
+					src/froebelGui,
+					src/intro,
+					src/projectGenerator/libs/pugixml,
+					src/projectGenerator/libs/pugixml/contrib,
+					src/projectGenerator/libs/pugixml/src,
+					src/projectGenerator/src,
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -606,26 +611,29 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
-					src/ProjectGeneratorMotor/libs/pugixml,
-					src/ProjectGeneratorMotor/libs/pugixml/contrib,
-					src/ProjectGeneratorMotor/libs/pugixml/src,
-					src/ProjectGeneratorMotor/src,
-					src/gui,
+					src/froebelGui,
+					src/intro,
+					src/projectGenerator/libs/pugixml,
+					src/projectGenerator/libs/pugixml/contrib,
+					src/projectGenerator/libs/pugixml/src,
+					src/projectGenerator/src,
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		E4B69B600A3A1757003C02F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -633,11 +641,10 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				ICON = "$(ICON_NAME_DEBUG)";
+				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -704,7 +711,6 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
 			};
@@ -713,17 +719,17 @@
 		E4B69B610A3A1757003C02F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				ICON = "$(ICON_NAME_RELEASE)";
+				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -790,7 +796,6 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

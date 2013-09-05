@@ -1,23 +1,30 @@
 #include "xcodeProject.h"
 #include <iostream>
 
+
+
 /*
- *
- *  xcode project files are plists but we can convert to xml, using plutil:
- *
- *  plutil -convert xml1 -o - myproj.xcodeproj/project.pbxproj
- *
- *  as an XML file, it's very odd and fairly unreadable, which is why this code is pretty gnarly.
- *
- *  some additional things that might be useful to try in the future:
- *
- *  (json parsing)  http://emilloer.com/2011/08/15/dealing-with-project-dot-pbxproj-in-ruby/
- *  (objective c) https://github.com/expanz/xcode-editor
- *  (plist c++) https://github.com/animetrics/PlistCpp
- *
+
+xcode project files are plists but we can convert to xml, using plutil:
+
+plutil -convert xml1 -o - myproj.xcodeproj/project.pbxproj
+
+as an XML file, it's very odd and fairly unreadable, which is why this code is pretty gnarly.
+
+some additional things that might be useful to try in the future:
+
+(json parsing)  http://emilloer.com/2011/08/15/dealing-with-project-dot-pbxproj-in-ruby/
+(objective c) https://github.com/expanz/xcode-editor
+(plist c++) https://github.com/animetrics/PlistCpp
+
 */
 
+
+
+
 // we are going to use POCO for computing the MD5 Hash of file names and paths, etc:
+
+
 
 // to add things to the xcode project file, we need some template XML around
 // these are common things we'll want to add
@@ -226,8 +233,11 @@ bool xcodeProject::createProjectFile(){
         findandreplaceInTexfile(projectDir + "Project.xcconfig", "../../..", relPath2);
     }
 
+
     return true;
 }
+
+
 
 void xcodeProject::renameProject(){
     pugi::xpath_node_set uuidSet = doc.select_nodes("//string[contains(.,'emptyExample')]");
@@ -239,6 +249,7 @@ void xcodeProject::renameProject(){
     }
 }
 
+
 bool xcodeProject::loadProjectFile(){
     string fileName = projectDir + projectName + ".xcodeproj/project.pbxproj";
     renameProject();
@@ -248,14 +259,18 @@ bool xcodeProject::loadProjectFile(){
 
 }
 
+
+
 bool xcodeProject::saveProjectFile(){
-    
+
+
+
     // does this belong here?
-    //
+
     renameProject();
 
     // save the project out:
-    //
+
     string fileName = projectDir + projectName + ".xcodeproj/project.pbxproj";
     bool bOk =  doc.save_file(ofToDataPath(fileName).c_str());
     return bOk;
@@ -277,7 +292,13 @@ bool xcodeProject::findArrayForUUID(string UUID, pugi::xml_node & nodeMe){
     return false;
 }
 
+
+
+
 pugi::xml_node xcodeProject::findOrMakeFolderSet(pugi::xml_node nodeToAddTo, vector < string > & folders, string pathForHash){
+
+
+
 
     char query[255];
     sprintf(query, "//key[contains(.,'%s')]/following-sibling::node()[1]//array/string", nodeToAddTo.previous_sibling().first_child().value());
@@ -318,9 +339,11 @@ pugi::xml_node xcodeProject::findOrMakeFolderSet(pugi::xml_node nodeToAddTo, vec
 
     }
 
+
+
     // now, if we have a pbxgroup with the right name, pop this name off the folder set, and keep going.
     // else, let's add a folder set, boom.
-    //
+
     if (bAnyNodeWithThisName == false){
 
         // make a new UUID
@@ -349,10 +372,13 @@ pugi::xml_node xcodeProject::findOrMakeFolderSet(pugi::xml_node nodeToAddTo, vec
         sprintf(queryArray, "//key[contains(.,'%s')]/following-sibling::node()[1]//array", nodeToAddTo.previous_sibling().first_child().value());
         doc.select_single_node(queryArray).node().append_child("string").append_child(pugi::node_pcdata).set_value(UUID.c_str());
         //array.begin()->node().parent().append_child("string").append_child(pugi::node_pcdata).set_value(UUID.c_str());
+
+
     } else {
 
         pathForHash += "/" + folders[0];
     }
+
 
     folders.erase(folders.begin());
 
@@ -361,9 +387,13 @@ pugi::xml_node xcodeProject::findOrMakeFolderSet(pugi::xml_node nodeToAddTo, vec
     } else {
         return nodeWithThisName;
     }
+
 }
 
+
+
 void xcodeProject::addSrc(string srcFile, string folder){
+
 
     string buildUUID;
 
@@ -483,6 +513,7 @@ void xcodeProject::addSrc(string srcFile, string folder){
     // (D) folder
     //-----------------------------------------------------------------
 
+
     if (bAddFolder == true){
 
         vector < string > folders = ofSplitString(folder, "/", true);
@@ -517,6 +548,8 @@ void xcodeProject::addSrc(string srcFile, string folder){
         };
 
     } else {
+
+
         pugi::xml_node array;
 		string xmlStr = "//key[contains(.,'"+srcUUID+"')]/following-sibling::node()[1]";
         pugi::xml_node node = doc.select_single_node(xmlStr.c_str()).node();
@@ -532,6 +565,9 @@ void xcodeProject::addSrc(string srcFile, string folder){
 // todo: these three have very duplicate code... please fix up a bit.
 
 void xcodeProject::addInclude(string includeName){
+
+
+
 
     char query[255];
     sprintf(query, "//key[contains(.,'baseConfigurationReference')]/parent::node()//key[contains(.,'HEADER_SEARCH_PATHS')]/following-sibling::node()[1]");

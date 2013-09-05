@@ -9,10 +9,9 @@
 #define CBLINUXPROJECT_H_
 
 #include "ofConstants.h"
+#include "pugixml.hpp"
 #include "ofAddon.h"
 #include "CBWinProject.h"
-
-#include "pugixml.hpp"
 
 class CBLinuxProject: public CBWinProject {
 public:
