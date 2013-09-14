@@ -8,19 +8,19 @@ void testApp::setup(){
     ofSetWindowShape(900,500);
     ofSetWindowTitle( "OFPlay" );
 //    ofSetLogLevel(OF_LOG_VERBOSE);
-    ofSetDataPathRoot("../Resources/");
+//    ofSetDataPathRoot("../Resources/");
     
     mScreen = NULL;
     logo.loadImage("OFPlay.png");
-    textSeq.set(0,0,900,450);
+//    textSeq.set(0,0,900,450);
     
     //  First time??
     //
     ofFile testFile("config.xml");
     if (testFile.exists()){
         searchForOF();
-    } else {
-        textSeq.loadSequence("intro.xml");
+//    } else {
+//        textSeq.loadSequence("intro.xml");
     }
 }
 
@@ -31,36 +31,36 @@ void testApp::update(){
     if (mScreen != NULL){
         mScreen->update();
     } else {
-        textSeq.update();
-    
-        if (textSeq.getLineNumber() == 3){
-            ofDirectory testDir01("/Applications/Xcode.app");
-            ofDirectory testDir02("/Developer/Applications/Xcode.app");
-            
-            if (testDir01.exists() || testDir02.exists() ){
-                textSeq.setLine(6);
-            }
-        }
-        
-        if (textSeq.getLineNumber() > 5){
-            ofDirectory testDir01("/Applications/Xcode.app");
-            ofDirectory testDir02("/Developer/Applications/Xcode.app");
-            
-            if (testDir01.exists() || testDir02.exists() ){
-                
-            } else {
-                textSeq.setLine(3);
-            }
-        }
-        
-        if (textSeq.getLineNumber() == 6){
-            ofFile testFile("/usr/bin/git");
-            if (testFile.exists()){
-                textSeq.setLine(7);
-            }
-        }
-        
-        if (textSeq.bFinish)
+//        textSeq.update();
+//    
+//        if (textSeq.getLineNumber() == 3){
+//            ofDirectory testDir01("/Applications/Xcode.app");
+//            ofDirectory testDir02("/Developer/Applications/Xcode.app");
+//            
+//            if (testDir01.exists() || testDir02.exists() ){
+//                textSeq.setLine(6);
+//            }
+//        }
+//        
+//        if (textSeq.getLineNumber() > 5){
+//            ofDirectory testDir01("/Applications/Xcode.app");
+//            ofDirectory testDir02("/Developer/Applications/Xcode.app");
+//            
+//            if (testDir01.exists() || testDir02.exists() ){
+//                
+//            } else {
+//                textSeq.setLine(3);
+//            }
+//        }
+//        
+//        if (textSeq.getLineNumber() == 6){
+//            ofFile testFile("/usr/bin/git");
+//            if (testFile.exists()){
+//                textSeq.setLine(7);
+//            }
+//        }
+//        
+//        if (textSeq.bFinish)
             searchForOF();
     }
 }
@@ -131,20 +131,20 @@ void testApp::draw(){
     
     if (mScreen != NULL){
         mScreen->draw();
-    } else {
-        ofSetColor(255);
-        textSeq.draw();
+//    } else {
+//        ofSetColor(255);
+//        textSeq.draw();
     }
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     if (mScreen == NULL){
-        if ( key == OF_KEY_RIGHT){
-            textSeq.setNextLine();
-        } else if ( key == OF_KEY_LEFT){
-            textSeq.setPrevLine();
-        }
+//        if ( key == OF_KEY_RIGHT){
+//            textSeq.setNextLine();
+//        } else if ( key == OF_KEY_LEFT){
+//            textSeq.setPrevLine();
+//        }
     } else {
         mScreen->keyPressed(key);
     }
@@ -169,21 +169,21 @@ void testApp::mousePressed(int x, int y, int button){
     if (mScreen != NULL){
         mScreen->mousePressed(mouse);
     } else {
-        int rta = -1;
-        
-        for (int i = 0; i < textSeq.size(); i++) {
-            if (textSeq.buttons[i].checkMousePressed(mouse)){
-                rta = i;
-            }
-        }
-        
-        if (rta != -1){
-            textSeq.setLine(rta);
-        } else if ( x > ofGetWidth()*0.5 ){
-            textSeq.setNextLine();
-        } else {
-            textSeq.setPrevLine();
-        }
+//        int rta = -1;
+//        
+//        for (int i = 0; i < textSeq.size(); i++) {
+//            if (textSeq.buttons[i].checkMousePressed(mouse)){
+//                rta = i;
+//            }
+//        }
+//        
+//        if (rta != -1){
+//            textSeq.setLine(rta);
+//        } else if ( x > ofGetWidth()*0.5 ){
+//            textSeq.setNextLine();
+//        } else {
+//            textSeq.setPrevLine();
+//        }
     }
 }
 

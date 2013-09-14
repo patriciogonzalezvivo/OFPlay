@@ -31,7 +31,7 @@ public:
     ofImage             logo;
     ofTrueTypeFont      font;
     
-    SlideSequencer       textSeq;
+//    SlideSequencer       textSeq;
     
     mainScreenOFPlay    *mScreen;
     

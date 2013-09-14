@@ -606,7 +606,7 @@ bool isProjectFolder(string &_projFolder){
         return false;
     }
     
-    //  4. Have main.cpp, testApp.h, testApp.cpp?
+    //  4. Have main.cpp, testApp.h, testApp.cpp, ofApp.h, ofApp.cpp?
     //
     ofFile test;
     bool    isMainCpp = test.open(searchFor+"/main.cpp");
