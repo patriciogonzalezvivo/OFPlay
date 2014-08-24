@@ -8,7 +8,7 @@ void testApp::setup(){
     ofSetWindowShape(900,500);
     ofSetWindowTitle( "OFPlay" );
 //    ofSetLogLevel(OF_LOG_VERBOSE);
-//    ofSetDataPathRoot("../Resources/");
+    ofSetDataPathRoot("../Resources/");
     
     mScreen = NULL;
     logo.loadImage("OFPlay.png");

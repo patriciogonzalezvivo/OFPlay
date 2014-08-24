@@ -57,8 +57,8 @@ bool baseProject::create(string path){
 #else
             splitFromLast(fileNames[i], "/", first, last);
 #endif
-            if (fileNames[i] != "src/testApp.cpp" &&
-                fileNames[i] != "src/testApp.h" &&
+            if (fileNames[i] != "src/ofApp.cpp" &&
+                fileNames[i] != "src/ofApp.h" &&
                 fileNames[i] != "src/main.cpp" &&
                 fileNames[i] != "src/testApp.mm" &&
                 fileNames[i] != "src/main.mm"){

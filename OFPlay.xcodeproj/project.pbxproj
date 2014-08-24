@@ -354,8 +354,8 @@
 			isa = PBXGroup;
 			children = (
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
-				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				c22abf79275e68a6e5ae2270e1b9ac3c /* froebelGui */,
 				5d1e45850e0042f84cbfd646fb2af320 /* intro */,
 				a13396fd5c374ce293bee72f756f6428 /* mainScreenOFPlay.cpp */,
